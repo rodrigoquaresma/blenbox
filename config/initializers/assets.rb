@@ -10,6 +10,6 @@ Rails.application.config.assets.version = '1.0'
 base_js    = %w( site.js )
 vendor_js  = %w( modernizr-2.8.3.js )
 base_css   = %w( site.css )
-vendor_css = %w(  )
+# vendor_css = %w(  )
 
-Rails.application.config.assets.precompile += [ base_css, base_js, vendor_css, vendor_js ].flatten
+Rails.application.config.assets.precompile += [ base_js, vendor_js, base_css ].flatten
