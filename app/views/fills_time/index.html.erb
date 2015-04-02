@@ -1,163 +1,20 @@
 <div class="container">
-  <div class="row">
-    <div class="col-sm-8">
-      <h3>folha ponto</h3>
-      <p>utilize as setas do teclado para navegar entre os dias</p>
-    </div>
-    <div class="col-sm-4 text-right">
-      <small>by <a href="http://www.rodrigoquaresma.com.br">rodrigo quaresma</a></small>
-    </div>
-  </div>
+  <%= render partial: "header" %>
 
   <%
   year = 2015
   month = 4
-
-  ndays = Time.days_in_month(month, year)
-
   %>
 
+  <p>
+    <%= link_to 'janeiro 2015', '#', class: 'btn btn-default' %>
+    <%= link_to 'fevereiro 2015', '#', class: 'btn btn-default' %>
+    <%= link_to 'março 2015', '#', class: 'btn btn-default' %>
+    <%= link_to 'abril 2015', '#', class: 'btn btn-primary' %>
+    <%= link_to 'maio 2015', '#', class: 'btn btn-default' %>
+    <%= link_to 'junho 2015', '#', class: 'btn btn-default' %>
+  </p>
 
-  <div role="tabpanel">
-
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active">
-        <a class="card-front" href="#table_front" aria-controls="table_front" role="tab" data-toggle="tab">Frente</a>
-      </li>
-      <li role="presentation">
-        <a class="card-back" href="#table_back" aria-controls="table_back" role="tab" data-toggle="tab">Verso</a>
-      </li>
-      <li class="pull-right">
-        <span class="lead">
-          <span class="text-muted">ano</span> <span><%= year %></span>
-          <span class="text-muted">mês</span> <span><%= month %></span>
-          <span class="text-muted hide">qt dias</span> <span class="hide"><%= ndays %></span>
-        </span>
-      </li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="table_front">
-        <table class="table table-bordered table-sign-in" style="border-top:0;">
-          <thead>
-            <tr>
-              <th></th>
-              <th colspan="2">manhã</th>
-              <th colspan="2">tarde</th>
-            </tr>
-            <tr>
-              <th style="width:12%;">dia</th>
-              <th style="width:22%;">entrada</th>
-              <th style="width:22%;">saída</th>
-              <th style="width:22%;">entrada</th>
-              <th style="width:22%;">saída</th>
-            </tr>
-          </thead>
-          <tbody>
-
-            <% for i in 1..15 %>
-              <%
-              day = i
-              hour_in = xhour_in[0]
-              minute_in = xminute_in[0]
-              start_time_in = Time.new(year,month,day,hour_in,minute_in)
-              end_time_in = start_time_in + 9.hours + 48.minutes
-
-              hour_in_l = xhour_in_l[0]
-              minute_in_l = xminute_in_l[0]
-              start_time_in_l = Time.new(year,month,day,hour_in_l,minute_in_l)
-              end_time_in_l = start_time_in_l + 1.hours
-
-              if start_time_in.strftime('%w').to_f == 6
-              %>
-                <tr style="background:#eee">
-                  <td><%= end_time_in.strftime('%d') %></td>
-                  <td colspan="4" style="text-align:left;">Sábado</td>
-                </tr>
-              <% elsif start_time_in.strftime('%w').to_f == 0 %>
-                <tr style="background:#eee">
-                  <td><%= end_time_in.strftime('%d') %></td>
-                  <td colspan="4" style="text-align:left;">Domingo</td>
-                </tr>
-              <% else %>
-                <tr>
-                  <td><%= end_time_in.strftime('%d') %></td>
-                  <td class="hour-sign-in"><%= time_build(hour_in,minute_in.to_s.rjust(2, '0')) %></td>
-                  <td class="hour-sign-out-l"><%= time_build(hour_in_l,minute_in_l.to_s.rjust(2, '0')) %></td>
-                  <td class="hour-sign-in-l"><%= end_time_in_l.strftime('%H:%M') %></td>
-                  <td class="hour-sign-out"><%= end_time_in.strftime('%H:%M') %></td>
-                </tr>
-              <% end %>
-            <% end %>
-
-          </tbody>
-        </table>
-      </div>
-      <div role="tabpanel" class="tab-pane fade" id="table_back">
-        <table class="table table-bordered table-sign-in" style="border-top:0;">
-          <thead>
-            <tr>
-              <th></th>
-              <th colspan="2">manhã</th>
-              <th colspan="2">tarde</th>
-            </tr>
-            <tr>
-              <th style="width:12%;">dia</th>
-              <th style="width:22%;">entrada</th>
-              <th style="width:22%;">saída</th>
-              <th style="width:22%;">entrada</th>
-              <th style="width:22%;">saída</th>
-            </tr>
-          </thead>
-          <tbody>
-
-            <% for i in 16..31 %>
-              <%
-              day = i
-              hour_in = xhour_in[0]
-              minute_in = xminute_in[0]
-              start_time_in = Time.new(year,month,day,hour_in,minute_in)
-              end_time_in = start_time_in + 9.hours + 48.minutes
-
-              hour_in_l = xhour_in_l[0]
-              minute_in_l = xminute_in_l[0]
-              start_time_in_l = Time.new(year,month,day,hour_in_l,minute_in_l)
-              end_time_in_l = start_time_in_l + 1.hours
-
-              if start_time_in.strftime('%w').to_f == 6
-              %>
-                <tr style="background:#eee">
-                  <td><%= end_time_in.strftime('%d') %></td>
-                  <td colspan="4" style="text-align:left;">Sábado</td>
-                </tr>
-              <% elsif start_time_in.strftime('%w').to_f == 0 %>
-                <tr style="background:#eee">
-                  <td><%= end_time_in.strftime('%d') %></td>
-                  <td colspan="4" style="text-align:left;">Domingo</td>
-                </tr>
-              <% elsif i > ndays %>
-                <tr style="background:#eee">
-                  <td><%= i %></td>
-                  <td colspan="4" style="text-align:left;">não nesse mês</td>
-                </tr>
-              <% else %>
-                <tr>
-                  <td><%= end_time_in.strftime('%d') %></td>
-                  <td class="hour-sign-in"><%= time_build(hour_in,minute_in.to_s.rjust(2, '0')) %></td>
-                  <td class="hour-sign-out-l"><%= time_build(hour_in_l,minute_in_l.to_s.rjust(2, '0')) %></td>
-                  <td class="hour-sign-in-l"><%= end_time_in_l.strftime('%H:%M') %></td>
-                  <td class="hour-sign-out"><%= end_time_in.strftime('%H:%M') %></td>
-                </tr>
-              <% end %>
-            <% end %>
-
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  </div>
+  <%= render partial: "table", locals: { year: year, month: month } %>
 
 </div>

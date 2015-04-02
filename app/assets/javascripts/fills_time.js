@@ -8,8 +8,8 @@
 
 
     $(document).keyup(function(e) {
-      if (e.keyCode == 13) $('.card-back').click(); //enter
-      if (e.keyCode == 32) $('.card-back').click(); //espaco
+      // if (e.keyCode == 13) $('.card-back').click(); //enter
+      if (e.keyCode == 32) goHandlers.goNextTr(); //espaco
       if (e.keyCode == 40) goHandlers.goNextTr(); //arrow down
       if (e.keyCode == 38) goHandlers.goBackTr(); //arrow up
       if (e.keyCode == 39) goHandlers.goCardBack(); //arrow right

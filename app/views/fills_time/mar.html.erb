@@ -1,0 +1,20 @@
+<div class="container">
+  <%= render partial: "header" %>
+
+  <%
+  year = 2015
+  month = 3
+  %>
+
+  <p>
+    <%= link_to 'janeiro 2015', fills_time_jan_path, class: 'btn btn-default' %>
+    <%= link_to 'fevereiro 2015', fills_time_feb_path, class: 'btn btn-default' %>
+    <%= link_to 'março 2015', fills_time_mar_path, class: 'btn btn-primary' %>
+    <%= link_to 'abril 2015', fills_time_apr_path, class: 'btn btn-default' %>
+    <%= link_to 'maio 2015', fills_time_may_path, class: 'btn btn-default' %>
+    <%= link_to 'junho 2015', fills_time_jun_path, class: 'btn btn-default' %>
+  </p>
+
+  <%= render partial: "table", locals: { year: year, month: month } %>
+
+</div>
