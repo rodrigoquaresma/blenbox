@@ -20,8 +20,8 @@ module FillsTimeHelper
     end
   end
 
-  def time_build(hour_in, minute_in)
-    return "#{hour_in}:#{minute_in}"
+  def time_build(hour, minute)
+    return "#{hour}:#{minute}"
   end
 
 end
