@@ -33,20 +33,24 @@
         month = 4
         day = 1
 
-        hour = xhour_in[0]
-        minute = xminute_in[0]
+        hour_in = xhour_in[0]
+        minute_in = xminute_in[0]
+        start_time_in = Time.new(year,month,day,hour_in,minute_in)
+        end_time_in = start_time_in + 9.hours + 48.minutes
 
-        start_time = Time.new(year,month,day,hour,minute)
-        end_time = start_time + 9.hours + 48.minutes
+        hour_in_l = xhour_in_l[0]
+        minute_in_l = xminute_in_l[0]
+        start_time_in_l = Time.new(year,month,day,hour_in_l,minute_in_l)
+        end_time_in_l = start_time_in_l + 1.hours
 
         %>
 
         <tr>
-          <td><%= i %> <span class="hide"><%= start_time %></span></td>
-          <td class="hour-sign-in"><%= time_build(hour,minute.to_s.rjust(2, '0')) %></td>
-          <td>12:00</td>
-          <td>13:00</td>
-          <td class="hour-sign-out"><%= end_time.strftime('%H:%M') %></td>
+          <td><%= i %></td>
+          <td class="hour-sign-in"><%= time_build(hour_in,minute_in.to_s.rjust(2, '0')) %></td>
+          <td class="hour-sign-out-l"><%= time_build(hour_in_l,minute_in_l.to_s.rjust(2, '0')) %></td>
+          <td class="hour-sign-in-l"><%= end_time_in_l.strftime('%H:%M') %></td>
+          <td class="hour-sign-out"><%= end_time_in.strftime('%H:%M') %></td>
         </tr>
       <% end %>
 

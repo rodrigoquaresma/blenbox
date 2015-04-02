@@ -20,6 +20,26 @@ module FillsTimeHelper
     end
   end
 
+  def hours_in_l
+    hours_in_l = Array.new (15) {rand(11..12)}
+  end
+
+  def minutes_in_l
+    minutes_in_l = Array.new (15) {rand(0..59)}
+  end
+
+  def xhour_in_l
+    hours_in_l.each do |hour_in_l|
+      hour_in_l
+    end
+  end
+
+  def xminute_in_l
+    minutes_in_l.each do |minute_in_l|
+      minute_in_l
+    end
+  end
+
   def time_build(hour, minute)
     return "#{hour}:#{minute}"
   end
