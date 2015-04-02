@@ -1,60 +1,64 @@
+//= require bootstrap-sprockets
+
 (function ($){
 
   window.onload = function() {
 
-    $('.table-sign-in tbody tr:first-child').addClass('focused');
-
-    // $('.table-sign-in tbody tr td.hour-sign-out').changeTime();
-
-    // console.log(tr_time)
-
-    // time_out.html()
-
-    var year = '2013';
-    var month = '04';
-    var day = '18';
-
-    var hour = '12';
-    var min = '35';
-
-    var reserv = new Date(year,month,day,hour,min)
-
-    console.log(reserv);
+    $('#table_front .table-sign-in tbody tr:first-child').addClass('focused');
 
 
-
-    $('.table-sign-in tbody tr').each(function() {
-      var singInTime = $(this).find(".hour-sign-in").html();
-      var singOutEnv = $(this).find(".hour-sign-out");
-
-
-      var xreserv = reserv.getTime() + 3000;
-
-      xreserv.setTime();
-
-      singOutEnv.html(xreserv);
-
-
+    $(document).keyup(function(e) {
+      if (e.keyCode == 13) $('.card-back').click(); //enter
+      if (e.keyCode == 32) $('.card-back').click(); //espaco
+      if (e.keyCode == 40) goHandlers.goNextTr(); //arrow down
+      if (e.keyCode == 38) goHandlers.goBackTr(); //arrow up
+      if (e.keyCode == 39) goHandlers.goCardBack(); //arrow right
+      if (e.keyCode == 37) goHandlers.goCardFront(); //arrow left
     });
 
+    var goHandlers = {
 
-    // function changeTime() {
-    //   var jqThis = $(this),
-    //   jqThisTr = jqThis.closest('tr');
-    //   // time_out = $('.table-sign-in tbody tr td.hour-sign-out'),
-    //   // tr_time = $('.table-sign-in tbody tr td.hour-sign-in').closest('tr');
-    //
-    //   jqThis.html(jqThisTr.find('.hour-sign-in'));
-    //
-    //
-    // }
+      goCardBack : function() {
+        $('.table-sign-in tbody tr').removeClass('focused');
+        $('#table_back .table-sign-in tbody tr:first-child').addClass('focused');
+        $('.card-back').click();
+  		},
+      goCardFront : function() {
+        $('.table-sign-in tbody tr').removeClass('focused');
+        $('#table_front .table-sign-in tbody tr:first-child').addClass('focused');
+        $('.card-front').click();
+  		},
+      goNextTr : function() {
+        var selTable = $('tr.focused').closest('tbody');
+        var trFocused = selTable.find('tr.focused');
+        var trFocusedLast = selTable.find('tr').last();
+        var trNextFocused = trFocused.next('tr');
 
-    // function changeImage( el, pos ) {
-    // 	$preview.attr( 'src', el.data( 'preview' ) );
-    // 	$carouselItems.removeClass( 'current-img' );
-    // 	el.addClass( 'current-img' );
-    // 	carousel.setCurrent( pos );
-    // }
+        if (trFocusedLast.hasClass('focused')) {
+          goHandlers.goCardBack();
+        } else {
+          trFocused.removeClass('focused');
+          trNextFocused.addClass('focused');
+        }
+
+      },
+      goBackTr : function() {
+        var selTable = $('tr.focused').closest('tbody');
+        var trFocused = selTable.find('tr.focused');
+        var trFocusedFirst = selTable.find('tr').first();
+        var trPrevFocused = trFocused.prev('tr');
+
+        if (trFocusedFirst.hasClass('focused')) {
+          goHandlers.goCardFront();
+        } else {
+          trFocused.removeClass('focused');
+          trPrevFocused.addClass('focused');
+        }
+
+      }
+
+    };
+
   }
 
 })(jQuery);

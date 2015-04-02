@@ -2,7 +2,13 @@
 @import "components/variables";
 @import "bootstrap/mixins";
 
+body {
+  background-color: #f5f5f5;
+}
+
 .table-sign-in {
+  border-top: 0;
+  background-color: white;
   tr td { text-align: right; }
   tr.focused {
     font-size: floor(($font-size-base * 3));
