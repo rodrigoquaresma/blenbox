@@ -1,3 +1,20 @@
-// Place all the styles related to the fills_time controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// Core variables and mixins
+@import "components/variables";
+@import "bootstrap/mixins";
+
+.table-sign-in {
+  tr td { text-align: right; }
+  tr.focused {
+    font-size: floor(($font-size-base * 3));
+    background: $brand-primary;
+    color: white;
+    font-weight: 500;
+    letter-spacing: 2px;
+    td {
+      background: $brand-primary;
+      &:first-child {
+        background: $brand-secundary;
+      }
+    }
+  }
+}
