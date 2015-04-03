@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'chi-square', :to => 'chi_square#index', :as => :chi_square
+  get 'chisquare', :to => redirect('chi-square')
+  get 'chi_square', :to => redirect('chi-square')
+
   root 'site#index'
 
   get 'folhaponto', :to => redirect('folhaponto/2015/apr')
