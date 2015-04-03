@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'chisquare', :to => redirect('chi-square')
   get 'chi_square', :to => redirect('chi-square')
 
+  match 'chi-square/calculate', :to => "chi_square#calculate", :via => 'post', :as => :chi_calculate
+
   root 'site#index'
 
   get 'folhaponto', :to => redirect('folhaponto/2015/apr')

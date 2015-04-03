@@ -1,2 +1,78 @@
-<h1>ChiSquare#index</h1>
-<p>Find me in app/views/chi_square/index.html.erb</p>
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-8">
+      <h1>Chi-Square Tests</h1>
+    </div>
+    <div class="col-sm-4 text-right">
+      <small>by <a href="http://www.rodrigoquaresma.com.br">rodrigo quaresma</a></small>
+    </div>
+  </div>
+
+
+
+  <h2>for a 2x2 table</h2>
+
+  <div class="row">
+    <div class="col-sm-8">
+
+      <%= form_tag(chi_calculate_path, method: "post") do %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">confidence interval around two independent means</h3>
+        </div>
+        <div class="panel-body form-horizontal">
+
+
+            <div class="row">
+              <div class="col-sm-4">
+              </div>
+              <div class="col-sm-4">
+                <label>visitors</label>
+              </div>
+              <div class="col-sm-4">
+                <label>goals</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-4">group A</label>
+              <div class="col-sm-4">
+                <%= text_field_tag(:number_group_a_v, '', class: 'form-control') %>
+              </div>
+              <div class="col-sm-4">
+                <%= text_field_tag(:number_group_a_g, '', class: 'form-control') %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4">group B</label>
+              <div class="col-sm-4">
+                <%= text_field_tag(:number_group_b_v, '', class: 'form-control') %>
+              </div>
+              <div class="col-sm-4">
+                <%= text_field_tag(:number_group_b_g, '', class: 'form-control') %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-4">
+                <%= submit_tag 'Go!', class: 'btn btn-primary' %>
+              </div>
+            </div>
+
+        </div>
+      </div>
+      <% end %>
+
+
+
+
+    </div>
+    <div class="col-sm-4">
+      <p>The calculator below can be used to interpret the results of a usability-oriented split (A/B) test. This is a basic scenario where you have two groups of Visitors (A & B) who each get to see one version of your website and for whom you track the number of Conversions or Goals (purchases, downloads, click-throughs, etc.).</p>
+      <p><%=@result%></p>
+    </div>
+  </div>
+
+
+
+</div>
