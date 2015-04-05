@@ -1,7 +1,10 @@
 class ChiSquareController < ApplicationController
 
   def index
-    @result = ''
+    @result = 0
+    @g_a_conversion = 0
+    @g_b_conversion = 0
+    @conf_int = 0
 
     @mmm = params[:number_group_a_v].to_i #total design a
 
