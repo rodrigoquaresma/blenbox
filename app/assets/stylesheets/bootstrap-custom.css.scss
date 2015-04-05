@@ -15,6 +15,10 @@
 
 @import "bootstrap/tables";
 @import "bootstrap/forms";
+.panel-body .form-group {
+  margin-bottom: 10px;
+  &:last-child { margin-bottom: 0px; }
+}
 @import "bootstrap/buttons";
 
 // Components
@@ -55,3 +59,48 @@
 
 .btn-secundary { @include button-variant($btn-secundary-color, $btn-secundary-bg, $btn-secundary-border); }
 .btn-default-b { @include button-variant($brand-secundary, $btn-default-bg, $brand-secundary); }
+
+// new helpers
+
+.row-nogutter,
+.form-horizontal .form-group.row-nogutter {
+  margin-right: 0;
+  margin-left: 0;
+  > [class^='col-'] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+.row-gutter-xs,
+.form-horizontal .form-group.row-gutter-xs {
+  margin-right: -5px;
+  margin-left: -5px;
+  > [class^='col-'] {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+.row-gutter-sm,
+.form-horizontal .form-group.row-gutter-sm {
+  margin-right: -10px;
+  margin-left: -10px;
+  > [class^='col-'] {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+
+hr.invisible { margin-bottom:11px; }
+hr.spacer-xs { margin-top: 5px; margin-bottom: 5px; }
+hr.spacer-sm { margin-top: 10px; margin-bottom: 10px; }
+hr.spacer-md { margin-top: 15px; margin-bottom: 15px; }
+
+.btn-height-xs,
+.btn-height-sm,
+.btn-height,
+.btn-height-lg  { margin: 0 ; padding: 0; }
+
+.btn-height-xs  { line-height: 25px; }
+.btn-height-sm  { line-height: 33px; }
+.btn-height     { line-height: 36px; }
+.btn-height-lg  { line-height: 48px; }
