@@ -5,8 +5,7 @@ class ChiSquareController < ApplicationController
     @g_a_conversion = 0
     @g_b_conversion = 0
     @conf_int = 0
-
-    @mmm = params[:number_group_a_v].to_i #total design a
+    @z = 0
 
   end
 
@@ -92,7 +91,6 @@ class ChiSquareController < ApplicationController
     @Ln = function_Ln(fmt)
 
     @test_function = function_ChiSq(result_chiSq,1)
-
 
     @conf_int = function_confidence_interval(m,a,n,c)
 
@@ -247,9 +245,7 @@ class ChiSquareController < ApplicationController
     form_normdist = (1-resF)*2
     form_normdist = form_normdist.to_f
 
-    x = vDs.to_f
-    x = vDs.round(4)
-
+    @vz = resF.round(3)
 
     return showPercConfLevel(resF.round(3))
 
