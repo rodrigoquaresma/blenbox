@@ -2,6 +2,8 @@
 
 <% ndays = Time.days_in_month(month, year) %>
 
+<p>feriado <%= @holiday_1 %></p>
+
 <div role="tabpanel">
 
   <!-- Nav tabs -->
@@ -20,6 +22,7 @@
       </span>
     </li>
   </ul>
+
 
   <!-- Tab panes -->
   <div class="tab-content">
@@ -64,6 +67,11 @@
               <tr style="background:#eee">
                 <td><%= end_time_in.strftime('%d') %></td>
                 <td colspan="4" style="text-align:left;">Domingo</td>
+              </tr>
+            <% elsif start_time_in == @holiday_1 %>
+              <tr style="background:#eee">
+                <td><%= end_time_in.strftime('%d') %></td>
+                <td colspan="4" style="text-align:left;">\o/ feriado</td>
               </tr>
             <% else %>
               <tr>
@@ -120,6 +128,11 @@
               <tr style="background:#eee">
                 <td><%= end_time_in.strftime('%d') %></td>
                 <td colspan="4" style="text-align:left;">Domingo</td>
+              </tr>
+            <% elsif start_time_in == @holiday_1 %>
+              <tr style="background:#eee">
+                <td><%= end_time_in.strftime('%d') %></td>
+                <td colspan="4" style="text-align:left;">\o/ feriado</td>
               </tr>
             <% elsif i > ndays %>
               <tr style="background:#eee">
