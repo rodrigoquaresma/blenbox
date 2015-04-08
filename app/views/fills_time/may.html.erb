@@ -4,6 +4,10 @@
   <%
   year = 2015
   month = 5
+
+  holiday_1 = Time.new(year,month,1).strftime('%F')
+  holiday_2 = ''
+
   %>
 
   <p>
@@ -15,6 +19,6 @@
     <%= link_to 'junho 2015', fills_time_jun_path, class: 'btn btn-default' %>
   </p>
 
-  <%= render partial: "table", locals: { year: year, month: month } %>
+  <%= render partial: "table", locals: { year: year, month: month, holiday_1: holiday_1, holiday_2: holiday_2 } %>
 
 </div>

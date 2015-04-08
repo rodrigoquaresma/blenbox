@@ -2,8 +2,6 @@
 
 <% ndays = Time.days_in_month(month, year) %>
 
-<p>feriado <%= @holiday_1 %></p>
-
 <div role="tabpanel">
 
   <!-- Nav tabs -->
@@ -57,8 +55,7 @@
             start_time_in_l = Time.new(year,month,day,hour_in_l,minute_in_l)
             end_time_in_l = start_time_in_l + 1.hours
 
-            if start_time_in.strftime('%w').to_f == 6
-            %>
+            if start_time_in.strftime('%w').to_f == 6 %>
               <tr style="background:#eee">
                 <td><%= end_time_in.strftime('%d') %></td>
                 <td colspan="4" style="text-align:left;">Sábado</td>
@@ -68,7 +65,7 @@
                 <td><%= end_time_in.strftime('%d') %></td>
                 <td colspan="4" style="text-align:left;">Domingo</td>
               </tr>
-            <% elsif start_time_in == @holiday_1 %>
+            <% elsif start_time_in.strftime('%F') == holiday_1 || start_time_in.strftime('%F') == holiday_2 %>
               <tr style="background:#eee">
                 <td><%= end_time_in.strftime('%d') %></td>
                 <td colspan="4" style="text-align:left;">\o/ feriado</td>
@@ -118,8 +115,7 @@
             start_time_in_l = Time.new(year,month,day,hour_in_l,minute_in_l)
             end_time_in_l = start_time_in_l + 1.hours
 
-            if start_time_in.strftime('%w').to_f == 6
-            %>
+            if start_time_in.strftime('%w').to_f == 6 %>
               <tr style="background:#eee">
                 <td><%= end_time_in.strftime('%d') %></td>
                 <td colspan="4" style="text-align:left;">Sábado</td>
@@ -129,7 +125,7 @@
                 <td><%= end_time_in.strftime('%d') %></td>
                 <td colspan="4" style="text-align:left;">Domingo</td>
               </tr>
-            <% elsif start_time_in == @holiday_1 %>
+              <% elsif start_time_in.strftime('%F') == holiday_1 || start_time_in.strftime('%F') == holiday_2 %>
               <tr style="background:#eee">
                 <td><%= end_time_in.strftime('%d') %></td>
                 <td colspan="4" style="text-align:left;">\o/ feriado</td>
