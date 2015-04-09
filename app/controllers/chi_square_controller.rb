@@ -36,6 +36,11 @@ class ChiSquareController < ApplicationController
     @nChiSquare = nChiSquare
     @nChiSquare_pValue = function_pValue(nChiSquare,1)
 
+    # Yates correction
+    cs = function_cs(m,a,n,c)
+    yatesChiSquare = function_fmt(cs)
+    @function_cs = yatesChiSquare
+
 
     @function_confidenceInterval = function_confidenceInterval(m,a,n,c)
 
@@ -50,6 +55,7 @@ class ChiSquareController < ApplicationController
     @function_fmt = fmt
 
     @function_Ln = function_Ln(fmt)
+
 
     render :action => :result
 
@@ -81,6 +87,35 @@ class ChiSquareController < ApplicationController
     csny = csq_B+csq_A+csq_D+csq_C
 
     return csny.to_f
+
+  end
+
+  def function_cs(vm,va,vn,vc)
+
+    cell_r1 = vm #total group A
+    cell_A  = va #ok group A
+    cell_B  = cell_r1-cell_A
+    cell_r2 = vn #total group B
+    cell_C  = vc #ok group B
+    cell_D  = cell_r2-cell_C
+
+    cell_c1 = cell_A+cell_C
+    cell_c2 = cell_B+cell_D
+    t = cell_A+cell_B+cell_C+cell_D
+
+    ex_A = cell_r1*cell_c1/t
+    ex_B = cell_r1*cell_c2/t
+    ex_C = cell_r2*cell_c1/t
+    ex_D = cell_r2*cell_c2/t
+
+    csq_B = function_csq(cell_B,ex_B.to_f,0.5).to_f
+    csq_A = function_csq(cell_A,ex_A.to_f,0.5).to_f
+    csq_D = function_csq(cell_D,ex_D.to_f,0.5).to_f
+    csq_C = function_csq(cell_C,ex_C.to_f,0.5).to_f
+
+    cs = csq_A+csq_B+csq_C+csq_D
+
+    return cs.to_f
 
   end
 

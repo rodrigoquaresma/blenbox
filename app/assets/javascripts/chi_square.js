@@ -38,6 +38,7 @@ function CalcStats(form) {
   if(Cell_D<Cell_A) { LoSlop = Cell_D }
   var HiSlop = Cell_B;
   if(Cell_C<Cell_B) { HiSlop = Cell_C }
+  
   var LnProb1 = LnFact(Cell_r1) + LnFact(Cell_r2) + LnFact(Cell_c1) + LnFact(Cell_c2) - LnFact(t)
   var SingleP = Exp( LnProb1 - LnFact(Cell_A) - LnFact(Cell_B) - LnFact(Cell_C) - LnFact(Cell_D) )
   var FisherP=0;
@@ -80,6 +81,8 @@ function CalcStats(form) {
 
   form.csyc.value = Fmt(cs)
   form.csyc_p.value = Fmt(Csp(cs))
+
+
   od=(Cell_A/Cell_B)/(Cell_C/Cell_D);
   form.od.value=Fmt(od)
   rr=(Cell_A/Cell_r1)/(Cell_C/Cell_r2);
@@ -133,11 +136,15 @@ function CalcStats(form) {
   csmh=(t-1)*(Cell_A*Cell_D-Cell_B*Cell_C)*(Cell_A*Cell_D-Cell_B*Cell_C)/(Cell_r1*Cell_r2*Cell_c1*Cell_c2)
   form.csmh.value = Fmt(csmh)
   form.csmh_p.value = Fmt(Csp(csmh))
-  cc=Sqrt(csny/(csny+t)); form.cc.value=Fmt(cc)
-  ca=cc*Sqrt(2); form.ca.value=Fmt(ca)
-  rtet=Cos(Pi/(1+Sqrt(od))); form.rtet.value = Fmt(rtet)
+  cc=Sqrt(csny/(csny+t));
+  form.cc.value=Fmt(cc)
+  ca=cc*Sqrt(2);
+  form.ca.value=Fmt(ca)
+  rtet=Cos(Pi/(1+Sqrt(od)));
+  form.rtet.value = Fmt(rtet)
 
-  cp=(Cell_A*Cell_D-Cell_B*Cell_C)/Sqrt(Cell_r1*Cell_r2*Cell_c2*Cell_c1); form.cp.value=Fmt(cp)
+  cp=(Cell_A*Cell_D-Cell_B*Cell_C)/Sqrt(Cell_r1*Cell_r2*Cell_c2*Cell_c1);
+  form.cp.value=Fmt(cp)
 
   yq=(Cell_A*Cell_D-Cell_B*Cell_C)/(Cell_B*Cell_C+Cell_A*Cell_D); form.yq.value=Fmt(yq)
   ets = (Cell_A - Sav_A) / (Cell_A + Cell_B + Cell_C - Sav_A); form.ets.value=Fmt(ets)
