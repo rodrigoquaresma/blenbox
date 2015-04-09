@@ -11,94 +11,131 @@ class ChiSquareController < ApplicationController
 
   def calculate
 
+    # define vars
     m = params[:number_group_a_v].to_i #total design a
     a = params[:number_group_a_g].to_i #pass design a
     n = params[:number_group_b_v].to_i #total design b
     c = params[:number_group_b_g].to_i #pass design b
-    b = m.to_f - a.to_f
-    d = n.to_f - c.to_f
-    r = a.to_f + c.to_f
-    s = b.to_f + d.to_f
-    mn = m.to_f + n.to_f
+
+    @value_m = m
+    @value_a = a
+    @value_n = n
+    @value_c = c
+
+    # functions
+
+    @function_isSmallSampleSizes = function_isSmallSampleSizes(m,a,n,c)
+
+    # chiSquare / two proportion test
+    chiSquare = function_chiSquare(m,a,n,c)
+    @chiSquare = chiSquare
+    @chiSquare_pValue = function_pValue(chiSquare,1)
+
+    # N-1 chiSquare / N-1 two proportion test
+    nChiSquare = function_nChiSquare(m,a,n,c)
+    @nChiSquare = nChiSquare
+    @nChiSquare_pValue = function_pValue(nChiSquare,1)
 
 
-    calc_1 = a*d-b*c
-    calc_2 = calc_1*calc_1
-    calc_3 = calc_2*mn
-    calc_4 = m*n*r*s
-    calc_5 = calc_3/calc_4
-    calc_6 = a.to_f/m.to_f
-    calc_7 = c.to_f/n.to_f
+    @function_confidenceInterval = function_confidenceInterval(m,a,n,c)
 
-    result_chiSq = calc_5.round(4)
+    @function_conversionRates = function_conversionRates(m,a,n,c)
 
-    @result = result_chiSq
-    @result_b = 100 - calc_5.round(1)
+    csny = function_csny(m,a,n,c)
 
-    @result_m = m
-    @result_a = a
-    @result_n = n
-    @result_c = c
+    @function_csny = csny
 
-    @g_a_conversion = calc_6.round(4)*100
-    @g_b_conversion = calc_7.round(4)*100
+    fmt = function_fmt(csny)
 
-    #new calcs
-    cell_r1 = m #total group A
-    cell_A  = a #ok group A
+    @function_fmt = fmt
+
+    @function_Ln = function_Ln(fmt)
+
+    render :action => :result
+
+  end
+
+  def function_csny(vm,va,vn,vc)
+
+    cell_r1 = vm #total group A
+    cell_A  = va #ok group A
     cell_B  = cell_r1-cell_A
-    cell_r2 = n #total group B
-    cell_C  = c #ok group B
+    cell_r2 = vn #total group B
+    cell_C  = vc #ok group B
     cell_D  = cell_r2-cell_C
 
     cell_c1 = cell_A+cell_C
     cell_c2 = cell_B+cell_D
     t = cell_A+cell_B+cell_C+cell_D
 
-    @cell_A = cell_A
-    @cell_B = cell_B
-    @cell_C = cell_C
-    @cell_D = cell_D
-
     ex_A = cell_r1*cell_c1/t
     ex_B = cell_r1*cell_c2/t
     ex_C = cell_r2*cell_c1/t
     ex_D = cell_r2*cell_c2/t
 
-    @Ex_A = ex_A
-    @Ex_B = ex_B
-    @Ex_C = ex_C
-    @Ex_D = ex_D
-
-    csq_B = csq(cell_B,ex_B,0).to_f
-    csq_A = csq(cell_A,ex_A,0).to_f
-    csq_D = csq(cell_D,ex_D,0).to_f
-    csq_C = csq(cell_C,ex_C,0).to_f
-
-    @csq_B = csq_B.to_f
-    @csq_A = csq_A.to_f
-    @csq_D = csq_D.to_f
-    @csq_C = csq_C.to_f
+    csq_B = function_csq(cell_B,ex_B,0).to_f
+    csq_A = function_csq(cell_A,ex_A,0).to_f
+    csq_D = function_csq(cell_D,ex_D,0).to_f
+    csq_C = function_csq(cell_C,ex_C,0).to_f
 
     csny = csq_B+csq_A+csq_D+csq_C
 
-    @csny = csny.round(4)
-
-    fmt = function_fmt(csny)
-
-    @fmt = fmt
-
-    @Ln = function_Ln(fmt)
-
-    @test_function = function_ChiSq(result_chiSq,1)
-
-    @conf_int = function_confidence_interval(m,a,n,c)
-
-    render :action => :index
+    return csny.to_f
 
   end
 
-  def csq(o,e,y)
+  def function_conversionRates(vm,va,vn,vc)
+
+    calc_1 = va.to_f/vm.to_f
+    calc_2 = vc.to_f/vn.to_f
+
+    calc_1 = calc_1*100
+    calc_2 = calc_2*100
+    calc_1 = calc_1.round(2)
+    calc_2 = calc_2.round(2)
+
+    return calc_1,calc_2
+
+  end
+
+  def function_chiSquare(vm,va,vn,vc)
+
+    vb = vm.to_f - va.to_f
+    vd = vn.to_f - vc.to_f
+    vr = va.to_f + vc.to_f
+    vs = vb.to_f + vd.to_f
+    vN = vm.to_f + vn.to_f
+
+    calc_1 = va*vd-vb*vc
+    calc_2 = calc_1*calc_1
+    calc_3 = calc_2*vN
+    calc_4 = vm*vn*vr*vs
+    calc_5 = calc_3/calc_4
+
+    return calc_5.to_f.round(4)
+
+  end
+
+  def function_nChiSquare(vm,va,vn,vc)
+
+    vb = vm.to_f - va.to_f
+    vd = vn.to_f - vc.to_f
+    vr = va.to_f + vc.to_f
+    vs = vb.to_f + vd.to_f
+    vN = vm.to_f + vn.to_f
+    vN1 = vN.to_f - 1
+
+    calc_1 = va*vd-vb*vc
+    calc_2 = calc_1*calc_1
+    calc_3 = calc_2*vN1
+    calc_4 = vm*vn*vr*vs
+    calc_5 = calc_3/calc_4
+
+    return calc_5.to_f.round(4)
+
+  end
+
+  def function_csq(o,e,y)
     if (e==0)
       return 0
     end
@@ -133,7 +170,7 @@ class ChiSquareController < ApplicationController
     if (function_Abs(z)>7)
       return (1-1/q+3/(q*q))*function_Exp(-q/2)/(function_Abs(z)*function_Sqrt(varPiD2))
     else
-      return function_ChiSq(q,1)
+      return function_pValue(q,1)
     end
   end
 
@@ -162,7 +199,7 @@ class ChiSquareController < ApplicationController
     return x * function_Ln(x) / function_Ln(2)
   end
 
-  def function_ChiSq(x,n)
+  def function_pValue(x,n)
     varPi=3.141592653589793
     if (x>1000 || n>1000)
       q=function_Norm((function_Pow(x/n,1/3)+2/(9*n)-1)/function_Sqrt(2/(9*n)))/2;
@@ -192,7 +229,7 @@ class ChiSquareController < ApplicationController
     return res.round(4)
   end
 
-  def function_confidence_interval(vAt,vAc,vBt,vBc)
+  def function_confidenceInterval(vAt,vAc,vBt,vBc)
 
     # vAt = total A
     # vAc = conversions A
@@ -232,6 +269,8 @@ class ChiSquareController < ApplicationController
 
     vns = calc_10.to_f
 
+    @vns = vns.round(4)
+
     calc_11 = vP.to_f*vQ.to_f
     calc_12 = calc_11.to_f*vns.to_f
     calc_13 = function_Sqrt(calc_12.to_f)
@@ -247,7 +286,41 @@ class ChiSquareController < ApplicationController
 
     @vz = resF.round(3)
 
+    @function_Norm = function_Norm(resF.round(3))
+
     return showPercConfLevel(resF.round(3))
+
+  end
+
+  def function_isSmallSampleSizes(vm,va,vn,vc)
+
+    # vm = total A
+    # va = conversions A
+    # vn = total B
+    # vc = conversions B
+
+    vr = va+vc
+    vs = (vm-va)+(vn-vc)
+
+    vN = vm+vn
+
+    calc_1 = vr*vm
+    calc_2 = calc_1.to_f/vN
+
+    calc_3 = vs*vm
+    calc_4 = calc_3.to_f/vN
+
+    calc_5 = vr*vn
+    calc_6 = calc_5.to_f/vN
+
+    calc_7 = vs*vn
+    calc_8 = calc_7.to_f/vN
+
+    if (calc_2.round(1)<5 || calc_4.round(1)<5 || calc_6.round(1)<5 || calc_8.round(1)<5)
+      return true
+    else
+      return false
+    end
 
   end
 

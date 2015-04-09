@@ -36,10 +36,10 @@
               <span>group A</span>
             </label>
             <div class="col-sm-4">
-              <%= text_field_tag(:number_group_a_v, 0, class: 'form-control') %>
+              <%= text_field_tag(:number_group_a_v, @value_m, class: 'form-control') %>
             </div>
             <div class="col-sm-4">
-              <%= text_field_tag(:number_group_a_g, 0, class: 'form-control') %>
+              <%= text_field_tag(:number_group_a_g, @value_a, class: 'form-control') %>
             </div>
           </div>
           <div class="form-group row-gutter-xs">
@@ -47,10 +47,10 @@
               <span>group B</span>
             </label>
             <div class="col-sm-4">
-              <%= text_field_tag(:number_group_b_v, 0, class: 'form-control') %>
+              <%= text_field_tag(:number_group_b_v, @value_n, class: 'form-control') %>
             </div>
             <div class="col-sm-4">
-              <%= text_field_tag(:number_group_b_g, 0, class: 'form-control') %>
+              <%= text_field_tag(:number_group_b_g, @value_c, class: 'form-control') %>
             </div>
           </div>
         </div>
@@ -59,9 +59,43 @@
         </div>
       </div>
       <% end %>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <h4>chi square test /<br> two proportion test</h4>
+          <p>Chi-Square <span><%=@chiSquare%></span></p>
+          <p>p-value: <span><%=@chiSquare_pValue%></span></p>
+        </div>
+        <div class="col-xs-6">
+          <h4>N - 1 two-proportion test /<br> N - 1 chi square test</h4>
+          <p>Chi-Square: <span><%=@nChiSquare%></span></p>
+          <p>p-value: <span><%=@nChiSquare_pValue%></span></p>
+          <h4>N - 1 two-proportion test</h4>
+          <p>vns: <span><%=@vns%></span></p>
+          <p>z: <span><%=@vz%></span></p>
+          <p>p-value: <span><%=@function_Norm%></span></p>
+        </div>
+      </div>
+      <hr />
     </div>
     <div class="col-sm-4">
+      <p>Degree of freedom <span>1</span></p>
+      <p>Conversion rate A: <span><%=@function_conversionRates[0]%>%</span></p>
+      <p>Conversion rate B: <span><%=@function_conversionRates[1]%>%</span></p>
+      <p>Intervalo de confiança: <span><%=@function_confidenceInterval%></span></p>
+      <hr />
+      <p>function_Norm: <span><%=@function_Norm%></span></p>
+      <p>function_pValue: <span><%=@function_pValue%></span></p>
+      <p>function_isSmallSampleSizes: <span><%=@function_isSmallSampleSizes%></span></p>
+      <p>function_chiSquare: <span><%=@function_chiSquare%></span></p>
+      <p>function_conversionRates: <span><%=@function_conversionRates%></span></p>
+      <p>function_csny: <span><%=@function_csny%></span></p>
+      <p>function_fmt: <span><%=@function_fmt%></span></p>
+      <p>function_Ln: <span><%=@function_Ln%></span></p>
+
+      <hr />
       <p>The calculator below can be used to interpret the results of a usability-oriented split (A/B) test. This is a basic scenario where you have two groups of Visitors (A & B) who each get to see one version of your website and for whom you track the number of Conversions or Goals (purchases, downloads, click-throughs, etc.).</p>
     </div>
   </div>
+
 </div>
