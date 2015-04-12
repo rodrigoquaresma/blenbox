@@ -29,35 +29,60 @@ class ChiSquareController < ApplicationController
     # chiSquare / two proportion test
     chiSquare = function_chiSquare(m,a,n,c)
     @chiSquare = chiSquare
-    @chiSquare_pValue = function_pValue(chiSquare,1)
+    chiSquare_pValue = function_pValue(chiSquare,1)
+    @chiSquare_pValue = chiSquare_pValue
+    @chiSquare_ConfidenceInterval = function_Norm(chiSquare_pValue)
 
     # N-1 chiSquare / N-1 two proportion test
     nChiSquare = function_nChiSquare(m,a,n,c)
     @nChiSquare = nChiSquare
-    @nChiSquare_pValue = function_pValue(nChiSquare,1)
+    nChiSquare_pValue = function_pValue(nChiSquare,1)
+    @nChiSquare_pValue = nChiSquare_pValue
+    @nchiSquare_ConfidenceInterval = function_Norm(nChiSquare_pValue)
 
     # Yates correction
-    cs = function_cs(m,a,n,c)
-    yatesChiSquare = function_fmt(cs)
-    @function_cs = yatesChiSquare
+    yatesChiSquare = function_yatesChiSquare(m,a,n,c)
+    @yatesChiSquare = yatesChiSquare
+    yatesChiSquare_pValue = function_pValue(yatesChiSquare,1)
+    @yatesChiSquare_pValue = yatesChiSquare_pValue
+    @yatesChiSquare_ConfidenceInterval = function_Norm(yatesChiSquare_pValue)
 
 
     @function_confidenceInterval = function_confidenceInterval(m,a,n,c)
-
     @function_conversionRates = function_conversionRates(m,a,n,c)
-
     csny = function_csny(m,a,n,c)
-
     @function_csny = csny
-
     fmt = function_fmt(csny)
-
     @function_fmt = fmt
-
     @function_Ln = function_Ln(fmt)
 
-
     render :action => :result
+
+  end
+
+  def function_yatesChiSquare(vm,va,vn,vc)
+
+    # vm = total A
+    # va = conversions A
+    # vn = total B
+    # vc = conversions B
+    vb = vm.to_f - va.to_f
+    vd = vn.to_f - vc.to_f
+    vr = va.to_f + vc.to_f
+    vs = vb.to_f + vd.to_f
+    vN = vm.to_f + vn.to_f
+
+    calc_01 = va*vd-vb*vc
+    calc_02 = vN/2
+    calc_03 = calc_01-calc_02
+    calc_04 = calc_03*calc_03
+    calc_05 = calc_04*vN
+    calc_06 = vm*vn*vr*vs
+    calc_07 = calc_05/calc_06
+
+    x = calc_07.to_f
+
+    return x.round(3)
 
   end
 
@@ -112,6 +137,8 @@ class ChiSquareController < ApplicationController
     csq_A = function_csq(cell_A,ex_A.to_f,0.5).to_f
     csq_D = function_csq(cell_D,ex_D.to_f,0.5).to_f
     csq_C = function_csq(cell_C,ex_C.to_f,0.5).to_f
+
+    # cs=function_csq(Cell_A,Ex_A,.5)+function_csq(Cell_B,Ex_B,.5)+function_csq(Cell_C,Ex_C,.5)+function_csq(Cell_D,Ex_D,.5)
 
     cs = csq_A+csq_B+csq_C+csq_D
 
@@ -235,7 +262,9 @@ class ChiSquareController < ApplicationController
   end
 
   def function_pValue(x,n)
+
     varPi=3.141592653589793
+
     if (x>1000 || n>1000)
       q=function_Norm((function_Pow(x/n,1/3)+2/(9*n)-1)/function_Sqrt(2/(9*n)))/2;
       if (x>n)
