@@ -11,94 +11,283 @@ class ChiSquareController < ApplicationController
 
   def calculate
 
+    # define vars
     m = params[:number_group_a_v].to_i #total design a
     a = params[:number_group_a_g].to_i #pass design a
     n = params[:number_group_b_v].to_i #total design b
     c = params[:number_group_b_g].to_i #pass design b
-    b = m.to_f - a.to_f
-    d = n.to_f - c.to_f
-    r = a.to_f + c.to_f
-    s = b.to_f + d.to_f
-    mn = m.to_f + n.to_f
 
+    @value_m = m
+    @value_a = a
+    @value_n = n
+    @value_c = c
 
-    calc_1 = a*d-b*c
-    calc_2 = calc_1*calc_1
-    calc_3 = calc_2*mn
-    calc_4 = m*n*r*s
-    calc_5 = calc_3/calc_4
-    calc_6 = a.to_f/m.to_f
-    calc_7 = c.to_f/n.to_f
+    # functions
 
-    result_chiSq = calc_5.round(4)
+    @function_isSmallSampleSizes = function_isSmallSampleSizes(m,a,n,c)
 
-    @result = result_chiSq
-    @result_b = 100 - calc_5.round(1)
+    # chiSquare / two proportion test
+    chiSquare = function_chiSquare(m,a,n,c)
+    @chiSquare = chiSquare
+    chiSquare_pValue = function_pValue(chiSquare,1)
+    @chiSquare_pValue = chiSquare_pValue
+    @chiSquare_ConfidenceInterval = function_Norm(chiSquare_pValue)
 
-    @result_m = m
-    @result_a = a
-    @result_n = n
-    @result_c = c
+    # N-1 chiSquare / N-1 two proportion test
+    nChiSquare = function_nChiSquare(m,a,n,c)
+    @nChiSquare = nChiSquare
+    nChiSquare_pValue = function_pValue(nChiSquare,1)
+    @nChiSquare_pValue = nChiSquare_pValue
+    @nchiSquare_ConfidenceInterval = function_Norm(nChiSquare_pValue)
 
-    @g_a_conversion = calc_6.round(4)*100
-    @g_b_conversion = calc_7.round(4)*100
+    # Yates correction
+    yatesChiSquare = function_yatesChiSquare(m,a,n,c)
+    @yatesChiSquare = yatesChiSquare
+    yatesChiSquare_pValue = function_pValue(yatesChiSquare,1)
+    @yatesChiSquare_pValue = yatesChiSquare_pValue
+    @yatesChiSquare_ConfidenceInterval = function_Norm(yatesChiSquare_pValue)
 
-    #new calcs
-    cell_r1 = m #total group A
-    cell_A  = a #ok group A
+    # Fisher Exact Test
+    fisherExactTest = function_fisherExactTest(m,a,n,c)
+    @fisherExactTest = fisherExactTest
+    fisherExactTest_pValue = function_pValue(fisherExactTest,1)
+    @fisherExactTest_pValue = fisherExactTest_pValue
+    @fisherExactTest_ConfidenceInterval = function_Norm(fisherExactTest_pValue)
+
+    @function_confidenceInterval = function_confidenceInterval(m,a,n,c)
+    @function_conversionRates = function_conversionRates(m,a,n,c)
+    csny = function_csny(m,a,n,c)
+    @function_csny = csny
+    @function_Ln = function_Ln(csny.round(3))
+
+    # @function_cs = function_cs(m,a,n,c)
+    # @show_me_the_number = function_pursuit(m,a,n,c)
+
+    render :action => :result
+
+  end
+
+  def function_fisherExactTest(vm,va,vn,vc)
+
+    cell_r1 = vm #total group A
+    cell_A  = va #ok group A
     cell_B  = cell_r1-cell_A
-    cell_r2 = n #total group B
-    cell_C  = c #ok group B
+    cell_r2 = vn #total group B
+    cell_C  = vc #ok group B
     cell_D  = cell_r2-cell_C
 
     cell_c1 = cell_A+cell_C
     cell_c2 = cell_B+cell_D
     t = cell_A+cell_B+cell_C+cell_D
 
-    @cell_A = cell_A
-    @cell_B = cell_B
-    @cell_C = cell_C
-    @cell_D = cell_D
+    loSlop = cell_A;
+    if (cell_D<cell_A)
+      loSlop = cell_D
+    end
+    hiSlop = cell_B;
+    if (cell_C<cell_B)
+      hiSlop = cell_C
+    end
+
+    lnProb1 = function_LnFact(cell_r1) + function_LnFact(cell_r2) + function_LnFact(cell_c1) + function_LnFact(cell_c2) - function_LnFact(t)
+    singleP = function_Exp( lnProb1 - function_LnFact(cell_A) - function_LnFact(cell_B) - function_LnFact(cell_C) - function_LnFact(cell_D) )
+    fisherP=0
+    leftP=0
+    rightP=0
+    # rosnerP=0
+    sumCheck=0
+    k = cell_A - loSlop
+
+    while( k<=cell_A+hiSlop )
+      vP = function_Exp( lnProb1 - function_LnFact(k) - function_LnFact(cell_r1-k) - function_LnFact(cell_c1-k) - function_LnFact(k+cell_r2-cell_c1) )
+      sumCheck = sumCheck + vP
+      if( k<=cell_A )
+        leftP = leftP + vP
+      end
+      if( k>=cell_A )
+        rightP = rightP + vP
+      end
+      if( vP<=(singleP+1e-12) )
+        fisherP = fisherP + vP
+      end
+      k = k + 1
+    end
+
+    return fisherP.round(4)
+
+  end
+
+
+  def function_fisherChiSquare(vm,va,vn,vc)
+
+    # vm = total A
+    # va = conversions A
+    # vn = total B
+    # vc = conversions B
+    vb = vm - va
+    vd = vn - vc
+    vr = va + vc
+    vs = vb + vd
+    vN = vm + vn
+
+    vFm= function_factorial(vm)
+    vFa= function_factorial(va)
+    vFn= function_factorial(vn)
+    vFc= function_factorial(vc)
+    vFb= function_factorial(vb)
+    vFd= function_factorial(vd)
+    vFr= function_factorial(vr)
+    vFs= function_factorial(vs)
+    vFN= function_factorial(vN)
+
+    calc_01 = vFm*vFn*vFr*vFs
+    calc_02 = vFa*vFb*vFc*vFd*vFN
+    calc_03 = calc_01.round(4)/calc_02.round(4)
+
+    x = calc_03.round(4)
+
+    return x
+
+  end
+
+  def function_yatesChiSquare(vm,va,vn,vc)
+
+    # vm = total A
+    # va = conversions A
+    # vn = total B
+    # vc = conversions B
+    vb = vm.to_f - va.to_f
+    vd = vn.to_f - vc.to_f
+    vr = va.to_f + vc.to_f
+    vs = vb.to_f + vd.to_f
+    vN = vm.to_f + vn.to_f
+
+    calc_01 = va*vd-vb*vc
+    calc_02 = vN/2
+    calc_03 = calc_01-calc_02
+    calc_04 = calc_03*calc_03
+    calc_05 = calc_04*vN
+    calc_06 = vm*vn*vr*vs
+    calc_07 = calc_05/calc_06
+
+    x = calc_07.to_f
+
+    return x.round(3)
+
+  end
+
+  def function_csny(vm,va,vn,vc)
+
+    cell_r1 = vm #total group A
+    cell_A  = va #ok group A
+    cell_B  = cell_r1-cell_A
+    cell_r2 = vn #total group B
+    cell_C  = vc #ok group B
+    cell_D  = cell_r2-cell_C
+
+    cell_c1 = cell_A+cell_C
+    cell_c2 = cell_B+cell_D
+    t = cell_A+cell_B+cell_C+cell_D
 
     ex_A = cell_r1*cell_c1/t
     ex_B = cell_r1*cell_c2/t
     ex_C = cell_r2*cell_c1/t
     ex_D = cell_r2*cell_c2/t
 
-    @Ex_A = ex_A
-    @Ex_B = ex_B
-    @Ex_C = ex_C
-    @Ex_D = ex_D
-
-    csq_B = csq(cell_B,ex_B,0).to_f
-    csq_A = csq(cell_A,ex_A,0).to_f
-    csq_D = csq(cell_D,ex_D,0).to_f
-    csq_C = csq(cell_C,ex_C,0).to_f
-
-    @csq_B = csq_B.to_f
-    @csq_A = csq_A.to_f
-    @csq_D = csq_D.to_f
-    @csq_C = csq_C.to_f
+    csq_B = function_csq(cell_B,ex_B,0).to_f
+    csq_A = function_csq(cell_A,ex_A,0).to_f
+    csq_D = function_csq(cell_D,ex_D,0).to_f
+    csq_C = function_csq(cell_C,ex_C,0).to_f
 
     csny = csq_B+csq_A+csq_D+csq_C
 
-    @csny = csny.round(4)
-
-    fmt = function_fmt(csny)
-
-    @fmt = fmt
-
-    @Ln = function_Ln(fmt)
-
-    @test_function = function_ChiSq(result_chiSq,1)
-
-    @conf_int = function_confidence_interval(m,a,n,c)
-
-    render :action => :index
+    return csny.to_f
 
   end
 
-  def csq(o,e,y)
+  def function_cs(vm,va,vn,vc)
+
+    cell_r1 = vm #total group A
+    cell_A  = va #ok group A
+    cell_B  = cell_r1-cell_A
+    cell_r2 = vn #total group B
+    cell_C  = vc #ok group B
+    cell_D  = cell_r2-cell_C
+
+    cell_c1 = cell_A+cell_C
+    cell_c2 = cell_B+cell_D
+    t = cell_A+cell_B+cell_C+cell_D
+
+    ex_A = cell_r1*cell_c1/t
+    ex_B = cell_r1*cell_c2/t
+    ex_C = cell_r2*cell_c1/t
+    ex_D = cell_r2*cell_c2/t
+
+    csq_B = function_csq(cell_B,ex_B.to_f,0.5).to_f
+    csq_A = function_csq(cell_A,ex_A.to_f,0.5).to_f
+    csq_D = function_csq(cell_D,ex_D.to_f,0.5).to_f
+    csq_C = function_csq(cell_C,ex_C.to_f,0.5).to_f
+
+    # cs=function_csq(Cell_A,Ex_A,.5)+function_csq(Cell_B,Ex_B,.5)+function_csq(Cell_C,Ex_C,.5)+function_csq(Cell_D,Ex_D,.5)
+
+    cs = csq_A+csq_B+csq_C+csq_D
+
+    return cs.to_f
+
+  end
+
+  def function_conversionRates(vm,va,vn,vc)
+
+    calc_1 = va.to_f/vm.to_f
+    calc_2 = vc.to_f/vn.to_f
+
+    calc_1 = calc_1*100
+    calc_2 = calc_2*100
+    calc_1 = calc_1.round(2)
+    calc_2 = calc_2.round(2)
+
+    return calc_1,calc_2
+
+  end
+
+  def function_chiSquare(vm,va,vn,vc)
+
+    vb = vm.to_f - va.to_f
+    vd = vn.to_f - vc.to_f
+    vr = va.to_f + vc.to_f
+    vs = vb.to_f + vd.to_f
+    vN = vm.to_f + vn.to_f
+
+    calc_1 = va*vd-vb*vc
+    calc_2 = calc_1*calc_1
+    calc_3 = calc_2*vN
+    calc_4 = vm*vn*vr*vs
+    calc_5 = calc_3/calc_4
+
+    return calc_5.to_f.round(4)
+
+  end
+
+  def function_nChiSquare(vm,va,vn,vc)
+
+    vb = vm.to_f - va.to_f
+    vd = vn.to_f - vc.to_f
+    vr = va.to_f + vc.to_f
+    vs = vb.to_f + vd.to_f
+    vN = vm.to_f + vn.to_f
+    vN1 = vN.to_f - 1
+
+    calc_1 = va*vd-vb*vc
+    calc_2 = calc_1*calc_1
+    calc_3 = calc_2*vN1
+    calc_4 = vm*vn*vr*vs
+    calc_5 = calc_3/calc_4
+
+    return calc_5.to_f.round(4)
+
+  end
+
+  def function_csq(o,e,y)
     if (e==0)
       return 0
     end
@@ -121,7 +310,7 @@ class ChiSquareController < ApplicationController
       v = v+(x-0.0005)
     end
     # return v.substring(0,v.indexOf('.')+4) #original
-    return v.round(3)
+    return v.round(4)
   end
 
   def function_Norm(z)
@@ -133,7 +322,7 @@ class ChiSquareController < ApplicationController
     if (function_Abs(z)>7)
       return (1-1/q+3/(q*q))*function_Exp(-q/2)/(function_Abs(z)*function_Sqrt(varPiD2))
     else
-      return function_ChiSq(q,1)
+      return function_pValue(q,1)
     end
   end
 
@@ -161,9 +350,33 @@ class ChiSquareController < ApplicationController
   def function_fEnt(x)
     return x * function_Ln(x) / function_Ln(2)
   end
-
-  def function_ChiSq(x,n)
+  def function_factorial(x)
+    n = (1..x).inject(:*) || 1
+    return n
+  end
+  def function_LnFact(z)
     varPi=3.141592653589793
+    varPi2=2*varPi
+    varPiD2=varPi/2
+    varLnPi2=function_Ln(varPi2)
+    if(z<2)
+      return 0
+    end
+    if(z<17)
+      f=z;
+      while(z>2)
+        z=z-1;
+        f=f*z
+      end
+      return function_Ln(f)
+    end
+    return (z+0.5)*function_Ln(z) - z + varLnPi2/2 + 1/(12*z) - 1/(360*function_Pow(z,3)) + 1/(1260*function_Pow(z,5)) - 1/(1680*function_Pow(z,7))
+  end
+
+  def function_pValue(x,n)
+
+    varPi=3.141592653589793
+
     if (x>1000 || n>1000)
       q=function_Norm((function_Pow(x/n,1/3)+2/(9*n)-1)/function_Sqrt(2/(9*n)))/2;
       if (x>n)
@@ -172,11 +385,15 @@ class ChiSquareController < ApplicationController
         return 1-q
       end
     end
+
     p=function_Exp(-0.5*x);
+
     if ((n%2)==1)
       p=p*function_Sqrt(2*x/varPi)
     end
+
     k=n;
+
     while (k>=2) do
       p=p*x/k;
       k=k-2
@@ -192,7 +409,7 @@ class ChiSquareController < ApplicationController
     return res.round(4)
   end
 
-  def function_confidence_interval(vAt,vAc,vBt,vBc)
+  def function_confidenceInterval(vAt,vAc,vBt,vBc)
 
     # vAt = total A
     # vAc = conversions A
@@ -232,6 +449,8 @@ class ChiSquareController < ApplicationController
 
     vns = calc_10.to_f
 
+    @vns = vns.round(4)
+
     calc_11 = vP.to_f*vQ.to_f
     calc_12 = calc_11.to_f*vns.to_f
     calc_13 = function_Sqrt(calc_12.to_f)
@@ -247,7 +466,41 @@ class ChiSquareController < ApplicationController
 
     @vz = resF.round(3)
 
+    @function_Norm = function_Norm(resF.round(3))
+
     return showPercConfLevel(resF.round(3))
+
+  end
+
+  def function_isSmallSampleSizes(vm,va,vn,vc)
+
+    # vm = total A
+    # va = conversions A
+    # vn = total B
+    # vc = conversions B
+
+    vr = va+vc
+    vs = (vm-va)+(vn-vc)
+
+    vN = vm+vn
+
+    calc_1 = vr*vm
+    calc_2 = calc_1.to_f/vN
+
+    calc_3 = vs*vm
+    calc_4 = calc_3.to_f/vN
+
+    calc_5 = vr*vn
+    calc_6 = calc_5.to_f/vN
+
+    calc_7 = vs*vn
+    calc_8 = calc_7.to_f/vN
+
+    if (calc_2.round(1)<5 || calc_4.round(1)<5 || calc_6.round(1)<5 || calc_8.round(1)<5)
+      return true
+    else
+      return false
+    end
 
   end
 
