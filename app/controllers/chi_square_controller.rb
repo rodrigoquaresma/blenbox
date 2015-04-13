@@ -47,16 +47,48 @@ class ChiSquareController < ApplicationController
     @yatesChiSquare_pValue = yatesChiSquare_pValue
     @yatesChiSquare_ConfidenceInterval = function_Norm(yatesChiSquare_pValue)
 
+    # Fisher Exact Test
+    fisherChiSquare = function_fisherChiSquare(m,a,n,c)
+    @fisherChiSquare = fisherChiSquare
+    fisherChiSquare_pValue = function_pValue(fisherChiSquare,1)
+    @fisherChiSquare_pValue = fisherChiSquare_pValue
+    @fisherChiSquare_ConfidenceInterval = function_Norm(fisherChiSquare_pValue)
+
 
     @function_confidenceInterval = function_confidenceInterval(m,a,n,c)
     @function_conversionRates = function_conversionRates(m,a,n,c)
     csny = function_csny(m,a,n,c)
     @function_csny = csny
-    fmt = function_fmt(csny)
-    @function_fmt = fmt
-    @function_Ln = function_Ln(fmt)
+    @function_Ln = function_Ln(csny.round(3))
+
+
+
+
+    @show_me_the_number = function_factorial(5)
 
     render :action => :result
+
+  end
+
+  def function_fisherChiSquare(vm,va,vn,vc)
+
+    # vm = total A
+    # va = conversions A
+    # vn = total B
+    # vc = conversions B
+    vb = vm.to_f - va.to_f
+    vd = vn.to_f - vc.to_f
+    vr = va.to_f + vc.to_f
+    vs = vb.to_f + vd.to_f
+    vN = vm.to_f + vn.to_f
+
+    calc_01 = function_factorial(vm)*function_factorial(vn)*function_factorial(vr)*function_factorial(vs)
+    calc_02 = function_factorial(va)*function_factorial(vb)*function_factorial(vc)*function_factorial(vd)*function_factorial(vN)
+    calc_03 = calc_01.round(4)/calc_02.round(4)
+
+    x = calc_03.round(4)
+
+    return x
 
   end
 
@@ -212,16 +244,16 @@ class ChiSquareController < ApplicationController
     return y
   end
 
-  def function_fmt(x)
-    v = 0
-    if (x>=0)
-      v = v+(x+0.0005)
-    else
-      v = v+(x-0.0005)
-    end
-    # return v.substring(0,v.indexOf('.')+4) #original
-    return v.round(3)
-  end
+  # def function_fmt(x)
+  #   v = 0
+  #   if (x>=0)
+  #     v = v+(x+0.0005)
+  #   else
+  #     v = v+(x-0.0005)
+  #   end
+  #   # return v.substring(0,v.indexOf('.')+4) #original
+  #   return v.round(3)
+  # end
 
   def function_Norm(z)
     varPi=3.141592653589793
@@ -259,6 +291,10 @@ class ChiSquareController < ApplicationController
   end
   def function_fEnt(x)
     return x * function_Ln(x) / function_Ln(2)
+  end
+  def function_factorial(x)
+    n = (1..x).inject(:*) || 1
+    return n
   end
 
   def function_pValue(x,n)
