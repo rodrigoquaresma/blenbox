@@ -48,12 +48,11 @@ class ChiSquareController < ApplicationController
     @yatesChiSquare_ConfidenceInterval = function_Norm(yatesChiSquare_pValue)
 
     # Fisher Exact Test
-    fisherChiSquare = function_fisherChiSquare(m,a,n,c)
-    @fisherChiSquare = fisherChiSquare
-    fisherChiSquare_pValue = function_pValue(fisherChiSquare,1)
-    @fisherChiSquare_pValue = fisherChiSquare_pValue
-    @fisherChiSquare_ConfidenceInterval = function_Norm(fisherChiSquare_pValue)
-
+    fisherExactTest = function_fisherExactTest(m,a,n,c)
+    @fisherExactTest = fisherExactTest
+    fisherExactTest_pValue = function_pValue(fisherExactTest,1)
+    @fisherExactTest_pValue = fisherExactTest_pValue
+    @fisherExactTest_ConfidenceInterval = function_Norm(fisherExactTest_pValue)
 
     @function_confidenceInterval = function_confidenceInterval(m,a,n,c)
     @function_conversionRates = function_conversionRates(m,a,n,c)
@@ -61,14 +60,63 @@ class ChiSquareController < ApplicationController
     @function_csny = csny
     @function_Ln = function_Ln(csny.round(3))
 
-
-
-
-    @show_me_the_number = function_factorial(5)
+    # @function_cs = function_cs(m,a,n,c)
+    # @show_me_the_number = function_pursuit(m,a,n,c)
 
     render :action => :result
 
   end
+
+  def function_fisherExactTest(vm,va,vn,vc)
+
+    cell_r1 = vm #total group A
+    cell_A  = va #ok group A
+    cell_B  = cell_r1-cell_A
+    cell_r2 = vn #total group B
+    cell_C  = vc #ok group B
+    cell_D  = cell_r2-cell_C
+
+    cell_c1 = cell_A+cell_C
+    cell_c2 = cell_B+cell_D
+    t = cell_A+cell_B+cell_C+cell_D
+
+    loSlop = cell_A;
+    if (cell_D<cell_A)
+      loSlop = cell_D
+    end
+    hiSlop = cell_B;
+    if (cell_C<cell_B)
+      hiSlop = cell_C
+    end
+
+    lnProb1 = function_LnFact(cell_r1) + function_LnFact(cell_r2) + function_LnFact(cell_c1) + function_LnFact(cell_c2) - function_LnFact(t)
+    singleP = function_Exp( lnProb1 - function_LnFact(cell_A) - function_LnFact(cell_B) - function_LnFact(cell_C) - function_LnFact(cell_D) )
+    fisherP=0
+    leftP=0
+    rightP=0
+    # rosnerP=0
+    sumCheck=0
+    k = cell_A - loSlop
+
+    while( k<=cell_A+hiSlop )
+      vP = function_Exp( lnProb1 - function_LnFact(k) - function_LnFact(cell_r1-k) - function_LnFact(cell_c1-k) - function_LnFact(k+cell_r2-cell_c1) )
+      sumCheck = sumCheck + vP
+      if( k<=cell_A )
+        leftP = leftP + vP
+      end
+      if( k>=cell_A )
+        rightP = rightP + vP
+      end
+      if( vP<=(singleP+1e-12) )
+        fisherP = fisherP + vP
+      end
+      k = k + 1
+    end
+
+    return fisherP.round(4)
+
+  end
+
 
   def function_fisherChiSquare(vm,va,vn,vc)
 
@@ -76,14 +124,24 @@ class ChiSquareController < ApplicationController
     # va = conversions A
     # vn = total B
     # vc = conversions B
-    vb = vm.to_f - va.to_f
-    vd = vn.to_f - vc.to_f
-    vr = va.to_f + vc.to_f
-    vs = vb.to_f + vd.to_f
-    vN = vm.to_f + vn.to_f
+    vb = vm - va
+    vd = vn - vc
+    vr = va + vc
+    vs = vb + vd
+    vN = vm + vn
 
-    calc_01 = function_factorial(vm)*function_factorial(vn)*function_factorial(vr)*function_factorial(vs)
-    calc_02 = function_factorial(va)*function_factorial(vb)*function_factorial(vc)*function_factorial(vd)*function_factorial(vN)
+    vFm= function_factorial(vm)
+    vFa= function_factorial(va)
+    vFn= function_factorial(vn)
+    vFc= function_factorial(vc)
+    vFb= function_factorial(vb)
+    vFd= function_factorial(vd)
+    vFr= function_factorial(vr)
+    vFs= function_factorial(vs)
+    vFN= function_factorial(vN)
+
+    calc_01 = vFm*vFn*vFr*vFs
+    calc_02 = vFa*vFb*vFc*vFd*vFN
     calc_03 = calc_01.round(4)/calc_02.round(4)
 
     x = calc_03.round(4)
@@ -244,16 +302,16 @@ class ChiSquareController < ApplicationController
     return y
   end
 
-  # def function_fmt(x)
-  #   v = 0
-  #   if (x>=0)
-  #     v = v+(x+0.0005)
-  #   else
-  #     v = v+(x-0.0005)
-  #   end
-  #   # return v.substring(0,v.indexOf('.')+4) #original
-  #   return v.round(3)
-  # end
+  def function_fmt(x)
+    v = 0
+    if (x>=0)
+      v = v+(x+0.0005)
+    else
+      v = v+(x-0.0005)
+    end
+    # return v.substring(0,v.indexOf('.')+4) #original
+    return v.round(4)
+  end
 
   def function_Norm(z)
     varPi=3.141592653589793
@@ -296,6 +354,24 @@ class ChiSquareController < ApplicationController
     n = (1..x).inject(:*) || 1
     return n
   end
+  def function_LnFact(z)
+    varPi=3.141592653589793
+    varPi2=2*varPi
+    varPiD2=varPi/2
+    varLnPi2=function_Ln(varPi2)
+    if(z<2)
+      return 0
+    end
+    if(z<17)
+      f=z;
+      while(z>2)
+        z=z-1;
+        f=f*z
+      end
+      return function_Ln(f)
+    end
+    return (z+0.5)*function_Ln(z) - z + varLnPi2/2 + 1/(12*z) - 1/(360*function_Pow(z,3)) + 1/(1260*function_Pow(z,5)) - 1/(1680*function_Pow(z,7))
+  end
 
   def function_pValue(x,n)
 
@@ -309,11 +385,15 @@ class ChiSquareController < ApplicationController
         return 1-q
       end
     end
+
     p=function_Exp(-0.5*x);
+
     if ((n%2)==1)
       p=p*function_Sqrt(2*x/varPi)
     end
+
     k=n;
+
     while (k>=2) do
       p=p*x/k;
       k=k-2

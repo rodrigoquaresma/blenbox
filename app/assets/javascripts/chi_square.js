@@ -62,6 +62,7 @@ function CalcStats(form) {
   form.FisherP.value = Fmt(FisherP)
   form.SingleP.value = Fmt(SingleP)
   form.SumCheck.value = "" + SumCheck
+
   RosnerP = 0.5
   if( LeftP<RosnerP ) { RosnerP = LeftP }
   if( RightP<RosnerP ) { RosnerP = RightP }

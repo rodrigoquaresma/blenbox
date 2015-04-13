@@ -100,9 +100,9 @@
           <tr>
             <td>Fisher Exact Test</td>
             <td>
-              <p><%= @fisherChiSquare %></p>
-              <p><%= @fisherChiSquare_pValue %></p>
-              <p><%= @fisherChiSquare_ConfidenceInterval %></p>
+              <p><%= @fisherExactTest %></p>
+              <p><%= @fisherExactTest_pValue %></p>
+              <p><%= @fisherExactTest_ConfidenceInterval %></p>
             </td>
             <td>Recommended: when any expected cell count is < 1</td>
           </tr>
@@ -118,6 +118,7 @@
       <p>Intervalo de confiança: <span><%=@confidenceInterval%></span></p>
       <hr />
       <p>show_me_the_number: <span><%=@show_me_the_number%></span></p>
+      <p>function_cs: <span><%=@function_cs%></span></p>
       <p>vns: <span><%=@vns%></span></p>
       <p>z: <span><%=@vz%></span></p>
       <p>function_Norm: <span><%=@function_Norm%></span></p>
