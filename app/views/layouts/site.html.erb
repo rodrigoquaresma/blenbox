@@ -15,13 +15,14 @@
   <![endif]-->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta property="og:title" content="rodrigo quaresma - interaction designer" />
+  <%= render partial: "layouts/ga" %>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= stylesheet_link_tag    'site', media: 'all' %>
   <%= yield :head %>
 </head>
 <body data-no-turbolink>
   <%= yield :content %>
-  <%= yield %>  
+  <%= yield %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "modernizr-2.8.3" %>
   <%= javascript_include_tag "site" %>
