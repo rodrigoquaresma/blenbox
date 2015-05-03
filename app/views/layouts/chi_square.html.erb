@@ -16,6 +16,7 @@
   <%= yield :head %>
 </head>
 <body data-no-turbolink >
+  <%= render partial: "layouts/navbar" %>
   <%= yield :content %>
   <%= yield %>
   <%= javascript_include_tag "application" %>

@@ -5,3 +5,15 @@
 // Core variables and mixins
 @import "components/variables";
 @import "bootstrap/mixins";
+
+body {
+  background: #1d292b;
+}
+
+.cover {
+  color: #dad2bf;
+  .title {
+    font-size: 4em;
+    margin: 2em 0;
+  }
+}
