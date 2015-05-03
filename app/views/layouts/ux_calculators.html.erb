@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ux calculators">
+  <meta name="keywords" content="user experience, ux, calculator, test a/b">
+  <meta name="author" content="rodrigo quaresma">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <title>ux calculators - by rodrigo quaresma - ux designer</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta property="og:title" content="ux calculators" />
+  <%= render partial: "layouts/ga" %>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= stylesheet_link_tag    'chi_square', media: 'all' %>
+  <%= yield :head %>
+</head>
+<body data-no-turbolink >
+  <%= render partial: "layouts/navbar" %>
+  <%= yield :content %>
+  <%= yield %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "chi_square" %>
+  <%= yield :footer %>
+</body>
+</html>
