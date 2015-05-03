@@ -1,23 +1,41 @@
 <div class="container">
   <h3>ux calculators</h3>
+  <!-- #1 -->
   <h2>what kind of analysis do you want to do?</h2>
-      <p class="text-muted">
-        <%= link_to 'continuous data', '#', class: 'btn btn-default' %>
-        e.g., task times or rating scales
-      </p>
-      <p class="text-muted">
-        <%= link_to 'discrete-binary data', '#', class: 'btn btn-default' %>
-        e.g., completion rates or convertion rates
-      </p>
-
-  <div class="row">
-    <div class="col-sm-6">
-    </div>
-    <div class="col-sm-6">
-    </div>
+  <div class="radio">
+    <label class="btn btn-default">
+      <input type="radio" name="analysis" /> continuous data
+    </label>
+    <span class="text-muted">e.g., task times or rating scales</span>
   </div>
-
-  <p>
-  </p>
-
+  <div class="radio">
+    <label class="btn btn-default">
+      <input type="radio" name="analysis" /> discrete-binary data
+    </label>
+    <span class="text-muted">e.g., completion rates or convertion rates</span>
+  </div>
+  <!-- #2 -->
+  <h2>comparing data? <small class="text-muted"></small></h2>
+  <div class="radio">
+    <label class="btn btn-default">
+      <input type="radio" name="comparing_data" /> yes
+    </label>
+  </div>
+  <div class="radio">
+    <label class="btn btn-default">
+      <input type="radio" name="comparing_data" /> no
+    </label>
+  </div>
+  <!-- #3 -->
+  <h2>diferent users in each group? <small class="text-muted"></small></h2>
+  <div class="radio">
+    <label class="btn btn-default">
+      <input type="radio" name="diferent_users" /> yes
+    </label>
+  </div>
+  <div class="radio">
+    <label class="btn btn-default">
+      <input type="radio" name="diferent_users" /> no
+    </label>
+  </div>
 </div>
