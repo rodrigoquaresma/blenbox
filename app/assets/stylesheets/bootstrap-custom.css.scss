@@ -1,6 +1,6 @@
 // Core variables and mixins
-@import "components/variables";
 @import "bootstrap/mixins";
+@import "components/variables";
 
 // Reset and dependencies
 @import "bootstrap/normalize";
@@ -104,3 +104,16 @@ hr.spacer-md { margin-top: 15px; margin-bottom: 15px; }
 .btn-height-sm  { line-height: 33px; }
 .btn-height     { line-height: 36px; }
 .btn-height-lg  { line-height: 48px; }
+
+
+// for all
+
+body { padding-top: 70px; }
+
+@media (min-width: 768px) {
+  .navbar-right {
+    margin-right: 0;
+  }
+}
+
+hr { opacity: .25; }

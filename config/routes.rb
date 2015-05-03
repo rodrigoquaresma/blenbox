@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
   root 'site#index'
 
-  get 'folhaponto', :to => redirect('folhaponto/2015/apr')
+  get '/', :to => 'site#index', :as => :site_index
+
+  get 'folhaponto', :to => redirect('folhaponto/2015/apr'), :as => :fills_time
   get 'folhaponto/2015/jan', :to => 'fills_time#jan', :as => :fills_time_jan
   get 'folhaponto/2015/feb', :to => 'fills_time#feb', :as => :fills_time_feb
   get 'folhaponto/2015/mar', :to => 'fills_time#mar', :as => :fills_time_mar

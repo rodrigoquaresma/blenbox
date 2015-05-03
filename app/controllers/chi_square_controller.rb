@@ -1,12 +1,6 @@
 class ChiSquareController < ApplicationController
 
   def index
-    @result = 0
-    @g_a_conversion = 0
-    @g_b_conversion = 0
-    @conf_int = 0
-    @z = 0
-
   end
 
   def calculate
@@ -51,7 +45,7 @@ class ChiSquareController < ApplicationController
     fisherExactTest = function_fisherExactTest(m,a,n,c)
     @fisherExactTest = fisherExactTest
     fisherExactTest_pValue = function_pValue(fisherExactTest,1)
-    @fisherExactTest_pValue = fisherExactTest_pValue
+    @fisherExactTest_pValue = function_fisherChiSquare(m,a,n,c)
     @fisherExactTest_ConfidenceInterval = function_Norm(fisherExactTest_pValue)
 
     @function_confidenceInterval = function_confidenceInterval(m,a,n,c)
@@ -69,25 +63,22 @@ class ChiSquareController < ApplicationController
 
   def function_fisherExactTest(vm,va,vn,vc)
 
-    cell_r1 = vm #total group A
-    cell_A  = va #ok group A
-    cell_B  = cell_r1-cell_A
-    cell_r2 = vn #total group B
-    cell_C  = vc #ok group B
-    cell_D  = cell_r2-cell_C
+    cell_r1 = vm              #total group A
+    cell_A  = va              #success group A
+    cell_B  = cell_r1-cell_A  #fail group A
+    cell_r2 = vn              #total group B
+    cell_C  = vc              #success group B
+    cell_D  = cell_r2-cell_C  #fail group B
 
-    cell_c1 = cell_A+cell_C
-    cell_c2 = cell_B+cell_D
-    t = cell_A+cell_B+cell_C+cell_D
+    cell_c1 = cell_A+cell_C   #total success
+    cell_c2 = cell_B+cell_D   #total fail
+    t = cell_A+cell_B+cell_C+cell_D #total
 
-    loSlop = cell_A;
-    if (cell_D<cell_A)
-      loSlop = cell_D
-    end
-    hiSlop = cell_B;
-    if (cell_C<cell_B)
-      hiSlop = cell_C
-    end
+    loSlop = cell_A
+    loSlop = cell_D if (cell_D<cell_A)
+
+    hiSlop = cell_B
+    hiSlop = cell_C if (cell_C<cell_B)
 
     lnProb1 = function_LnFact(cell_r1) + function_LnFact(cell_r2) + function_LnFact(cell_c1) + function_LnFact(cell_c2) - function_LnFact(t)
     singleP = function_Exp( lnProb1 - function_LnFact(cell_A) - function_LnFact(cell_B) - function_LnFact(cell_C) - function_LnFact(cell_D) )
@@ -113,7 +104,10 @@ class ChiSquareController < ApplicationController
       k = k + 1
     end
 
-    return fisherP.round(4)
+
+    @show_me_the_number = rightP,leftP
+
+    return fisherP.to_f
 
   end
 
@@ -144,7 +138,7 @@ class ChiSquareController < ApplicationController
     calc_02 = vFa*vFb*vFc*vFd*vFN
     calc_03 = calc_01.round(4)/calc_02.round(4)
 
-    x = calc_03.round(4)
+    x = calc_03.to_f
 
     return x
 
