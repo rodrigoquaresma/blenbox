@@ -1,7 +1,7 @@
 module FillsTimeHelper
 
   def hours_in
-    hours_in = Array.new (15) {rand(8..10)}
+    hours_in = Array.new (15) {rand(8..9)}
   end
 
   def minutes_in
@@ -25,7 +25,7 @@ module FillsTimeHelper
   end
 
   def minutes_in_l
-    minutes_in_l = Array.new (15) {rand(0..59)}
+    minutes_in_l = Array.new (15) {rand(0..30)}
   end
 
   def xhour_in_l

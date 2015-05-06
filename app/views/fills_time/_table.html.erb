@@ -55,6 +55,24 @@
             start_time_in_l = Time.new(year,month,day,hour_in_l,minute_in_l)
             end_time_in_l = start_time_in_l + 1.hours
 
+            if (end_time_in - end_time_in_l) >= 8.hours
+              start_time_in = start_time_in - 2.hours
+              end_time_in = start_time_in + 9.hours + 48.minutes
+              start_time_in_l = start_time_in_l + 30.minutes
+              end_time_in_l = end_time_in_l + 30.minutes
+            elsif (end_time_in - end_time_in_l) >= 7.hours
+              start_time_in = start_time_in - 1.hours
+              start_time_in = start_time_in - 30.minutes
+              end_time_in = start_time_in + 9.hours + 48.minutes
+              start_time_in_l = start_time_in_l + 30.minutes
+              end_time_in_l = end_time_in_l + 30.minutes
+            elsif (end_time_in - end_time_in_l) >= 6.hours
+              start_time_in = start_time_in - 1.hours
+              end_time_in = start_time_in + 9.hours + 48.minutes
+              start_time_in_l = start_time_in_l + 30.minutes
+              end_time_in_l = end_time_in_l + 30.minutes
+            end
+
             if start_time_in.strftime('%w').to_f == 6 %>
               <tr style="background:#eee">
                 <td><%= end_time_in.strftime('%d') %></td>
@@ -114,6 +132,24 @@
             minute_in_l = xminute_in_l[0]
             start_time_in_l = Time.new(year,month,day,hour_in_l,minute_in_l)
             end_time_in_l = start_time_in_l + 1.hours
+
+            if (end_time_in - end_time_in_l) >= 8.hours
+              start_time_in = start_time_in - 2.hours
+              end_time_in = start_time_in + 9.hours + 48.minutes
+              start_time_in_l = start_time_in_l + 30.minutes
+              end_time_in_l = end_time_in_l + 30.minutes
+            elsif (end_time_in - end_time_in_l) >= 7.hours
+              start_time_in = start_time_in - 1.hours
+              start_time_in = start_time_in - 30.minutes
+              end_time_in = start_time_in + 9.hours + 48.minutes
+              start_time_in_l = start_time_in_l + 30.minutes
+              end_time_in_l = end_time_in_l + 30.minutes
+            elsif (end_time_in - end_time_in_l) >= 6.hours
+              start_time_in = start_time_in - 1.hours
+              end_time_in = start_time_in + 9.hours + 48.minutes
+              start_time_in_l = start_time_in_l + 30.minutes
+              end_time_in_l = end_time_in_l + 30.minutes
+            end
 
             if start_time_in.strftime('%w').to_f == 6 %>
               <tr style="background:#eee">
