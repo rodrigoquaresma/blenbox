@@ -40,6 +40,16 @@
 @import "bootstrap/media";
 @import "bootstrap/list-group";
 @import "bootstrap/panels";
+.panel { border-width: 2px; }
+.panel-body {
+  background-color: rgba(255,255,255,0.8);
+  border-radius: $panel-border-radius - 2;
+  p:last-child { margin-bottom: 0; }
+}
+.panel-heading,
+.panel-footer { border: 0; }
+
+
 @import "bootstrap/responsive-embed";
 @import "bootstrap/wells";
 @import "bootstrap/close";

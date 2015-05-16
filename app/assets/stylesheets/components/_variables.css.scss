@@ -25,16 +25,19 @@ $navbar-inverse-link-color:                 lighten($brand-primary, 50%);
 
 $nav-tabs-active-link-hover-bg:             white;
 
-$panel-footer-bg:             #d7d4cc;
+$panel-bg:                    #d7d4cc;
+$panel-footer-bg:             transparent;
 $panel-body-padding:          10px;
 $panel-heading-padding:       10px;
+$panel-border-radius:         6px;
 
 $panel-default-text:          #5f6162;
-$panel-default-border:        $body-bg;
-$panel-default-heading-bg:    #d7d4cc;
+$panel-default-border:        transparent;
+$panel-default-heading-bg:    transparent;
 
 
 // extra
+// $panel-body-border-radius:    8px;
 
 $btn-secundary-color:            #fff;
 $btn-secundary-bg:               $brand-secundary;
