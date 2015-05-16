@@ -18,13 +18,13 @@
 <body data-no-turbolink >
   <%= render partial: "layouts/navbar" %>
   <div class="container">
-    <h3>ux calculators</h3>
+    <h1>ux calculators</h1>
     <div class="row">
-      <div class="col-sm-9 col-md-10">
+      <div class="col-sm-8 col-md-9">
         <%= yield :content %>
         <%= yield %>
       </div>
-      <div class="col-sm-3 col-md-2">
+      <div class="col-sm-4 col-md-3">
         <%= render partial: "ux_calculators/ad" %>
       </div>
     </div>
