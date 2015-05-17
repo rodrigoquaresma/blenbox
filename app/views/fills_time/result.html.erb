@@ -1,0 +1,66 @@
+<div class="container">
+  <%= render partial: "header" %>
+
+  <%
+  year_now = Time.now.year
+  month_now = Time.now.month
+  month_now = month_now - 1
+
+  year = @sel_year
+  month = @sel_month
+
+  ndays = Time.days_in_month(month, year)
+
+  holiday_1 = ''
+  holiday_2 = ''
+  case month
+  when 1
+    holiday_1 = Time.new(year,month,1).strftime('%F')
+  when 2
+    holiday_1 = Time.new(year,month,16).strftime('%F')
+    holiday_2 = Time.new(year,month,17).strftime('%F')
+  when 3
+    holiday_1 = Time.new(year,month,23).strftime('%F')
+  when 4
+    holiday_1 = Time.new(year,month,3).strftime('%F')
+    holiday_2 = Time.new(year,month,21).strftime('%F')
+  when 5
+    holiday_1 = Time.new(year,month,1).strftime('%F')
+  when 6
+    holiday_1 = Time.new(year,month,4).strftime('%F')
+  when 8
+    holiday_1 = Time.new(year,month,11).strftime('%F')
+  when 9
+    holiday_1 = Time.new(year,month,7).strftime('%F')
+  when 10
+    holiday_1 = Time.new(year,month,12).strftime('%F')
+  when 11
+    holiday_1 = Time.new(year,month,2).strftime('%F')
+  when 12
+    holiday_1 = Time.new(year,month,24).strftime('%F')
+    holiday_2 = Time.new(year,month,25).strftime('%F')
+  end
+  %>
+
+  <%= form_tag(fills_time_calculate_path, method: "post") do %>
+    <div class="form-inline">
+      <div class="form-group">
+        <%= label_tag :sel_year, 'Ano', class: 'sr-only' %>
+        <%= select_tag :sel_year, options_for_select(years.collect{ |y| [y] }, year), class: 'form-control input-lg' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag :sel_month, 'Mês', class: 'sr-only' %>
+        <%= select_tag :sel_month, options_for_select(months.collect{ |m| [m[0], m[1]] }, month), class: 'form-control input-lg' %>
+      </div>
+      <%= submit_tag 'Go!', class: 'btn btn-primary btn-lg' %>
+      <span class="lead btn-height-lg pull-right">
+        <span class="text-muted">ano</span> <span><%= year %></span>
+        <span class="text-muted">mês</span> <span><%= month %></span>
+      </span>
+    </div>
+    <hr class="spacer-sm" />
+  <% end %>
+
+  <%= render partial: "table", locals: { year: year, month: month, ndays: ndays, holiday_1: holiday_1, holiday_2: holiday_2 } %>
+
+</div>
