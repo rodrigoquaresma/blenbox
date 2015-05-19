@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get 'ux-calculators', :to => 'ux_calculators#index', :as => :ux_calculators
   get 'uxcalculators', :to => redirect('ux-calculators')
 
+  get 'ux-calculators/binary', :to => 'ux_calculators#binary', :as => :ux_calculators_binary
+
+
   get 'chi-square', :to => 'chi_square#index', :as => :chi_square
   get 'chisquare', :to => redirect('chi-square')
   get 'chi_square', :to => redirect('chi-square')
