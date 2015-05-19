@@ -5,11 +5,11 @@
 <div class="container">
   <div class="cover">
     <h3 class="title"><strong>blen</strong>box</h3>
-    <ul class="list-inline">
-      <li><%= link_to 'ux calculators', ux_calculators_path, class: 'btn btn-default' %></li>
-      <li><%= link_to 'split test calculator', chi_square_path, class: 'btn btn-default' %></li>
-      <li><%= link_to 'ajudante folha ponto', fills_time_path, class: 'btn btn-default' %></li>
-    </ul>
+    <p>
+      <%= link_to 'ux calculators', ux_calculators_path, class: 'btn btn-default' %>
+      <%= link_to 'split test calculator', chi_square_path, class: 'btn btn-default' %>
+      <%= link_to 'ajudante folha ponto', fills_time_path, class: 'btn btn-default' %>
+    </p>
   </div>
   <%= render partial: "layouts/sharebuttons" %>
   <hr />
