@@ -20,7 +20,7 @@
   <%= stylesheet_link_tag    'site', media: 'all' %>
   <%= yield :head %>
 </head>
-<body data-no-turbolink>
+<body data-no-turbolink style="padding-top:0;">
   <%= yield :content %>
   <%= yield %>
   <%= javascript_include_tag "application" %>
