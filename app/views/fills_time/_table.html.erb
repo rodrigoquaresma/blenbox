@@ -35,60 +35,7 @@
         <tbody>
 
           <% for i in 1..15 %>
-            <%
-            day = i
-            hour_in = xhour_in[0]
-            minute_in = xminute_in[0]
-            start_time_in = Time.new(year,month,day,hour_in,minute_in)
-            end_time_in = start_time_in + 9.hours + 48.minutes
-
-            hour_in_l = xhour_in_l[0]
-            minute_in_l = xminute_in_l[0]
-            start_time_in_l = Time.new(year,month,day,hour_in_l,minute_in_l)
-            end_time_in_l = start_time_in_l + 1.hours
-
-            if (end_time_in - end_time_in_l) >= 8.hours
-              start_time_in = start_time_in - 2.hours
-              end_time_in = start_time_in + 9.hours + 48.minutes
-              start_time_in_l = start_time_in_l + 30.minutes
-              end_time_in_l = end_time_in_l + 30.minutes
-            elsif (end_time_in - end_time_in_l) >= 7.hours
-              start_time_in = start_time_in - 1.hours
-              start_time_in = start_time_in - 30.minutes
-              end_time_in = start_time_in + 9.hours + 48.minutes
-              start_time_in_l = start_time_in_l + 30.minutes
-              end_time_in_l = end_time_in_l + 30.minutes
-            elsif (end_time_in - end_time_in_l) >= 6.hours
-              start_time_in = start_time_in - 1.hours
-              end_time_in = start_time_in + 9.hours + 48.minutes
-              start_time_in_l = start_time_in_l + 30.minutes
-              end_time_in_l = end_time_in_l + 30.minutes
-            end
-
-            if start_time_in.strftime('%w').to_f == 6 %>
-              <tr style="background:#eee">
-                <td><%= end_time_in.strftime('%d') %></td>
-                <td colspan="4" style="text-align:left;">Sábado</td>
-              </tr>
-            <% elsif start_time_in.strftime('%w').to_f == 0 %>
-              <tr style="background:#eee">
-                <td><%= end_time_in.strftime('%d') %></td>
-                <td colspan="4" style="text-align:left;">Domingo</td>
-              </tr>
-            <% elsif start_time_in.strftime('%F') == holiday_1 || start_time_in.strftime('%F') == holiday_2 %>
-              <tr style="background:#eee">
-                <td><%= end_time_in.strftime('%d') %></td>
-                <td colspan="4" style="text-align:left;">\o/ feriado</td>
-              </tr>
-            <% else %>
-              <tr>
-                <td><%= end_time_in.strftime('%d') %></td>
-                <td class="hour-sign-in"><%= time_build(hour_in,minute_in.to_s.rjust(2, '0')) %></td>
-                <td class="hour-sign-out-l"><%= time_build(hour_in_l,minute_in_l.to_s.rjust(2, '0')) %></td>
-                <td class="hour-sign-in-l"><%= end_time_in_l.strftime('%H:%M') %></td>
-                <td class="hour-sign-out"><%= end_time_in.strftime('%H:%M') %></td>
-              </tr>
-            <% end %>
+          <%= render partial: "table_tr", locals: { year: year, month: month, ndays: ndays, holiday_1: holiday_1, holiday_2: holiday_2, i: i } %>
           <% end %>
 
         </tbody>
@@ -113,65 +60,7 @@
         <tbody>
 
           <% for i in 16..31 %>
-            <%
-            day = i
-            hour_in = xhour_in[0]
-            minute_in = xminute_in[0]
-            start_time_in = Time.new(year,month,day,hour_in,minute_in)
-            end_time_in = start_time_in + 9.hours + 48.minutes
-
-            hour_in_l = xhour_in_l[0]
-            minute_in_l = xminute_in_l[0]
-            start_time_in_l = Time.new(year,month,day,hour_in_l,minute_in_l)
-            end_time_in_l = start_time_in_l + 1.hours
-
-            if (end_time_in - end_time_in_l) >= 8.hours
-              start_time_in = start_time_in - 2.hours
-              end_time_in = start_time_in + 9.hours + 48.minutes
-              start_time_in_l = start_time_in_l + 30.minutes
-              end_time_in_l = end_time_in_l + 30.minutes
-            elsif (end_time_in - end_time_in_l) >= 7.hours
-              start_time_in = start_time_in - 1.hours
-              start_time_in = start_time_in - 30.minutes
-              end_time_in = start_time_in + 9.hours + 48.minutes
-              start_time_in_l = start_time_in_l + 30.minutes
-              end_time_in_l = end_time_in_l + 30.minutes
-            elsif (end_time_in - end_time_in_l) >= 6.hours
-              start_time_in = start_time_in - 1.hours
-              end_time_in = start_time_in + 9.hours + 48.minutes
-              start_time_in_l = start_time_in_l + 30.minutes
-              end_time_in_l = end_time_in_l + 30.minutes
-            end
-
-            if start_time_in.strftime('%w').to_f == 6 %>
-              <tr style="background:#eee">
-                <td><%= end_time_in.strftime('%d') %></td>
-                <td colspan="4" style="text-align:left;">Sábado</td>
-              </tr>
-            <% elsif i > ndays %>
-              <tr style="background:#eee">
-                <td><%= i %></td>
-                <td colspan="4" style="text-align:left;">não nesse mês</td>
-              </tr>
-            <% elsif start_time_in.strftime('%w').to_f == 0 %>
-              <tr style="background:#eee">
-                <td><%= end_time_in.strftime('%d') %></td>
-                <td colspan="4" style="text-align:left;">Domingo</td>
-              </tr>
-              <% elsif start_time_in.strftime('%F') == holiday_1 || start_time_in.strftime('%F') == holiday_2 %>
-              <tr style="background:#eee">
-                <td><%= end_time_in.strftime('%d') %></td>
-                <td colspan="4" style="text-align:left;">\o/ feriado</td>
-              </tr>
-            <% else %>
-              <tr>
-                <td><%= end_time_in.strftime('%d') %></td>
-                <td class="hour-sign-in"><%= time_build(hour_in,minute_in.to_s.rjust(2, '0')) %></td>
-                <td class="hour-sign-out-l"><%= time_build(hour_in_l,minute_in_l.to_s.rjust(2, '0')) %></td>
-                <td class="hour-sign-in-l"><%= end_time_in_l.strftime('%H:%M') %></td>
-                <td class="hour-sign-out"><%= end_time_in.strftime('%H:%M') %></td>
-              </tr>
-            <% end %>
+          <%= render partial: "table_tr", locals: { year: year, month: month, ndays: ndays, holiday_1: holiday_1, holiday_2: holiday_2, i: i } %>
           <% end %>
 
         </tbody>
