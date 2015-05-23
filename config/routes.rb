@@ -3,8 +3,35 @@ Rails.application.routes.draw do
   get 'ux-calculators', :to => 'ux_calculators#index', :as => :ux_calculators
   get 'uxcalculators', :to => redirect('ux-calculators')
 
-  get 'ux-calculators/binary', :to => 'ux_calculators#binary', :as => :ux_calculators_binary
+  get 'ux-calculators/continuous/',                                                      :to => 'ux_calculators#cn',                :as => :uxcal_cn
+  get 'ux-calculators/continuous/comparing-data-yes',                                    :to => 'ux_calculators#cn_cd_y',           :as => :uxcal_cn_cd_y
+  get 'ux-calculators/continuous/comparing-data-yes/diferent-users-yes',                 :to => 'ux_calculators#cn_cd_y_du_y',      :as => :uxcal_cn_cd_y_du_y
+  get 'ux-calculators/continuous/comparing-data-yes/diferent-users-yes/more-groups-yes', :to => 'ux_calculators#cn_cd_y_du_y_mg_y', :as => :uxcal_cn_cd_y_du_y_mg_y
+  get 'ux-calculators/continuous/comparing-data-yes/diferent-users-yes/more-groups-no',  :to => 'ux_calculators#cn_cd_y_du_y_mg_n', :as => :uxcal_cn_cd_y_du_y_mg_n
+  get 'ux-calculators/continuous/comparing-data-yes/diferent-users-no',                  :to => 'ux_calculators#cn_cd_y_du_n',      :as => :uxcal_cn_cd_y_du_n
+  get 'ux-calculators/continuous/comparing-data-yes/diferent-users-no/more-groups-yes',  :to => 'ux_calculators#cn_cd_y_du_n_mg_y', :as => :uxcal_cn_cd_y_du_n_mg_y
+  get 'ux-calculators/continuous/comparing-data-yes/diferent-users-no/more-groups-no',   :to => 'ux_calculators#cn_cd_y_du_n_mg_n', :as => :uxcal_cn_cd_y_du_n_mg_n
+  get 'ux-calculators/continuous/comparing-data-no',                                     :to => 'ux_calculators#cn_cd_n',           :as => :uxcal_cn_cd_n
+  get 'ux-calculators/continuous/comparing-data-no/against-bench-yes',                   :to => 'ux_calculators#cn_cd_n_ab_y',      :as => :uxcal_cn_cd_n_ab_y
+  get 'ux-calculators/continuous/comparing-data-no/against-bench-yes/task-time-yes',     :to => 'ux_calculators#cn_cd_n_ab_y_tt_y', :as => :uxcal_cn_cd_n_ab_y_tt_y
+  get 'ux-calculators/continuous/comparing-data-no/against-bench-yes/task-time-no',      :to => 'ux_calculators#cn_cd_n_ab_y_tt_n', :as => :uxcal_cn_cd_n_ab_y_tt_n
+  get 'ux-calculators/continuous/comparing-data-no/against-bench-no',                    :to => 'ux_calculators#cn_cd_n_ab_n',      :as => :uxcal_cn_cd_n_ab_n
+  get 'ux-calculators/continuous/comparing-data-no/against-bench-no/task-time-yes',      :to => 'ux_calculators#cn_cd_n_ab_n_tt_y', :as => :uxcal_cn_cd_n_ab_n_tt_y
+  get 'ux-calculators/continuous/comparing-data-no/against-bench-no/task-time-no',       :to => 'ux_calculators#cn_cd_n_ab_n_tt_n', :as => :uxcal_cn_cd_n_ab_n_tt_n
 
+  get 'ux-calculators/binary',                                                                          :to => 'ux_calculators#bn',                     :as => :uxcal_bn
+  get 'ux-calculators/binary/comparing-groups-yes',                                                     :to => 'ux_calculators#bn_cg_y',                :as => :uxcal_bn_cg_y
+  get 'ux-calculators/binary/comparing-groups-yes/diferent-users-yes',                                  :to => 'ux_calculators#bn_cg_y_du_y',           :as => :uxcal_bn_cg_y_du_y
+  get 'ux-calculators/binary/comparing-groups-yes/diferent-users-yes/more-groups-yes',                  :to => 'ux_calculators#bn_cg_y_du_y_mg_y',      :as => :uxcal_bn_cg_y_du_y_mg_y
+  get 'ux-calculators/binary/comparing-groups-yes/diferent-users-yes/more-groups-yes/large-sample-yes', :to => 'ux_calculators#bn_cg_y_du_y_mg_y_ls_y', :as => :uxcal_bn_cg_y_du_y_mg_ls_y
+  get 'ux-calculators/binary/comparing-groups-yes/diferent-users-yes/more-groups-yes/large-sample-no',  :to => 'ux_calculators#bn_cg_y_du_y_mg_y_ls_n', :as => :uxcal_bn_cg_y_du_y_mg_ls_n
+  get 'ux-calculators/binary/comparing-groups-yes/diferent-users-yes/more-groups-no',                   :to => 'ux_calculators#bn_cg_y_du_y_mg_n',      :as => :uxcal_bn_cg_y_du_y_mg_n
+  get 'ux-calculators/binary/comparing-groups-yes/diferent-users-no',                                   :to => 'ux_calculators#bn_cg_y_du_n',           :as => :uxcal_bn_cg_y_du_n
+  get 'ux-calculators/binary/comparing-groups-yes/diferent-users-no/more-groups-yes',                   :to => 'ux_calculators#bn_cg_y_du_n_mg_y',      :as => :uxcal_bn_cg_y_du_n_mg_y
+  get 'ux-calculators/binary/comparing-groups-yes/diferent-users-no/more-groups-no',                    :to => 'ux_calculators#bn_cg_y_du_n_mg_n',      :as => :uxcal_bn_cg_y_du_n_mg_n
+  get 'ux-calculators/binary/comparing-groups-no',                                                      :to => 'ux_calculators#bn_cg_n',                :as => :uxcal_bn_cg_n
+  get 'ux-calculators/binary/comparing-groups-no/against-bench-yes',                                    :to => 'ux_calculators#bn_cg_n_ab_y',           :as => :uxcal_bn_cg_n_ab_y
+  get 'ux-calculators/binary/comparing-groups-no/against-bench-no',                                     :to => 'ux_calculators#bn_cg_n_ab_n',           :as => :uxcal_bn_cg_n_ab_n
 
   get 'chi-square', :to => 'chi_square#index', :as => :chi_square
   get 'chisquare', :to => redirect('chi-square')
