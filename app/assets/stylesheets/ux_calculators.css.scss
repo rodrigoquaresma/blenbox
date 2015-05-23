@@ -1,3 +1,16 @@
-// Place all the styles related to the ux-calculators controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// Core variables and mixins
+@import "bootstrap/mixins";
+@import "components/variables";
+
+
+.breadcrumb {
+  & > li {
+    .breadcrumb-sub {
+      display: block;
+      color: $gray-light;
+    }
+    &:not(:first-child) {
+      .breadcrumb-sub { padding-left: 19px;}
+    }
+  }
+}

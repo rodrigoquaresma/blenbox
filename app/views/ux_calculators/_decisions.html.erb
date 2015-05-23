@@ -1,0 +1,10 @@
+<% unless @breadcrumbs.blank? %>
+  <ul class="list-group">
+    <% @breadcrumbs.each do |breadcrumb| %>
+      <li class="list-group-item">
+        <%= link_to breadcrumb[1], {controller: "ux_calculators", action: breadcrumb[0]} %>
+        <span class="breadcrumb-sub"><%= breadcrumb[2] %></span>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
