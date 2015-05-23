@@ -11,3 +11,13 @@
     &:first-child { margin-top: 39px; }
   }
 }
+
+.data-result {
+  .data-result-label {
+    margin-bottom: 2px;
+    color: $gray;
+  }
+  .data-result-value {
+    font-size: ceil(($font-size-base * 1.7));
+  }
+}

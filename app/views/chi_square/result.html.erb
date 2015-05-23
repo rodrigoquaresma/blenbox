@@ -1,8 +1,23 @@
-<h4>Conversion rate A: <span><%=@function_conversionRates[0]%>%</span></h4>
-<h4>Conversion rate B: <span><%=@function_conversionRates[1]%>%</span></h4>
-<h4>Intervalo de confiança: <span><%=@function_confidenceInterval%></span></h4>
 
-<hr />
+<div class="data-result">
+  <div class="row">
+    <div class="col-md-4">
+      <h4 class="data-result-label">Conversion rate A:</h4>
+      <p class="data-result-value"><%=@function_conversionRates[0]%>%</p>
+    </div>
+    <div class="col-md-4">
+      <h4 class="data-result-label">Conversion rate B:</h4>
+      <p class="data-result-value"><%=@function_conversionRates[1]%>%</p>
+    </div>
+    <div class="col-md-4">
+      <h4 class="data-result-label">Intervalo de confiança:</h4>
+      <p class="data-result-value"><%=@function_confidenceInterval%>%</p>
+    </div>
+  </div>
+</div>
+
+<hr class="spacer-sm invisible" />
+
 <%= render partial: "chi_square/form" %>
 
 <table class="table hide">
