@@ -2,15 +2,12 @@
 @import "components/variables";
 @import "bootstrap/mixins";
 
-
-
-.form-horizontal .form-control-label {
-  padding-top: 0;
-  span {
-    background: #f5f5f5;
-    border-radius: 4px;
-    padding: 0 10px;
+.calculator-form {
+  .label-group {
+    text-align: right;
     display: block;
     line-height: 34px;
+    margin-bottom: 10px;
+    &:first-child { margin-top: 39px; }
   }
 }

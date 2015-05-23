@@ -1,0 +1,68 @@
+<%
+if @value_m.blank?
+  value_group_a_v = 0
+else
+  value_group_a_v = @value_m
+end
+if @value_n.blank?
+  value_group_b_v = 0
+else
+  value_group_b_v = @value_n
+end
+if @value_a.blank?
+  value_group_a_g = 0
+else
+  value_group_a_g = @value_a
+end
+if @value_c.blank?
+  value_group_b_g = 0
+else
+  value_group_b_g = @value_c
+end
+%>
+
+
+<%= form_tag(chi_calculate_path, method: "post") do %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">confidence interval around two independent means</h3>
+    </div>
+    <div class="panel-body calculator-form">
+      <div class="row-gutter-xs">
+        <div class="col-sm-4">
+          <span class="label-group hidden-xs">group A</span>
+          <span class="label-group hidden-xs">group A</span>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-visitors">
+            <h4>visitors</h4>
+            <div class="form-group">
+              <label class="visible-xs-block">group A <span class="visible-xs-inline">(visitors)</span></label>
+              <%= text_field_tag(:number_group_a_v, value_group_a_v, class: 'form-control') %>
+            </div>
+            <div class="form-group">
+              <label class="visible-xs-block">group B <span class="visible-xs-inline">(visitors)</span></label>
+              <%= text_field_tag(:number_group_b_v, value_group_b_v, class: 'form-control') %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-goals">
+            <h4>goals</h4>
+            <div class="form-group">
+              <label class="visible-xs-block">group A <span class="visible-xs-inline">(goals)</span></label>
+              <%= text_field_tag(:number_group_a_g, value_group_a_g, class: 'form-control') %>
+            </div>
+            <div class="form-group">
+              <label class="visible-xs-block">group B <span class="visible-xs-inline">(goals)</span></label>
+              <%= text_field_tag(:number_group_b_g, value_group_b_g, class: 'form-control') %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <%= submit_tag 'Go!', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

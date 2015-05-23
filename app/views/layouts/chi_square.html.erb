@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="chi square calculator">
-  <meta name="keywords" content="chi square calculator, test a/b">
+  <meta name="description" content="a/b test confidence interval calculator - find out if your a/b testing results are statistically significant">
+  <meta name="keywords" content="user experience, ux, convertion rate, ux calculator, a/b test, confidence interval, chi square formula">
   <meta name="author" content="rodrigo quaresma">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-  <title>rodrigo quaresma - interaction designer</title>
+  <title>a/b test confidence interval calculator - by rodrigo quaresma</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta property="og:title" content="chi square calculator" />
+  <meta property="og:title" content="a/b test confidence interval calculator" />
   <%= render partial: "layouts/ga" %>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= stylesheet_link_tag    'chi_square', media: 'all' %>
@@ -17,8 +17,20 @@
 </head>
 <body data-no-turbolink >
   <%= render partial: "layouts/navbar" %>
-  <%= yield :content %>
-  <%= yield %>
+  <div class="container">
+    <h1>a/b testing confidence interval calculator</h1>
+    <p class="lead">find out if your a/b testing results are statistically significant</p>
+    <div class="row">
+      <div class="col-sm-8 col-md-9">
+        <%= yield :content %>
+        <%= yield %>
+      </div>
+      <div class="col-sm-4 col-md-3">
+        <%= yield :support %>
+        <%= render partial: "chi_square/ad" %>
+      </div>
+    </div>
+  </div>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "chi_square" %>
   <%= yield :footer %>

@@ -1,55 +1,6 @@
-<div class="container">
-  <h2>for a 2x2 table</h2>
-  <div class="row">
-    <div class="col-sm-8">
-      <%= form_tag(chi_calculate_path, method: "post") do %>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">confidence interval around two independent means</h3>
-        </div>
-        <div class="panel-body form-horizontal">
-          <div class="form-group row-gutter-xs">
-            <div class="col-sm-4">
-            </div>
-            <div class="col-sm-4 form-control-label">
-              <span>visitors</span>
-            </div>
-            <div class="col-sm-4 form-control-label">
-              <span>goals</span>
-            </div>
-          </div>
+<%= render partial: "chi_square/form" %>
 
-          <div class="form-group row-gutter-xs">
-            <label class="col-sm-4 control-label form-control-label">
-              <span>group A</span>
-            </label>
-            <div class="col-sm-4">
-              <%= text_field_tag(:number_group_a_v, 0, class: 'form-control') %>
-            </div>
-            <div class="col-sm-4">
-              <%= text_field_tag(:number_group_a_g, 0, class: 'form-control') %>
-            </div>
-          </div>
-          <div class="form-group row-gutter-xs">
-            <label class="col-sm-4 control-label form-control-label">
-              <span>group B</span>
-            </label>
-            <div class="col-sm-4">
-              <%= text_field_tag(:number_group_b_v, 0, class: 'form-control') %>
-            </div>
-            <div class="col-sm-4">
-              <%= text_field_tag(:number_group_b_g, 0, class: 'form-control') %>
-            </div>
-          </div>
-        </div>
-        <div class="panel-footer">
-          <%= submit_tag 'Go!', class: 'btn btn-primary' %>
-        </div>
-      </div>
-      <% end %>
-    </div>
-    <div class="col-sm-4">
-      <p>The calculator below can be used to interpret the results of a usability-oriented split (A/B) test. This is a basic scenario where you have two groups of Visitors (A & B) who each get to see one version of your website and for whom you track the number of Conversions or Goals (purchases, downloads, click-throughs, etc.).</p>
-    </div>
-  </div>
-</div>
+<% content_for :support do %>
+  <p>This calculator can be used to interpret the results of a usability-oriented split (A/B) test. This is a basic scenario where you have two groups of Visitors (A & B) who each get to see one version of your website and for whom you track the number of Conversions or Goals (purchases, downloads, click-throughs, etc.).</p>
+  <hr />
+<% end %>

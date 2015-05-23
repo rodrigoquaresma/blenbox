@@ -10,6 +10,10 @@
 // Core CSS
 @import "bootstrap/scaffolding";
 @import "bootstrap/type";
+h1 { font-weight: 100; text-transform: uppercase; letter-spacing: .16em; }
+h2 { font-weight: 200; }
+h3 { font-weight: 300; }
+h4 { font-weight: 400; }
 @import "bootstrap/code";
 @import "bootstrap/grid";
 

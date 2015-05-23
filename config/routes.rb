@@ -33,11 +33,12 @@ Rails.application.routes.draw do
   get 'ux-calculators/binary/comparing-groups-no/against-bench-yes',                                    :to => 'ux_calculators#bn_cg_n_ab_y',           :as => :uxcal_bn_cg_n_ab_y
   get 'ux-calculators/binary/comparing-groups-no/against-bench-no',                                     :to => 'ux_calculators#bn_cg_n_ab_n',           :as => :uxcal_bn_cg_n_ab_n
 
-  get 'chi-square', :to => 'chi_square#index', :as => :chi_square
-  get 'chisquare', :to => redirect('chi-square')
-  get 'chi_square', :to => redirect('chi-square')
+  get 'ab-testing-calculator', :to => 'chi_square#index', :as => :chi_square
+  get 'chi-square', :to => redirect('ab-testing-calculator')
+  get 'chisquare', :to => redirect('ab-testing-calculator')
+  get 'chi_square', :to => redirect('ab-testing-calculator')
 
-  match 'chi-square/calculate', :to => "chi_square#calculate", :via => 'post', :as => :chi_calculate
+  match 'ab-testing-calculator/result', :to => "chi_square#calculate", :via => 'post', :as => :chi_calculate
 
   root 'site#index'
 
