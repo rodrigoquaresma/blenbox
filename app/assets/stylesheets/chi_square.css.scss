@@ -12,10 +12,7 @@
     border-radius: 4px;
     &:first-child { margin-top: 39px; }
   }
-  .winner {
-    background-color: $brand-success;
-  }
-  label.winner { color: $brand-success; background-color: transparent; }
+  .winner { color: $brand-success; font-weight: bold; }
 }
 
 .data-result {
@@ -35,4 +32,5 @@
     // .data-result-label { color: $brand-warning; }
     .data-result-value { color: $brand-warning; }
   }
+  .progress { height: 10px; }
 }
