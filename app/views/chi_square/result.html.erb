@@ -1,17 +1,25 @@
 
+<h2><%= @message %></h2>
+
 <div class="data-result">
   <div class="row">
     <div class="col-md-4">
-      <h4 class="data-result-label">Conversion rate A:</h4>
-      <p class="data-result-value"><%=@function_conversionRates[0]%>%</p>
+      <div class="data-result-group <%= @thewinner_a? 'winner' : 'nowinner' %>">
+        <h4 class="data-result-label">Conversion rate <strong>A</strong>:</h4>
+        <p class="data-result-value"><%=@conversion_rate_a%>%</p>
+      </div>
     </div>
     <div class="col-md-4">
-      <h4 class="data-result-label">Conversion rate B:</h4>
-      <p class="data-result-value"><%=@function_conversionRates[1]%>%</p>
+      <div class="data-result-group <%= @thewinner_b? 'winner' : 'nowinner' %>">
+        <h4 class="data-result-label">Conversion rate <strong>B</strong>:</h4>
+        <p class="data-result-value"><%=@conversion_rate_b%>%</p>
+      </div>
     </div>
     <div class="col-md-4">
-      <h4 class="data-result-label">Intervalo de confiança:</h4>
-      <p class="data-result-value"><%=@function_confidenceInterval%>%</p>
+      <div class="data-result-group <%= @winner? 'haswinner' : 'hasnotwinner' %>">
+        <h4 class="data-result-label">Intervalo de confiança:</h4>
+        <p class="data-result-value"><%=@function_confidenceInterval%></p>
+      </div>
     </div>
   </div>
 </div>
@@ -19,6 +27,8 @@
 <hr class="spacer-sm invisible" />
 
 <%= render partial: "chi_square/form" %>
+
+<p>This calculator can be used to interpret the results of a usability-oriented split (A/B) test. This is a basic scenario where you have two groups of Visitors (A & B) who each get to see one version of your website and for whom you track the number of Conversions or Goals (purchases, downloads, click-throughs, etc.).</p>
 
 <table class="table hide">
   <thead>
@@ -87,6 +97,4 @@
     <p>function_Ln: <span><%=@function_Ln%></span></p>
     <hr />
   </div>
-  <p>This calculator can be used to interpret the results of a usability-oriented split (A/B) test. This is a basic scenario where you have two groups of Visitors (A & B) who each get to see one version of your website and for whom you track the number of Conversions or Goals (purchases, downloads, click-throughs, etc.).</p>
-  <hr />
 <% end %>

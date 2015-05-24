@@ -8,16 +8,31 @@
     display: block;
     line-height: 34px;
     margin-bottom: 10px;
+    padding: 0 4px;
+    border-radius: 4px;
     &:first-child { margin-top: 39px; }
   }
+  .winner {
+    background-color: $brand-success;
+  }
+  label.winner { color: $brand-success; background-color: transparent; }
 }
 
 .data-result {
+
   .data-result-label {
     margin-bottom: 2px;
     color: $gray;
   }
   .data-result-value {
     font-size: ceil(($font-size-base * 1.7));
+  }
+  .winner {
+    // .data-result-label { color: $brand-success; }
+    .data-result-value { color: $brand-success; font-weight: bold; }
+  }
+  .nowinner {
+    // .data-result-label { color: $brand-warning; }
+    .data-result-value { color: $brand-warning; }
   }
 }

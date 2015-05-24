@@ -57,6 +57,18 @@ class ChiSquareController < ApplicationController
     # @function_cs = function_cs(m,a,n,c)
     # @show_me_the_number = function_pursuit(m,a,n,c)
 
+    if @winner = true
+      if @conversion_rate_a > @conversion_rate_b
+        @thewinner_a = true
+        @thewinner_b = false
+      elsif @conversion_rate_b > @conversion_rate_a
+        @thewinner_a = false
+        @thewinner_b = true
+      end
+    end
+
+
+
     render :action => :result
 
   end
@@ -239,6 +251,9 @@ class ChiSquareController < ApplicationController
     calc_2 = calc_2*100
     calc_1 = calc_1.round(2)
     calc_2 = calc_2.round(2)
+
+    @conversion_rate_a = calc_1
+    @conversion_rate_b = calc_2
 
     return calc_1,calc_2
 
@@ -502,14 +517,24 @@ class ChiSquareController < ApplicationController
 
     case x
     when 0.000..1.640
+      @message = 'No, there is not a clear winner. Try with a bigger sample.'
+      @winner = false
       return "to much low"
     when 1.650..1.950
+      @winner = false
+      @message = 'Almost done... the confidence interval is high, but it is not the best. Try with a bigger sample.'
       return "90%"
     when 1.960..2.570
+      @winner = true
+      @message = 'Hummm, we can say that we have a winner, but... be careful, the confidence interval is not the best.'
       return "95%"
     when 2.580..3.290
+      @winner = true
+      @message = 'Nice! You have a winner! Go for it!'
       return "99%"
     else
+      @winner = true
+      @message = 'Great! You have a winner! Go for it! It is the best confidence interval possible!'
       return "99,9%"
     end
 
