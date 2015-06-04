@@ -519,7 +519,7 @@ class ChiSquareController < ApplicationController
     when 0.000..1.640
       @message = 'No, there is not a clear winner. Try with a bigger sample.'
       @winner = false
-      return "to much low"
+      return "low"
     when 1.650..1.950
       @winner = false
       @message = 'Almost done... the confidence interval is high, but it is not the best. Try with a bigger sample.'

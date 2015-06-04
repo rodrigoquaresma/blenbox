@@ -3,34 +3,73 @@
 @import "bootstrap/mixins";
 
 .calculator-form {
-  .label-group {
+  padding: 0;
+  .calculator-form-label {
+    padding: 10px;
+    margin: 0;
+  }
+  .calculator-form-label-group {
     text-align: right;
     display: block;
     line-height: 34px;
-    margin-bottom: 10px;
-    padding: 0 4px;
-    border-radius: 4px;
+    padding: 10px 10px 10px 0;
+    border-top: 1px dashed #ddd;
     &:first-child { margin-top: 39px; }
+    &:last-child { border-radius: 0 0 0 4px; }
   }
-  .winner { color: $brand-success; font-weight: bold; }
+  .calculator-form-group {
+    .form-group {
+      border-top: 1px dashed #ddd;
+      margin: 0;
+      padding: 10px;
+    }
+  }
+  .input-visitors {
+    // .form-group:last-child { border-bottom: 4px solid #d7d4cc; }
+  }
+  .input-goals {
+    .form-group:last-child { border-radius: 0 0 4px 4px; }
+  }
+  .winner {
+    color: $state-success-text;
+    font-weight: bold;
+    background-color: $state-success-bg;
+  }
 }
 
 .data-result {
+  .data-result-label { margin-bottom: 2px; color: $gray; }
+  .data-result-value { font-size: ceil(($font-size-base * 1.7)); line-height: 1.5em; }
+  .winner .data-result-value { color: $brand-success; font-weight: bold; }
+  .nowinner .data-result-value { color: $brand-warning; }
+  .progress { height: 10px; margin: 12px 0 20px; }
+}
 
-  .data-result-label {
-    margin-bottom: 2px;
-    color: $gray;
+// Small grid
+@media (min-width: $screen-sm-min) {
+  .calculator-form {
+    .calculator-form-label-group {
+      padding: 10px 10px 10px 0;
+      &:first-child { margin-top: 39px; }
+      &:last-child { border-radius: 0 0 0 4px; }
+    }
+    .calculator-form-group {
+      .form-group {
+        padding: 10px 10px 10px 0;
+      }
+    }
+    .input-goals {
+      .form-group:last-child { border-radius: 0 0 4px 0; }
+    }
   }
-  .data-result-value {
-    font-size: ceil(($font-size-base * 1.7));
-  }
-  .winner {
-    // .data-result-label { color: $brand-success; }
-    .data-result-value { color: $brand-success; font-weight: bold; }
-  }
-  .nowinner {
-    // .data-result-label { color: $brand-warning; }
-    .data-result-value { color: $brand-warning; }
-  }
-  .progress { height: 10px; }
+}
+
+// Medium grid
+@media (min-width: $screen-md-min) {
+
+}
+
+// Large grid
+@media (min-width: $screen-lg-min) {
+
 }

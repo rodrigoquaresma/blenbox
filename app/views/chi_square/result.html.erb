@@ -5,33 +5,51 @@
   <div class="row">
     <div class="col-md-4">
       <div class="data-result-group <%= @thewinner_a? 'winner' : 'nowinner' %>">
-        <h4 class="data-result-label">Conversion rate <strong>A</strong>:</h4>
-        <p class="data-result-value"><%=@conversion_rate_a%>%</p>
-        <div class="progress">
-          <div class="progress-bar progress-bar-<%= @thewinner_a? 'success' : 'warning' %>" role="progressbar" aria-valuenow="<%=@conversion_rate_a%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@conversion_rate_a%>%">
-            <span class="sr-only"><%=@conversion_rate_b%> Complete (success)</span>
+        <h4 class="data-result-label"><strong>group A</strong> | conversion rate:</h4>
+        <div class="row row-gutter-xs">
+          <div class="col-xs-4">
+            <p class="data-result-value"><%=@conversion_rate_a%>%</p>
+          </div>
+          <div class="col-xs-8">
+            <div class="progress">
+              <div class="progress-bar progress-bar-<%= @thewinner_a? 'success' : 'warning' %>" role="progressbar" aria-valuenow="<%=@conversion_rate_a%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@conversion_rate_a%>%">
+                <span class="sr-only"><%=@conversion_rate_b%> Complete (success)</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="col-md-4">
       <div class="data-result-group <%= @thewinner_b? 'winner' : 'nowinner' %>">
-        <h4 class="data-result-label">Conversion rate <strong>B</strong>:</h4>
-        <p class="data-result-value"><%=@conversion_rate_b%>%</p>
-        <div class="progress">
-          <div class="progress-bar progress-bar-<%= @thewinner_b? 'success' : 'warning' %>" role="progressbar" aria-valuenow="<%=@conversion_rate_b%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@conversion_rate_b%>%">
-            <span class="sr-only"><%=@conversion_rate_b%> Complete (success)</span>
+        <h4 class="data-result-label"><strong>group B</strong> | conversion rate:</h4>
+        <div class="row row-gutter-xs">
+          <div class="col-xs-4">
+            <p class="data-result-value"><%=@conversion_rate_b%>%</p>
+          </div>
+          <div class="col-xs-8">
+            <div class="progress">
+              <div class="progress-bar progress-bar-<%= @thewinner_b? 'success' : 'warning' %>" role="progressbar" aria-valuenow="<%=@conversion_rate_b%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@conversion_rate_b%>%">
+                <span class="sr-only"><%=@conversion_rate_b%> Complete (success)</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="col-md-4">
       <div class="data-result-group <%= @winner? 'haswinner' : 'hasnotwinner' %>">
-        <h4 class="data-result-label">Intervalo de confiança:</h4>
-        <p class="data-result-value"><%=@function_confidenceInterval%></p>
-        <div class="progress">
-          <div class="progress-bar progress-bar-<%= @winner? 'info' : 'danger' %>" role="progressbar" aria-valuenow="<%=@function_confidenceInterval%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@function_confidenceInterval%>%">
-            <span class="sr-only"><%=@function_confidenceInterval%> Complete (success)</span>
+        <h4 class="data-result-label">confidence interval:</h4>
+        <div class="row row-gutter-xs">
+          <div class="col-xs-4">
+            <p class="data-result-value"><%=@function_confidenceInterval%></p>
+          </div>
+          <div class="col-xs-8">
+            <div class="progress">
+              <div class="progress-bar progress-bar-<%= @winner? 'info' : 'danger' %>" role="progressbar" aria-valuenow="<%=@function_confidenceInterval%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@function_confidenceInterval%>%">
+                <span class="sr-only"><%=@function_confidenceInterval%> Complete (success)</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

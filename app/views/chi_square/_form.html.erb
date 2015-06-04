@@ -28,33 +28,33 @@ end
       <h3 class="panel-title">confidence interval around two independent means</h3>
     </div>
     <div class="panel-body calculator-form">
-      <div class="row-gutter-xs">
-        <div class="col-sm-4">
-          <span class="label-group hidden-xs <%= @thewinner_a? 'winner' : 'nowinner' %>">group A</span>
-          <span class="label-group hidden-xs <%= @thewinner_b? 'winner' : 'nowinner' %>">group B</span>
+      <div class="row-nogutter">
+        <div class="col-sm-4 hidden-xs">
+          <span class="calculator-form-label-group <%= @thewinner_a? 'winner' : 'nowinner' %>">group A</span>
+          <span class="calculator-form-label-group <%= @thewinner_b? 'winner' : 'nowinner' %>">group B</span>
         </div>
-        <div class="col-sm-4">
-          <div class="form-visitors">
-            <h4>visitors</h4>
-            <div class="form-group">
-              <label class="visible-xs-block <%= @thewinner_a? 'winner' : 'nowinner' %>">group A <span class="visible-xs-inline">(visitors)</span></label>
+        <div class="col-xs-6 col-sm-4">
+          <div class="calculator-form-group input-visitors">
+            <h4 class="calculator-form-label">visitors</h4>
+            <div class="form-group <%= @thewinner_a? 'winner' : 'nowinner' %>">
+              <label class="visible-xs-block">group A <span class="visible-xs-inline">(visitors)</span></label>
               <%= text_field_tag(:number_group_a_v, value_group_a_v, class: 'form-control') %>
             </div>
-            <div class="form-group">
-              <label class="visible-xs-block <%= @thewinner_b? 'winner' : 'nowinner' %>">group B <span class="visible-xs-inline">(visitors)</span></label>
+            <div class="form-group <%= @thewinner_b? 'winner' : 'nowinner' %>">
+              <label class="visible-xs-block">group B <span class="visible-xs-inline">(visitors)</span></label>
               <%= text_field_tag(:number_group_b_v, value_group_b_v, class: 'form-control') %>
             </div>
           </div>
         </div>
-        <div class="col-sm-4">
-          <div class="form-goals">
-            <h4>goals</h4>
-            <div class="form-group">
-              <label class="visible-xs-block <%= @thewinner_a? 'winner' : 'nowinner' %>">group A <span class="visible-xs-inline">(goals)</span></label>
+        <div class="col-xs-6 col-sm-4">
+          <div class="calculator-form-group input-goals">
+            <h4 class="calculator-form-label">goals</h4>
+            <div class="form-group <%= @thewinner_a? 'winner' : 'nowinner' %>">
+              <label class="visible-xs-block">group A <span class="visible-xs-inline">(goals)</span></label>
               <%= text_field_tag(:number_group_a_g, value_group_a_g, class: 'form-control') %>
             </div>
-            <div class="form-group">
-              <label class="visible-xs-block <%= @thewinner_b? 'winner' : 'nowinner' %>">group B <span class="visible-xs-inline">(goals)</span></label>
+            <div class="form-group <%= @thewinner_b? 'winner' : 'nowinner' %>">
+              <label class="visible-xs-block">group B <span class="visible-xs-inline">(goals)</span></label>
               <%= text_field_tag(:number_group_b_g, value_group_b_g, class: 'form-control') %>
             </div>
           </div>
