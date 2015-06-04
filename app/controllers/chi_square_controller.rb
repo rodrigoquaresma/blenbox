@@ -249,8 +249,8 @@ class ChiSquareController < ApplicationController
 
     calc_1 = calc_1*100
     calc_2 = calc_2*100
-    calc_1 = calc_1.round(2)
-    calc_2 = calc_2.round(2)
+    calc_1 = calc_1.round(1)
+    calc_2 = calc_2.round(1)
 
     @conversion_rate_a = calc_1
     @conversion_rate_b = calc_2
@@ -535,7 +535,7 @@ class ChiSquareController < ApplicationController
     else
       @winner = true
       @message = 'Great! You have a winner! Go for it! It is the best confidence interval possible!'
-      return "99,9%"
+      return "99.9%"
     end
 
   end

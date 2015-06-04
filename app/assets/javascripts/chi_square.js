@@ -1,3 +1,77 @@
+(function ($){
+  window.onload = function() {
+
+    var formCalculator = $('.form-calculator');
+    var formCalculatorInputs = $('.form-calculator input');
+
+    var inputGroupA_t = $('input[name="number_group_a_v"]'); // total
+    var inputGroupA_p = $('input[name="number_group_a_g"]'); // pass
+    var inputGroupA_n = $('input[name="number_group_a_n"]'); // not pass
+    var inputGroupB_t = $('input[name="number_group_b_v"]'); // total
+    var inputGroupB_p = $('input[name="number_group_b_g"]'); // pass
+    var inputGroupB_n = $('input[name="number_group_b_n"]'); // not pass
+
+    formCalculatorInputs.keyup(function() {
+
+      var result_a = inputGroupA_t.val() - inputGroupA_p.val()
+      var result_b = inputGroupB_t.val() - inputGroupB_p.val()
+
+      inputGroupA_n.val( result_a );
+      inputGroupB_n.val( result_b );
+
+    }).keyup();
+
+    function compute(a,b) {
+      var a = $('#a').val();
+      var b = $('#b').val();
+      var total = a * b;
+      $('#total').val(total);
+    }
+
+
+    $(document).keyup(function(e) {
+
+
+      // if (e.keyCode == 13) $('.card-back').click(); //enter
+      // if (e.keyCode == 32) goHandlers.goNextTr(); //espaco
+      // if (e.keyCode == 40) goHandlers.goNextTr(); //arrow down
+      // if (e.keyCode == 38) goHandlers.goBackTr(); //arrow up
+      // if (e.keyCode == 39) goHandlers.goCardBack(); //arrow right
+      // if (e.keyCode == 37) goHandlers.goCardFront(); //arrow left
+
+      // formfills.calculateNotPass();
+
+
+    });
+    var formfills = {
+      calculateNotPass : function() {
+
+        var inputGroupA_t = $('input[name="number_group_a_v"]').val(); // total
+        var inputGroupA_p = $('input[name="number_group_a_g"]').val(); // pass
+        var inputGroupA_n = $('input[name="number_group_a_n"]').val(); // not pass
+        var inputGroupB_t = $('input[name="number_group_a_v"]').val(); // total
+        var inputGroupB_p = $('input[name="number_group_a_g"]').val(); // pass
+        var inputGroupB_n = $('input[name="number_group_a_n"]').val(); // not pass
+
+        var resultGroupA = inputGroupA_t - inputGroupA_p;
+        var resultGroupB = inputGroupB_t - inputGroupB_p;
+
+        inputGroupA_n.val(resultGroupA);
+        inputGroupA_n.val(resultGroupB);
+
+  		}
+    };
+  }
+})(jQuery);
+
+
+number_group_a_n
+
+
+number_group_a_n
+
+
+
 
 function Ln(x) { return Math.log(x) }
 function Exp(x) { return Math.exp(x)}

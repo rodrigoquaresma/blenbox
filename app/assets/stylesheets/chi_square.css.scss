@@ -2,6 +2,12 @@
 @import "components/variables";
 @import "bootstrap/mixins";
 
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+  opacity: 0.5;
+}
+
 .calculator-form {
   padding: 0;
   .calculator-form-label {
@@ -27,7 +33,7 @@
   .input-visitors {
     // .form-group:last-child { border-bottom: 4px solid #d7d4cc; }
   }
-  .input-goals {
+  .input-pass {
     .form-group:last-child { border-radius: 0 0 4px 4px; }
   }
   .winner {
@@ -58,7 +64,7 @@
         padding: 10px 10px 10px 0;
       }
     }
-    .input-goals {
+    .input-pass {
       .form-group:last-child { border-radius: 0 0 4px 0; }
     }
   }
