@@ -16,6 +16,9 @@ class ChiSquareController < ApplicationController
     @value_n = n
     @value_c = c
 
+    isnotzero(m)
+
+
     # functions
 
     @function_isSmallSampleSizes = function_isSmallSampleSizes(m,a,n,c)
@@ -67,10 +70,13 @@ class ChiSquareController < ApplicationController
       end
     end
 
-
-
     render :action => :result
 
+  end
+
+
+  def isnotzero(x)
+    x >= 0 ? false : true
   end
 
   def function_fisherExactTest(vm,va,vn,vc)

@@ -75,6 +75,9 @@ end
       </div>
     </div>
     <div class="panel-footer">
+      <%= hidden_field_tag(:number_total_pass, 0) %>
+      <%= hidden_field_tag(:number_total_notpass, 0) %>
+      <%= hidden_field_tag(:number_total, 0) %>
       <%= submit_tag 'Go!', class: 'btn btn-primary' %>
     </div>
   </div>

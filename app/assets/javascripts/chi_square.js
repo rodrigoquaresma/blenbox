@@ -4,30 +4,33 @@
     var formCalculator = $('.form-calculator');
     var formCalculatorInputs = $('.form-calculator input');
 
-    var inputGroupA_t = $('input[name="number_group_a_v"]'); // total
-    var inputGroupA_p = $('input[name="number_group_a_g"]'); // pass
-    var inputGroupA_n = $('input[name="number_group_a_n"]'); // not pass
-    var inputGroupB_t = $('input[name="number_group_b_v"]'); // total
-    var inputGroupB_p = $('input[name="number_group_b_g"]'); // pass
-    var inputGroupB_n = $('input[name="number_group_b_n"]'); // not pass
+    var inputGroupA_t = $('input[name="number_group_a_v"]'); // m total
+    var inputGroupA_p = $('input[name="number_group_a_g"]'); // a pass
+    var inputGroupA_n = $('input[name="number_group_a_n"]'); // b not pass
+    var inputGroupB_t = $('input[name="number_group_b_v"]'); // c total
+    var inputGroupB_p = $('input[name="number_group_b_g"]'); // n pass
+    var inputGroupB_n = $('input[name="number_group_b_n"]'); // d not pass
+
+    var inputTotalPass = $('input[name="number_total_pass"]'); // c total
+    var inputTotalNotPass = $('input[name="number_total_notpass"]'); // n pass
+    var inputTotal = $('input[name="number_total"]'); // d not pass
+
 
     formCalculatorInputs.keyup(function() {
 
-      var result_a = inputGroupA_t.val() - inputGroupA_p.val()
-      var result_b = inputGroupB_t.val() - inputGroupB_p.val()
+      var result_group_a_notpass = parseInt(inputGroupA_t.val()) - parseInt(inputGroupA_p.val());
+      var result_group_b_notpass = parseInt(inputGroupB_t.val()) - parseInt(inputGroupB_p.val());
+      var result_total_pass = parseInt(inputGroupA_p.val()) + parseInt(inputGroupB_p.val());
+      var result_total_notpass = parseInt(inputGroupA_n.val()) + parseInt(inputGroupB_n.val());
+      var result_total = parseInt(inputGroupA_t.val()) + parseInt(inputGroupB_t.val());
 
-      inputGroupA_n.val( result_a );
-      inputGroupB_n.val( result_b );
+      inputGroupA_n.val( result_group_a_notpass );
+      inputGroupB_n.val( result_group_b_notpass );
+      inputTotalPass.val( result_total_pass );
+      inputTotalNotPass.val( result_total_notpass );
+      inputTotal.val( result_total );
 
     }).keyup();
-
-    function compute(a,b) {
-      var a = $('#a').val();
-      var b = $('#b').val();
-      var total = a * b;
-      $('#total').val(total);
-    }
-
 
     $(document).keyup(function(e) {
 
