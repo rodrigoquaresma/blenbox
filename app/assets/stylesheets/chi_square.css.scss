@@ -31,10 +31,13 @@ fieldset[disabled] .form-control {
     }
   }
   .input-visitors {
-    // .form-group:last-child { border-bottom: 4px solid #d7d4cc; }
+    .form-group:last-child { border-radius: 0 0 0 4px; }
   }
   .input-pass {
-    .form-group:last-child { border-radius: 0 0 4px 4px; }
+    // .form-group:last-child { border-radius: 0 0 4px 4px; }
+  }
+  .input-notpass {
+    .form-group:last-child { border-radius: 0 0 4px 0; }
   }
   .winner {
     color: $state-success-text;

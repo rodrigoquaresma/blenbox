@@ -16,67 +16,79 @@ class ChiSquareController < ApplicationController
     @value_n = n
     @value_c = c
 
-    isnotzero(m)
+    if isnotzero(m) == false || isnotzero(n) == false
+      @message_error = "zero"
+      render :action => :not_result
+    elsif isnotlesszero(a) == false || isnotlesszero(c) == false
+      @message_error = "pass minor"
+      render :action => :not_result
+    elsif m < a || n < c
+      @message_error = "calc minor"
+      render :action => :not_result
+    else
 
+      # functions
+      # @function_isSmallSampleSizes = function_isSmallSampleSizes(m,a,n,c)
+      #
+      # # chiSquare / two proportion test
+      # chiSquare = function_chiSquare(m,a,n,c)
+      # @chiSquare = chiSquare
+      # chiSquare_pValue = function_pValue(chiSquare,1)
+      # @chiSquare_pValue = chiSquare_pValue
+      # @chiSquare_ConfidenceInterval = function_Norm(chiSquare_pValue)
+      #
+      # # N-1 chiSquare / N-1 two proportion test
+      # nChiSquare = function_nChiSquare(m,a,n,c)
+      # @nChiSquare = nChiSquare
+      # nChiSquare_pValue = function_pValue(nChiSquare,1)
+      # @nChiSquare_pValue = nChiSquare_pValue
+      # @nchiSquare_ConfidenceInterval = function_Norm(nChiSquare_pValue)
+      #
+      # # Yates correction
+      # yatesChiSquare = function_yatesChiSquare(m,a,n,c)
+      # @yatesChiSquare = yatesChiSquare
+      # yatesChiSquare_pValue = function_pValue(yatesChiSquare,1)
+      # @yatesChiSquare_pValue = yatesChiSquare_pValue
+      # @yatesChiSquare_ConfidenceInterval = function_Norm(yatesChiSquare_pValue)
+      #
+      # # Fisher Exact Test
+      # fisherExactTest = function_fisherExactTest(m,a,n,c)
+      # @fisherExactTest = fisherExactTest
+      # fisherExactTest_pValue = function_pValue(fisherExactTest,1)
+      # @fisherExactTest_pValue = function_fisherChiSquare(m,a,n,c)
+      # @fisherExactTest_ConfidenceInterval = function_Norm(fisherExactTest_pValue)
 
-    # functions
+      @function_confidenceInterval = function_confidenceInterval(m,a,n,c)
+      @function_conversionRates = function_conversionRates(m,a,n,c)
+      # csny = function_csny(m,a,n,c)
+      # @function_csny = csny
+      # @function_Ln = function_Ln(csny.round(3))
 
-    @function_isSmallSampleSizes = function_isSmallSampleSizes(m,a,n,c)
+      # @function_cs = function_cs(m,a,n,c)
+      # @show_me_the_number = function_pursuit(m,a,n,c)
 
-    # chiSquare / two proportion test
-    chiSquare = function_chiSquare(m,a,n,c)
-    @chiSquare = chiSquare
-    chiSquare_pValue = function_pValue(chiSquare,1)
-    @chiSquare_pValue = chiSquare_pValue
-    @chiSquare_ConfidenceInterval = function_Norm(chiSquare_pValue)
-
-    # N-1 chiSquare / N-1 two proportion test
-    nChiSquare = function_nChiSquare(m,a,n,c)
-    @nChiSquare = nChiSquare
-    nChiSquare_pValue = function_pValue(nChiSquare,1)
-    @nChiSquare_pValue = nChiSquare_pValue
-    @nchiSquare_ConfidenceInterval = function_Norm(nChiSquare_pValue)
-
-    # Yates correction
-    yatesChiSquare = function_yatesChiSquare(m,a,n,c)
-    @yatesChiSquare = yatesChiSquare
-    yatesChiSquare_pValue = function_pValue(yatesChiSquare,1)
-    @yatesChiSquare_pValue = yatesChiSquare_pValue
-    @yatesChiSquare_ConfidenceInterval = function_Norm(yatesChiSquare_pValue)
-
-    # Fisher Exact Test
-    fisherExactTest = function_fisherExactTest(m,a,n,c)
-    @fisherExactTest = fisherExactTest
-    fisherExactTest_pValue = function_pValue(fisherExactTest,1)
-    @fisherExactTest_pValue = function_fisherChiSquare(m,a,n,c)
-    @fisherExactTest_ConfidenceInterval = function_Norm(fisherExactTest_pValue)
-
-    @function_confidenceInterval = function_confidenceInterval(m,a,n,c)
-    @function_conversionRates = function_conversionRates(m,a,n,c)
-    csny = function_csny(m,a,n,c)
-    @function_csny = csny
-    @function_Ln = function_Ln(csny.round(3))
-
-    # @function_cs = function_cs(m,a,n,c)
-    # @show_me_the_number = function_pursuit(m,a,n,c)
-
-    if @winner = true
-      if @conversion_rate_a > @conversion_rate_b
-        @thewinner_a = true
-        @thewinner_b = false
-      elsif @conversion_rate_b > @conversion_rate_a
-        @thewinner_a = false
-        @thewinner_b = true
+      if @winner = true
+        if @conversion_rate_a > @conversion_rate_b
+          @thewinner_a = true
+          @thewinner_b = false
+        elsif @conversion_rate_b > @conversion_rate_a
+          @thewinner_a = false
+          @thewinner_b = true
+        end
       end
-    end
 
-    render :action => :result
+      render :action => :result
+
+    end
 
   end
 
 
   def isnotzero(x)
-    x >= 0 ? false : true
+    x <= 0 ? false : true
+  end
+  def isnotlesszero(x)
+    x < 0 ? false : true
   end
 
   def function_fisherExactTest(vm,va,vn,vc)

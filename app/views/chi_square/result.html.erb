@@ -1,6 +1,4 @@
-
 <h2><%= @message %></h2>
-
 <div class="data-result">
   <div class="row">
     <div class="col-md-4">
@@ -62,72 +60,3 @@
 <%= render partial: "chi_square/form" %>
 
 <p>This calculator can be used to interpret the results of a usability-oriented split (A/B) test. This is a basic scenario where you have two groups of Visitors (A & B) who each get to see one version of your website and for whom you track the number of Conversions or Goals (purchases, downloads, click-throughs, etc.).</p>
-
-<table class="table hide">
-  <thead>
-    <tr>
-      <th style="width:35%">method</th>
-      <th style="width:30%">p-value<br>int. confidence</th>
-      <th style="width:35%">notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>N - 1 Chi-Square/N - 1 Two-Proportion Test</td>
-      <td>
-        <p><%= @nChiSquare %></p>
-        <p><%= @nChiSquare_pValue %></p>
-        <p><%= @nchiSquare_ConfidenceInterval %></p>
-      </td>
-      <td>Recommended: when expected cell counts are all > 1</td>
-    </tr>
-    <tr>
-      <td>Chi-Square/Two-Proportion Test</td>
-      <td>
-        <p><%= @chiSquare %></p>
-        <p><%= @chiSquare_pValue %></p>
-        <p><%= @chiSquare_ConfidenceInterval %></p>
-      </td>
-      <td>Not recommended: understates true probability for small sample sizes</td>
-    </tr>
-    <tr>
-      <td>Chi-Square with Yates Correction</td>
-      <td>
-        <p><%= @yatesChiSquare %></p>
-        <p><%= @yatesChiSquare_pValue %></p>
-        <p><%= @yatesChiSquare_ConfidenceInterval %></p>
-      </td>
-      <td>Not recommended: overstates true probability for all sample sizes</td>
-    </tr>
-    <tr>
-      <td>Fisher Exact Test</td>
-      <td>
-        <p><%= @fisherExactTest %></p>
-        <p><%= @fisherExactTest_pValue %></p>
-        <p><%= @fisherExactTest_ConfidenceInterval %></p>
-      </td>
-      <td>Recommended: when any expected cell count is < 1</td>
-    </tr>
-  </tbody>
-</table>
-
-<% content_for :support do %>
-  <div class="hide">
-    <p>Degree of freedom <span>1</span></p>
-    <p>Conversion rate A: <span><%=@function_conversionRates[0]%>%</span></p>
-    <p>Conversion rate B: <span><%=@function_conversionRates[1]%>%</span></p>
-    <p>Intervalo de confiança: <span><%=@function_confidenceInterval%></span></p>
-    <p>Intervalo de confiança: <span><%=@confidenceInterval%></span></p>
-    <hr />
-    <p>show_me_the_number: <span><%=@show_me_the_number%></span></p>
-    <p>function_cs: <span><%=@function_cs%></span></p>
-    <p>vns: <span><%=@vns%></span></p>
-    <p>z: <span><%=@vz%></span></p>
-    <p>function_Norm: <span><%=@function_Norm%></span></p>
-    <p>function_isSmallSampleSizes: <span><%=@function_isSmallSampleSizes%></span></p>
-    <p>function_conversionRates: <span><%=@function_conversionRates%></span></p>
-    <p>function_csny: <span><%=@function_csny%></span></p>
-    <p>function_Ln: <span><%=@function_Ln%></span></p>
-    <hr />
-  </div>
-<% end %>
