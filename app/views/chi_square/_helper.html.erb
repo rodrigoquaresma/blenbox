@@ -1,5 +1,5 @@
 
-<table class="table hide">
+<table class="table">
   <thead>
     <tr>
       <th style="width:35%">method</th>
@@ -14,6 +14,7 @@
         <p><%= @nChiSquare %></p>
         <p><%= @nChiSquare_pValue %></p>
         <p><%= @nchiSquare_ConfidenceInterval %></p>
+        <p><%= @shownChiSquare_pValue %></p>
       </td>
       <td>Recommended: when expected cell counts are all > 1</td>
     </tr>
@@ -23,6 +24,7 @@
         <p><%= @chiSquare %></p>
         <p><%= @chiSquare_pValue %></p>
         <p><%= @chiSquare_ConfidenceInterval %></p>
+        <p><%= @showchiSquare_pValue %></p>
       </td>
       <td>Not recommended: understates true probability for small sample sizes</td>
     </tr>
@@ -32,6 +34,7 @@
         <p><%= @yatesChiSquare %></p>
         <p><%= @yatesChiSquare_pValue %></p>
         <p><%= @yatesChiSquare_ConfidenceInterval %></p>
+        <p><%= @showyatesChiSquare_pValue %></p>
       </td>
       <td>Not recommended: overstates true probability for all sample sizes</td>
     </tr>
@@ -41,6 +44,7 @@
         <p><%= @fisherExactTest %></p>
         <p><%= @fisherExactTest_pValue %></p>
         <p><%= @fisherExactTest_ConfidenceInterval %></p>
+        <p><%= @showfisherExactTest_pValue %></p>
       </td>
       <td>Recommended: when any expected cell count is < 1</td>
     </tr>
@@ -48,7 +52,7 @@
 </table>
 
 <% content_for :support do %>
-  <div class="hide">
+  <div class="">
     <p>Degree of freedom <span>1</span></p>
     <p>Conversion rate A: <span><%=@function_conversionRates[0]%>%</span></p>
     <p>Conversion rate B: <span><%=@function_conversionRates[1]%>%</span></p>
