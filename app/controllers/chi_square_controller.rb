@@ -465,6 +465,9 @@ class ChiSquareController < ApplicationController
     calc_5 = calc_4.to_f/vN
     calc_6 = function_Sqrt(calc_5.to_f)
     calc_7 = vConvRtB-vConvRtA
+    if calc_7 < 0
+      calc_7 = calc_7 * -1
+    end
 
     vDs = calc_7.to_f*calc_6.to_f
     vDs = vDs.round(4)
@@ -478,7 +481,7 @@ class ChiSquareController < ApplicationController
 
     vns = calc_10.to_f
 
-    @vns = calc_10.to_f
+    @vns = calc_7.round(4)
 
     calc_11 = vP.to_f*vQ.to_f
     calc_12 = calc_11.to_f*vns.to_f
