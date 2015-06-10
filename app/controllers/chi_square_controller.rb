@@ -29,6 +29,8 @@ class ChiSquareController < ApplicationController
 
       calculatePValue(m,a,n,c)
 
+      calculateZValue(m,a,n,c)
+
       # functions
       @function_isSmallSampleSizes = function_isSmallSampleSizes(m,a,n,c)
 
@@ -136,8 +138,7 @@ class ChiSquareController < ApplicationController
       k = k + 1
     end
 
-
-    @show_me_the_number = rightP,leftP
+    # @show_me_the_number = rightP,leftP
 
     return fisherP.to_f
 
@@ -613,6 +614,35 @@ class ChiSquareController < ApplicationController
     # } else {
     #   $("#significant").val("No");
     # }
+
+  end
+
+  def calculateZValue(m,a,n,c)
+
+    vP = (a.to_f+c.to_f)/(m.to_f+n.to_f)
+    vQ = 1- vP.round(3)
+
+    vp1 = ((a.to_f/m.to_f)*10).to_f.round(3)
+    vp2 = ((c.to_f/n.to_f)*10).to_f.round(3)
+
+    if vp1.to_f.round(3) > vp2.to_f.round(3)
+      vz_calc_1 = vp1.to_f.round(3)-vp2.to_f.round(3)
+    elsif vp1.to_f.round(3) < vp2.to_f.round(3)
+      vz_calc_1 = vp2.to_f.round(3)-vp1.to_f.round(3)
+    else
+      vz_calc_1 = 0
+    end
+
+    vz_calc_2 = ((m.to_f+n.to_f).to_f-1)/(m.to_f+n.to_f).to_f
+    vz_calc_2 = function_Sqrt(vz_calc_2.to_f)
+    vz_calc_3 = vz_calc_1.to_f.round(3) * vz_calc_2.to_f.round(3)
+
+    vz_calc_4 = ((1/m.to_f).to_f+(1/n.to_f).to_f).to_f
+    vz_calc_5 = function_Sqrt(vP.to_f.round(3) * vQ.to_f.round(3) * vz_calc_4.to_f.round(3))
+
+    vz_calc_6 = vz_calc_3.to_f.round(3) / vz_calc_5.to_f.round(3)
+
+    @show_me_the_number = vz_calc_6.to_f.round(3)
 
   end
 
