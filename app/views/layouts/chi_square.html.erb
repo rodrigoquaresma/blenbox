@@ -26,6 +26,10 @@
   <%= yield :head %>
 </head>
 <body data-no-turbolink >
+  <% if Rails.env.production? %>
+    <%= render partial: 'layouts/ga' %>
+    <%= render partial: 'chi_square/ad' %>
+  <% end %>
   <%= render partial: "layouts/navbar" %>
   <div class="container">
     <h1>a/b testing calculator</h1>
@@ -44,11 +48,5 @@
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "chi_square" %>
   <%= yield :footer %>
-
-  <% if Rails.env.production? %>
-    <%= render :partial => 'layouts/ga' %>
-    <%= render partial: "chi_square/ad" %>
-  <% end %>
-
 </body>
 </html>
