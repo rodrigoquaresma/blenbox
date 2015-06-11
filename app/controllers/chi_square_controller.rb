@@ -620,29 +620,40 @@ class ChiSquareController < ApplicationController
   def calculateZValue(m,a,n,c)
 
     vP = (a.to_f+c.to_f)/(m.to_f+n.to_f)
-    vQ = 1- vP.round(3)
+    vQ = 1- vP.to_f
 
-    vp1 = ((a.to_f/m.to_f)*10).to_f.round(3)
-    vp2 = ((c.to_f/n.to_f)*10).to_f.round(3)
+    vp1 = ((a.to_f/m.to_f)*10).to_f
+    vp2 = ((c.to_f/n.to_f)*10).to_f
 
-    if vp1.to_f.round(3) > vp2.to_f.round(3)
-      vz_calc_1 = vp1.to_f.round(3)-vp2.to_f.round(3)
-    elsif vp1.to_f.round(3) < vp2.to_f.round(3)
-      vz_calc_1 = vp2.to_f.round(3)-vp1.to_f.round(3)
+    if vp1.to_f > vp2.to_f
+      vz_calc_1 = vp1.to_f - vp2.to_f
+    elsif vp1.to_f < vp2.to_f
+      vz_calc_1 = vp2.to_f - vp1.to_f
     else
       vz_calc_1 = 0
     end
 
     vz_calc_2 = ((m.to_f+n.to_f).to_f-1)/(m.to_f+n.to_f).to_f
     vz_calc_2 = function_Sqrt(vz_calc_2.to_f)
-    vz_calc_3 = vz_calc_1.to_f.round(3) * vz_calc_2.to_f.round(3)
+    vz_calc_3 = vz_calc_1.to_f * vz_calc_2.to_f
+    # vz_calc_3 = function_Sqrt(vz_calc_2.to_f)
 
-    vz_calc_4 = ((1/m.to_f).to_f+(1/n.to_f).to_f).to_f
-    vz_calc_5 = function_Sqrt(vP.to_f.round(3) * vQ.to_f.round(3) * vz_calc_4.to_f.round(3))
+    vz_calc_4 = (1/m.to_f) + (1/n.to_f)
+    vz_calc_5 = function_Sqrt(vP.to_f * vQ.to_f * vz_calc_4.to_f)
 
-    vz_calc_6 = vz_calc_3.to_f.round(3) / vz_calc_5.to_f.round(3)
+    vz_calc_6 = vz_calc_3.to_f / vz_calc_5.to_f
+    vz_calc_6 = vz_calc_6.to_f/10
+    vz_value = vz_calc_6.round(3)
 
-    @show_me_the_number = vz_calc_6.to_f.round(3)
+    vp_value = function_Norm(vz_value.to_f)
+
+    vp_value_probality_same = vp_value*100
+    vp_value_probality_diff = 100 - vp_value_probality_same
+
+    @vp_value_probality_same = vp_value_probality_same.round(1)
+    @vp_value_probality_diff = vp_value_probality_diff.round(1)
+
+    @show_me_the_number = vp_value
 
   end
 
