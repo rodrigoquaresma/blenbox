@@ -1,5 +1,3 @@
-//= require bootstrap-sprockets
-
 (function ($){
   window.onload = function() {
     $('#table_front .table-sign-in tbody tr:first-child').addClass('focused');

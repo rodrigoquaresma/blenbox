@@ -1,3 +1,60 @@
+(function ($){
+  window.onload = function() {
+
+    var formCalculator = $('.form-calculator');
+    var formCalculatorInputs = $('.form-calculator input');
+
+    var inputGroupA_t = $('input[name="number_group_a_v"]'); // m total
+    var inputGroupA_p = $('input[name="number_group_a_g"]'); // a pass
+    var inputGroupA_n = $('input[name="number_group_a_n"]'); // b not pass
+    var inputGroupB_t = $('input[name="number_group_b_v"]'); // c total
+    var inputGroupB_p = $('input[name="number_group_b_g"]'); // n pass
+    var inputGroupB_n = $('input[name="number_group_b_n"]'); // d not pass
+
+    var inputTotalPass = $('input[name="number_total_pass"]'); // c total
+    var inputTotalNotPass = $('input[name="number_total_notpass"]'); // n pass
+    var inputTotal = $('input[name="number_total"]'); // d not pass
+
+
+    formCalculatorInputs.keyup(function() {
+
+      var result_group_a_notpass = parseInt(inputGroupA_t.val()) - parseInt(inputGroupA_p.val());
+      var result_group_b_notpass = parseInt(inputGroupB_t.val()) - parseInt(inputGroupB_p.val());
+      var result_total_pass = parseInt(inputGroupA_p.val()) + parseInt(inputGroupB_p.val());
+      var result_total_notpass = parseInt(inputGroupA_n.val()) + parseInt(inputGroupB_n.val());
+      var result_total = parseInt(inputGroupA_t.val()) + parseInt(inputGroupB_t.val());
+
+      inputGroupA_n.val( result_group_a_notpass );
+      inputGroupB_n.val( result_group_b_notpass );
+      inputTotalPass.val( result_total_pass );
+      inputTotalNotPass.val( result_total_notpass );
+      inputTotal.val( result_total );
+
+    }).keyup();
+
+    $(document).keyup(function(e) {
+
+
+      // if (e.keyCode == 13) $('.card-back').click(); //enter
+      // if (e.keyCode == 32) goHandlers.goNextTr(); //espaco
+      // if (e.keyCode == 40) goHandlers.goNextTr(); //arrow down
+      // if (e.keyCode == 38) goHandlers.goBackTr(); //arrow up
+      // if (e.keyCode == 39) goHandlers.goCardBack(); //arrow right
+      // if (e.keyCode == 37) goHandlers.goCardFront(); //arrow left
+
+      // formfills.calculateNotPass();
+
+
+    });
+    var formfills = {
+      calculateNotPass : function() {
+
+
+  		}
+    };
+  }
+})(jQuery);
+
 
 function Ln(x) { return Math.log(x) }
 function Exp(x) { return Math.exp(x)}
@@ -425,4 +482,52 @@ function LnFact(z) {
     return Ln(f)
   }
   return (z+0.5)*Ln(z) - z + LnPi2/2 + 1/(12*z) - 1/(360*Pow(z,3)) + 1/(1260*Pow(z,5)) - 1/(1680*Pow(z,7))
+}
+
+
+function NormalP(x) {
+  var d1=0.0498673470,d2=0.0211410061,d3=0.0032776263,d4=0.0000380036,d5=0.0000488906,d6=0.0000053830;
+  var a=Math.abs(x);
+  var t=1.0+a*(d1+a*(d2+a*(d3+a*(d4+a*(d5+a*d6)))));
+  t*=t;
+  t*=t;
+  t*=t;
+  t*=t;
+  t=1.0/(t+t);
+  if(x>=0)t=1-t;return t;
+}
+
+function calculate() {
+  if($("#control_trials").val()==""||$("#variation_trials").val()==""||$("#control_conversions").val()==""||$("#variation_conversions").val()=="") {
+    alert("Control and variation fields cannot be left blank. Please enter a number there.");
+    return;
+  } else if(isNaN(parseInt($("#control_trials").val()))||isNaN(parseInt($("#variation_trials").val()))||isNaN(parseInt($("#control_conversions").val()))||isNaN(parseInt($("#variation_conversions").val()))) {
+    alert("Please enter a number in control and variation fields.");
+    return;
+  }
+  var c_t=parseInt($("#control_trials").val());
+  var v_t=parseInt($("#variation_trials").val());
+  var c_c=parseInt($("#control_conversions").val());
+  var v_c=parseInt($("#variation_conversions").val());
+  if(c_t<15){
+    alert("There must be at least 15 control trials for this tool to produce any results.");
+    return;
+  }
+  if(v_t<15){
+    alert("There must be at least 15 variation trials for this tool to produce any results.");
+    return;
+  }
+  var c_p=c_c/c_t;
+  var v_p=v_c/v_t;
+  var std_error=Math.sqrt((c_p*(1-c_p)/c_t)+(v_p*(1-v_p)/v_t));
+  var z_value=(v_p-c_p)/std_error;
+  var p_value=NormalP(z_value);
+  if(p_value>0.5)p_value=1-p_value;
+  p_value=Math.round(p_value*1000)/1000;
+  $("#p_value").val(p_value);
+  if (p_value<0.05) {
+    $("#significant").val("Yes!");
+  } else {
+    $("#significant").val("No");
+  }
 }

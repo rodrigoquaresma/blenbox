@@ -16,61 +16,83 @@ class ChiSquareController < ApplicationController
     @value_n = n
     @value_c = c
 
-    # functions
+    if isnotzero(m) == false || isnotzero(n) == false
+      @message_error = "Visitors fields value cannot be zero or minor."
+      render :action => :not_result
+    elsif isnotlesszero(a) == false || isnotlesszero(c) == false
+      @message_error = "Pass fields value cannot be negative."
+      render :action => :not_result
+    elsif m < a || n < c
+      @message_error = "Visitors value cannot be minor than a pass value."
+      render :action => :not_result
+    else
 
-    @function_isSmallSampleSizes = function_isSmallSampleSizes(m,a,n,c)
+      calculatePValue(m,a,n,c)
 
-    # chiSquare / two proportion test
-    chiSquare = function_chiSquare(m,a,n,c)
-    @chiSquare = chiSquare
-    chiSquare_pValue = function_pValue(chiSquare,1)
-    @chiSquare_pValue = chiSquare_pValue
-    @chiSquare_ConfidenceInterval = function_Norm(chiSquare_pValue)
+      calculateZValue(m,a,n,c)
 
-    # N-1 chiSquare / N-1 two proportion test
-    nChiSquare = function_nChiSquare(m,a,n,c)
-    @nChiSquare = nChiSquare
-    nChiSquare_pValue = function_pValue(nChiSquare,1)
-    @nChiSquare_pValue = nChiSquare_pValue
-    @nchiSquare_ConfidenceInterval = function_Norm(nChiSquare_pValue)
+      # functions
+      @function_isSmallSampleSizes = function_isSmallSampleSizes(m,a,n,c)
 
-    # Yates correction
-    yatesChiSquare = function_yatesChiSquare(m,a,n,c)
-    @yatesChiSquare = yatesChiSquare
-    yatesChiSquare_pValue = function_pValue(yatesChiSquare,1)
-    @yatesChiSquare_pValue = yatesChiSquare_pValue
-    @yatesChiSquare_ConfidenceInterval = function_Norm(yatesChiSquare_pValue)
+      # N-1 chiSquare / N-1 two proportion test
+      nChiSquare = function_nChiSquare(m,a,n,c)
+      @nChiSquare = nChiSquare
+      nChiSquare_pValue = function_pValue(nChiSquare,1)
+      @nChiSquare_pValue = nChiSquare_pValue
+      @nchiSquare_ConfidenceInterval = function_Norm(nChiSquare_pValue)
+      @shownChiSquare_pValue = 1 - function_Norm(nChiSquare_pValue)
 
-    # Fisher Exact Test
-    fisherExactTest = function_fisherExactTest(m,a,n,c)
-    @fisherExactTest = fisherExactTest
-    fisherExactTest_pValue = function_pValue(fisherExactTest,1)
-    @fisherExactTest_pValue = function_fisherChiSquare(m,a,n,c)
-    @fisherExactTest_ConfidenceInterval = function_Norm(fisherExactTest_pValue)
+      # chiSquare / two proportion test
+      chiSquare = function_chiSquare(m,a,n,c)
+      @chiSquare = chiSquare
+      chiSquare_pValue = function_pValue(chiSquare,1)
+      @chiSquare_pValue = chiSquare_pValue
+      @chiSquare_ConfidenceInterval = function_Norm(chiSquare_pValue)
+      @showchiSquare_pValue = 1 - function_Norm(chiSquare_pValue)
 
-    @function_confidenceInterval = function_confidenceInterval(m,a,n,c)
-    @function_conversionRates = function_conversionRates(m,a,n,c)
-    csny = function_csny(m,a,n,c)
-    @function_csny = csny
-    @function_Ln = function_Ln(csny.round(3))
+      # Yates correction
+      yatesChiSquare = function_yatesChiSquare(m,a,n,c)
+      @yatesChiSquare = yatesChiSquare
+      yatesChiSquare_pValue = function_pValue(yatesChiSquare,1)
+      @yatesChiSquare_pValue = yatesChiSquare_pValue
+      @yatesChiSquare_ConfidenceInterval = function_Norm(yatesChiSquare_pValue)
+      @showyatesChiSquare_pValue = 1 - function_Norm(yatesChiSquare_pValue)
 
-    # @function_cs = function_cs(m,a,n,c)
-    # @show_me_the_number = function_pursuit(m,a,n,c)
+      # Fisher Exact Test
+      fisherExactTest = function_fisherExactTest(m,a,n,c)
+      @fisherExactTest = fisherExactTest
+      fisherExactTest_pValue = function_pValue(fisherExactTest,1)
+      @fisherExactTest_pValue = function_fisherChiSquare(m,a,n,c)
+      @fisherExactTest_ConfidenceInterval = function_Norm(fisherExactTest_pValue)
+      @showfisherExactTest_pValue = 1 - function_Norm(fisherExactTest_pValue)
 
-    if @winner = true
-      if @conversion_rate_a > @conversion_rate_b
-        @thewinner_a = true
-        @thewinner_b = false
-      elsif @conversion_rate_b > @conversion_rate_a
-        @thewinner_a = false
-        @thewinner_b = true
+      @function_confidenceInterval = function_confidenceInterval(m,a,n,c)
+      @function_conversionRates = function_conversionRates(m,a,n,c)
+      csny = function_csny(m,a,n,c)
+      @function_csny = csny
+      @function_Ln = function_Ln(csny.round(3))
+
+      @function_cs = function_cs(m,a,n,c)
+      # @show_me_the_number = function_pursuit(m,a,n,c)
+
+      if @winner = true
+        if @conversion_rate_a > @conversion_rate_b
+          @thewinner_a = true
+          @thewinner_b = false
+        elsif @conversion_rate_b > @conversion_rate_a
+          @thewinner_a = false
+          @thewinner_b = true
+        end
       end
+      render :action => :result
     end
+  end
 
-
-
-    render :action => :result
-
+  def isnotzero(x)
+    x <= 0 ? false : true
+  end
+  def isnotlesszero(x)
+    x < 0 ? false : true
   end
 
   def function_fisherExactTest(vm,va,vn,vc)
@@ -116,8 +138,7 @@ class ChiSquareController < ApplicationController
       k = k + 1
     end
 
-
-    @show_me_the_number = rightP,leftP
+    # @show_me_the_number = rightP,leftP
 
     return fisherP.to_f
 
@@ -249,8 +270,8 @@ class ChiSquareController < ApplicationController
 
     calc_1 = calc_1*100
     calc_2 = calc_2*100
-    calc_1 = calc_1.round(2)
-    calc_2 = calc_2.round(2)
+    calc_1 = calc_1.round(1)
+    calc_2 = calc_2.round(1)
 
     @conversion_rate_a = calc_1
     @conversion_rate_b = calc_2
@@ -445,6 +466,9 @@ class ChiSquareController < ApplicationController
     calc_5 = calc_4.to_f/vN
     calc_6 = function_Sqrt(calc_5.to_f)
     calc_7 = vConvRtB-vConvRtA
+    if calc_7 < 0
+      calc_7 = calc_7 * -1
+    end
 
     vDs = calc_7.to_f*calc_6.to_f
     vDs = vDs.round(4)
@@ -458,7 +482,7 @@ class ChiSquareController < ApplicationController
 
     vns = calc_10.to_f
 
-    @vns = vns.round(4)
+    @vns = calc_7.round(4)
 
     calc_11 = vP.to_f*vQ.to_f
     calc_12 = calc_11.to_f*vns.to_f
@@ -470,12 +494,13 @@ class ChiSquareController < ApplicationController
     resF = vDs.to_f/vDi.to_f
     resF.round(4)
 
+
     form_normdist = (1-resF)*2
     form_normdist = form_normdist.to_f
 
-    @vz = resF.round(3)
+    @vz = form_normdist
 
-    @function_Norm = function_Norm(resF.round(3))
+    # @show_me_the_number = resF.round(3)
 
     return showPercConfLevel(resF.round(3))
 
@@ -514,12 +539,11 @@ class ChiSquareController < ApplicationController
   end
 
   def showPercConfLevel(x)
-
     case x
     when 0.000..1.640
-      @message = 'No, there is not a clear winner. Try with a bigger sample.'
       @winner = false
-      return "to much low"
+      @message = 'No, there is not a clear winner. Try with a bigger sample.'
+      return "low"
     when 1.650..1.950
       @winner = false
       @message = 'Almost done... the confidence interval is high, but it is not the best. Try with a bigger sample.'
@@ -535,10 +559,154 @@ class ChiSquareController < ApplicationController
     else
       @winner = true
       @message = 'Great! You have a winner! Go for it! It is the best confidence interval possible!'
-      return "99,9%"
+      return "99.9%"
     end
+  end
+
+  def function_NormalP(x)
+    d1=0.0498673470
+    d2=0.0211410061
+    d3=0.0032776263
+    d4=0.0000380036
+    d5=0.0000488906
+    d6=0.0000053830
+    a=x.abs
+    t=1.0+a*(d1+a*(d2+a*(d3+a*(d4+a*(d5+a*d6)))))
+    t*=t
+    t*=t
+    t*=t
+    t*=t
+    t=1.0/(t+t)
+    if(x>=0)
+      t=1-t
+    end
+  end
+
+  def calculatePValue(m,a,n,c)
+
+    c_t=m
+    v_t=n
+    c_c=a
+    v_c=c
+
+    # if(c_t<15)
+    #   alert("There must be at least 15 control trials for this tool to produce any results.");
+    #   return
+    # end
+    # if(v_t<15)
+    #   alert("There must be at least 15 variation trials for this tool to produce any results.");
+    #   return
+    # end
+
+    c_p=c_c.to_f/c_t.to_f
+    v_p=v_c.to_f/v_t.to_f
+    std_error=Math.sqrt((c_p.to_f*(1-c_p.to_f)/c_t.to_f)+(v_p.to_f*(1-v_p.to_f)/v_t.to_f))
+    z_value=(v_p.to_f-c_p.to_f)/std_error.to_f
+
+    p_value=function_NormalP(z_value.to_f)
+
+    if(p_value.to_f>0.5)
+      p_value=1-p_value.to_f
+    end
+
+    @calculatePValue = z_value
+
+    # if (p_value<0.05) {
+    #   $("#significant").val("Yes!");
+    # } else {
+    #   $("#significant").val("No");
+    # }
 
   end
 
+  def calculateZValue(m,a,n,c)
+
+    vP = (a.to_f+c.to_f)/(m.to_f+n.to_f)
+    vQ = 1- vP.to_f
+
+    vp1 = ((a.to_f/m.to_f)*10).to_f
+    vp2 = ((c.to_f/n.to_f)*10).to_f
+
+    if vp1.to_f > vp2.to_f
+      vz_calc_1 = vp1.to_f - vp2.to_f
+    elsif vp1.to_f < vp2.to_f
+      vz_calc_1 = vp2.to_f - vp1.to_f
+    else
+      vz_calc_1 = 0
+    end
+
+    vz_calc_2 = ((m.to_f+n.to_f).to_f-1)/(m.to_f+n.to_f).to_f
+    vz_calc_2 = function_Sqrt(vz_calc_2.to_f)
+    vz_calc_3 = vz_calc_1.to_f * vz_calc_2.to_f
+
+    vz_calc_4 = (1/m.to_f) + (1/n.to_f)
+    vz_calc_5 = function_Sqrt(vP.to_f * vQ.to_f * vz_calc_4.to_f)
+
+    vz_calc_6 = vz_calc_3.to_f / vz_calc_5.to_f
+    vz_calc_6 = vz_calc_6.to_f/10
+    vz_value = vz_calc_6.round(2)
+
+    vp_value = function_Norm(vz_value.to_f).round(2)
+
+    vp_value_probality_same = vp_value*100
+    vp_value_probality_diff = 100 - vp_value_probality_same
+
+    @vp_value_probality_same = vp_value_probality_same.round(0)
+    @vp_value_probality_diff = vp_value_probality_diff.round(0)
+
+    vPadj_calc_1 = functionCriticalValue(vz_value)
+    vPadj_calc_2 = vPadj_calc_1*vPadj_calc_1
+
+    vPadj1 = (a + (vPadj_calc_2/4))/(m + (vPadj_calc_2/2))
+    vPadj2 = (c + (vPadj_calc_2/4))/(n + (vPadj_calc_2/2))
+
+    vRange_calc_1 = vPadj1 - vPadj2
+    if vRange_calc_1 < 0
+      vRange_calc_1 = vRange_calc_1 * - 1
+    end
+    vRange_calc_2 = (vPadj1*(1-vPadj1))/(m + (vPadj_calc_2/2)) + (vPadj2*(1-vPadj2))/(n + (vPadj_calc_2/2))
+    vRange_calc_3 = vPadj_calc_1 * function_Sqrt(vRange_calc_2)
+
+    @expecBot = ((vRange_calc_1 - vRange_calc_3)*100).round(1)
+    @expecTop = ((vRange_calc_1 + vRange_calc_3)*100).round(1)
+
+    @show_me_the_number = @expecBot
+
+  end
+
+  def functionCriticalValue(x)
+    case x
+    when 0.000..1.644
+      return 0
+    # when 1.645..1.694
+    when 1.645..1.959
+      # 90
+      return 1.645
+    # when 1.695..1.750
+    #   return 91
+    # when 1.751..1.811
+    #   return 92
+    # when 1.812..1.880
+    #   return 93
+    # when 1.881..1.959
+    #   return 94
+    # when 1.960..2.053
+    when 1.960..2.575
+      # 95
+      return 1.960
+    # when 2.054..2.169
+    #   return 96
+    # when 2.170..2.325
+    #   return 97
+    # when 2.326..2.575
+    #   return 98
+  when 2.576..3.289
+      # 99
+      return 2.576
+    else
+      # 99.9
+      return 3.290
+    end
+  end
 
 end
