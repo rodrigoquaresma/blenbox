@@ -75,15 +75,8 @@ class ChiSquareController < ApplicationController
       @function_cs = function_cs(m,a,n,c)
       # @show_me_the_number = function_pursuit(m,a,n,c)
 
-      if @winner = true
-        if @conversion_rate_a > @conversion_rate_b
-          @thewinner_a = true
-          @thewinner_b = false
-        elsif @conversion_rate_b > @conversion_rate_a
-          @thewinner_a = false
-          @thewinner_b = true
-        end
-      end
+      # hasWinner(@winner)
+
       render :action => :result
     end
   end
@@ -542,24 +535,47 @@ class ChiSquareController < ApplicationController
     case x
     when 0.000..1.640
       @winner = false
+      haswinner = false
       @message = 'No, there is not a clear winner. Try with a bigger sample.'
       return "low"
     when 1.650..1.950
       @winner = false
+      haswinner = false
       @message = 'Almost done... the confidence interval is high, but it is not the best. Try with a bigger sample.'
       return "90%"
     when 1.960..2.570
       @winner = true
+      haswinner = true
       @message = 'Hummm, we can say that we have a winner, but... be careful, the confidence interval is not the best.'
       return "95%"
     when 2.580..3.290
       @winner = true
+      haswinner = true
       @message = 'Nice! You have a winner! Go for it!'
       return "99%"
     else
       @winner = true
+      haswinner = true
       @message = 'Great! You have a winner! Go for it! It is the best confidence interval possible!'
       return "99.9%"
+    end
+
+    fHasWinner(haswinner)
+
+  end
+
+  def fHasWinner(ifhasis)
+    if ifhasis = true
+      if @conversion_rate_a > @conversion_rate_b
+        @thewinner_a = true
+        @thewinner_b = false
+      elsif @conversion_rate_b > @conversion_rate_a
+        @thewinner_a = false
+        @thewinner_b = true
+      end
+    else
+      @thewinner_a = false
+      @thewinner_b = false
     end
   end
 
@@ -700,7 +716,7 @@ class ChiSquareController < ApplicationController
     #   return 97
     # when 2.326..2.575
     #   return 98
-  when 2.576..3.289
+    when 2.576..3.289
       # 99
       return 2.576
     else
