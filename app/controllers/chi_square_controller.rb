@@ -500,6 +500,8 @@ class ChiSquareController < ApplicationController
 
     @vz = form_normdist
 
+    # @show_me_the_number = resF.round(3)
+
     return showPercConfLevel(resF.round(3))
 
   end
@@ -636,25 +638,75 @@ class ChiSquareController < ApplicationController
     vz_calc_2 = ((m.to_f+n.to_f).to_f-1)/(m.to_f+n.to_f).to_f
     vz_calc_2 = function_Sqrt(vz_calc_2.to_f)
     vz_calc_3 = vz_calc_1.to_f * vz_calc_2.to_f
-    # vz_calc_3 = function_Sqrt(vz_calc_2.to_f)
 
     vz_calc_4 = (1/m.to_f) + (1/n.to_f)
     vz_calc_5 = function_Sqrt(vP.to_f * vQ.to_f * vz_calc_4.to_f)
 
     vz_calc_6 = vz_calc_3.to_f / vz_calc_5.to_f
     vz_calc_6 = vz_calc_6.to_f/10
-    vz_value = vz_calc_6.round(3)
+    vz_value = vz_calc_6.round(2)
 
-    vp_value = function_Norm(vz_value.to_f)
+    vp_value = function_Norm(vz_value.to_f).round(2)
 
     vp_value_probality_same = vp_value*100
     vp_value_probality_diff = 100 - vp_value_probality_same
 
-    @vp_value_probality_same = vp_value_probality_same.round(1)
-    @vp_value_probality_diff = vp_value_probality_diff.round(1)
+    @vp_value_probality_same = vp_value_probality_same.round(0)
+    @vp_value_probality_diff = vp_value_probality_diff.round(0)
 
-    @show_me_the_number = vp_value
+    vPadj_calc_1 = functionCriticalValue(vz_value)
+    vPadj_calc_2 = vPadj_calc_1*vPadj_calc_1
 
+    vPadj1 = (a + (vPadj_calc_2/4))/(m + (vPadj_calc_2/2))
+    vPadj2 = (c + (vPadj_calc_2/4))/(n + (vPadj_calc_2/2))
+
+    vRange_calc_1 = vPadj1 - vPadj2
+    if vRange_calc_1 < 0
+      vRange_calc_1 = vRange_calc_1 * - 1
+    end
+    vRange_calc_2 = (vPadj1*(1-vPadj1))/(m + (vPadj_calc_2/2)) + (vPadj2*(1-vPadj2))/(n + (vPadj_calc_2/2))
+    vRange_calc_3 = vPadj_calc_1 * function_Sqrt(vRange_calc_2)
+
+    @expecBot = ((vRange_calc_1 - vRange_calc_3)*100).round(1)
+    @expecTop = ((vRange_calc_1 + vRange_calc_3)*100).round(1)
+
+    @show_me_the_number = @expecBot
+
+  end
+
+  def functionCriticalValue(x)
+    case x
+    when 0.000..1.644
+      return 0
+    # when 1.645..1.694
+    when 1.645..1.959
+      # 90
+      return 1.645
+    # when 1.695..1.750
+    #   return 91
+    # when 1.751..1.811
+    #   return 92
+    # when 1.812..1.880
+    #   return 93
+    # when 1.881..1.959
+    #   return 94
+    # when 1.960..2.053
+    when 1.960..2.575
+      # 95
+      return 1.960
+    # when 2.054..2.169
+    #   return 96
+    # when 2.170..2.325
+    #   return 97
+    # when 2.326..2.575
+    #   return 98
+  when 2.576..3.289
+      # 99
+      return 2.576
+    else
+      # 99.9
+      return 3.290
+    end
   end
 
 end
