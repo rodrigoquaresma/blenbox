@@ -8,7 +8,7 @@ class UxCalculatorsController < ApplicationController
       ['index','What type of Data?','continuous']
     ]
     @ask = 'Comparing data?'
-    @ask_help = ''
+    @ask_help = 'This decision is whether you are comparing data or just getting an estimate of precision. to get an estimate of precision you compute a confidence interval around your sample metrics (e.g., what is the margin of error around a completion rate of 70%). by comparing data we mean comparing data from two or more groups (e.g., task completion times for products A and B) or comparing your data to a benchmark (e.g., is the completion rate for product A significantly above 70%)'
     @answer_y = 'cn_cd_y'
     @answer_n = 'cn_cd_n'
     render 'cn'
@@ -19,7 +19,7 @@ class UxCalculatorsController < ApplicationController
       ['cn','Comparing data?','yes']
     ]
     @ask = 'Different users in each group?'
-    @ask_help = ''
+    @ask_help = 'Por exemplo, se os usuários que testaram a versão A não testaram a versão B e vice versa, você pode responder "sim", pois cada grupo foi testado com diferentes usuários em comparação com o outro. A resposta é não se os mesmos usuários utilizaram todas as versões em avaliação.'
     @answer_y = 'cn_cd_y_du_y'
     @answer_n = 'cn_cd_y_du_n'
     render 'cn'
@@ -31,7 +31,7 @@ class UxCalculatorsController < ApplicationController
       ['cn_cd_y','Different users in each group?','yes']
     ]
     @ask = '3 or more groups?'
-    @ask_help = ''
+    @ask_help = 'Considere um grupo de usuários para cada versão de design que for testada. Responda sim se você estiver testando mais que 2 versões.'
     @answer_y = 'cn_cd_y_du_y_mg_y'
     @answer_n = 'cn_cd_y_du_y_mg_n'
     render 'cn'
@@ -64,7 +64,7 @@ class UxCalculatorsController < ApplicationController
       ['cn_cd_y','Different users in each group?','no']
     ]
     @ask = '3 or more groups?'
-    @ask_help = ''
+    @ask_help = 'Considere um grupo de usuários para cada versão de design que for testada. Responda sim se você estiver testando mais que 2 versões.'
     @answer_y = 'cn_cd_y_du_n_mg_y'
     @answer_n = 'cn_cd_y_du_n_mg_n'
     render 'cn'
@@ -195,7 +195,7 @@ class UxCalculatorsController < ApplicationController
       ['bn_cg_y','Different users in each group?','yes']
     ]
     @ask = '3 or more groups?'
-    @ask_help = ''
+    @ask_help = 'Considere um grupo de usuários para cada versão de design que for testada. Responda sim se você estiver testando mais que 2 versões.'
     @answer_y = 'bn_cg_y_du_y_mg_y'
     @answer_n = 'bn_cg_y_du_y_mg_n'
     render 'bn'
@@ -253,7 +253,7 @@ class UxCalculatorsController < ApplicationController
       ['bn_cg_y','Different users in each group?','no']
     ]
     @ask = '3 or more groups?'
-    @ask_help = ''
+    @ask_help = 'Considere um grupo de usuários para cada versão de design que for testada. Responda sim se você estiver testando mais que 2 versões.'
     @answer_y = 'bn_cg_y_du_n_mg_y'
     @answer_n = 'bn_cg_y_du_n_mg_n'
     render 'bn'
