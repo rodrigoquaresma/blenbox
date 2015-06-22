@@ -54,3 +54,5 @@ gem 'spring',        group: :development
 gem 'autoprefixer-rails', '>= 5.0.0.1'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'sass-rails', '>= 3.2'
+
+gem 'rails-i18n', '~> 4.0.4'
