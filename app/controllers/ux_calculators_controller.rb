@@ -5,10 +5,10 @@ class UxCalculatorsController < ApplicationController
 
   def cn
     @breadcrumbs = [
-      ['index','What type of Data?','continuous']
+      ['index',t('ux_calculators.asks.type_data'),'continuous']
     ]
-    @ask = 'Comparing data?'
-    @ask_help = 'This decision is whether you are comparing data or just getting an estimate of precision. to get an estimate of precision you compute a confidence interval around your sample metrics (e.g., what is the margin of error around a completion rate of 70%). by comparing data we mean comparing data from two or more groups (e.g., task completion times for products A and B) or comparing your data to a benchmark (e.g., is the completion rate for product A significantly above 70%)'
+    @ask = t('ux_calculators.asks.cn.ask')
+    @ask_help = t('ux_calculators.asks.cn.ask_helper')
     @answer_y = 'cn_cd_y'
     @answer_n = 'cn_cd_n'
     render 'cn'

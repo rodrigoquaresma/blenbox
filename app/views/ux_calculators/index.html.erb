@@ -1,34 +1,32 @@
-<p class="lead"><%= t('ux_calculators.what_is_this') %></p>
+<p class="lead"><%= t('ux_calculators.explanation') %></p>
 
 <!-- #1 -->
-<h2>What type of Data do you have?</h2>
-<p>For this decision map, the primary thing you need to know is if your data is binary or not.</p>
+<h2><%= t('ux_calculators.asks.type_data') %></h2>
+<p><%= t('ux_calculators.asks.type_data_helper') %></p>
 <div class="row">
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Binary</h3>
+        <h3 class="panel-title"><%= t('ux_calculators.asks.type_data_bn_title') %></h3>
       </div>
       <div class="panel-body">
-        <p>Pass/fail, yes/no, purchase/didn't purchase aor coded as 1 or 0.</p>
-        <p>These include things like completion rates  and conversion rates.</p>
+        <%= t('ux_calculators.asks.type_data_bn_explanation_html') %>
       </div>
       <div class="panel-footer">
-        <%= link_to "Binary", uxcal_bn_path, class: "btn btn-primary btn-block" %>
+        <%= link_to t('ux_calculators.asks.type_data_bn_btn'), uxcal_bn_path, class: "btn btn-primary btn-block" %>
       </div>
     </div>
   </div>
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Continuous</h3>
+        <h3 class="panel-title"><%= t('ux_calculators.asks.type_data_cn_title') %></h3>
       </div>
       <div class="panel-body">
-        <p>If your data isn't coded as 1's or 0's/pass or fail/yes or no then we can usually treat it as what's called continuous or metric data.</p>
-        <p><a href="http://www.usablestats.com/lessons/datatypes" target="_blank">Learn more about the types of continuous data.</a></p>
+        <%= t('ux_calculators.asks.type_data_cn_explanation_html') %>
       </div>
       <div class="panel-footer">
-        <%= link_to "Continuous", uxcal_cn_path, class: "btn btn-primary btn-block" %>
+        <%= link_to t('ux_calculators.asks.type_data_cn_btn'), uxcal_cn_path, class: "btn btn-primary btn-block" %>
       </div>
     </div>
   </div>
