@@ -14,3 +14,9 @@
     }
   }
 }
+
+.list-group-breadcrumb {
+  text-transform: uppercase;
+  letter-spacing: .25em;
+  .breadcrumb-sub { font-weight: bold; color: $gray-light; }
+}

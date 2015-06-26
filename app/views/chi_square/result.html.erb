@@ -59,7 +59,7 @@
   The probability the two concepts have the same conversion rate is around <strong><%= @vp_value_probality_same %>%</strong>.
   That is, there is about <strong><%= @vp_value_probality_diff %>%</strong> probability the two completion rates are different.
 </p>
-<p class="lead">If you use concept <strong><%= @thewinner_a? 'A' : 'B' %></strong>, you could expect it to convert between <strong><%= @expecBot %>%</strong> and <strong><%= @expecTop %>%</strong> more users than concept <strong><%= @thewinner_a? 'B' : 'A' %></strong>.</p>
+<p class="lead <%= @winner? 'haswinner' : 'hide' %>">If you use concept <strong><%= @thewinner_a? 'A' : 'B' %></strong>, you could expect it to convert between <strong><%= @expecBot %>%</strong> and <strong><%= @expecTop %>%</strong> more users than concept <strong><%= @thewinner_a? 'B' : 'A' %></strong>.</p>
 
 <hr class="spacer-sm invisible" />
 

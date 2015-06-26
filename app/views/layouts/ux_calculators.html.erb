@@ -10,7 +10,10 @@
   <title>ux calculators - by rodrigo quaresma - ux designer</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta property="og:title" content="ux calculators" />
-  <%= render partial: "layouts/ga" %>
+  <% if Rails.env.production? %>
+    <%= render partial: 'layouts/ga' %>
+    <%= render partial: "ux_calculators/ad" %>
+  <% end %>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= stylesheet_link_tag    'ux_calculators', media: 'all' %>
   <%= yield :head %>
@@ -25,7 +28,8 @@
         <%= yield %>
       </div>
       <div class="col-sm-4 col-md-3">
-        <%= render partial: "ux_calculators/ad" %>
+        <%= yield :support %>
+        <%= yield :adsense %>
       </div>
     </div>
     <%= render partial: "ux_calculators/reference" %>

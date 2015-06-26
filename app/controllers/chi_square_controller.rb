@@ -75,7 +75,7 @@ class ChiSquareController < ApplicationController
       @function_cs = function_cs(m,a,n,c)
       # @show_me_the_number = function_pursuit(m,a,n,c)
 
-      if @winner = true
+      if @winner == true
         if @conversion_rate_a > @conversion_rate_b
           @thewinner_a = true
           @thewinner_b = false
