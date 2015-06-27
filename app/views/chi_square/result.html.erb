@@ -55,10 +55,8 @@
   </div>
 </div>
 
-<p class="lead">
-  The probability the two concepts have the same conversion rate is around <strong><%= @vp_value_probability_same %>%</strong>.
-  That is, there is about <strong><%= @vp_value_probability_diff %>%</strong> probability the two completion rates are different.
-</p>
+<p class="lead">The probability the two concepts have the same conversion rate is around <strong><%= @vp_value_probability_same %>%</strong>. That is, there is about <strong><%= @vp_value_probability_diff %>%</strong> probability the two completion rates are different.</p>
+
 <p class="lead <%= @winner? 'haswinner' : 'hide' %>">If you use concept <strong><%= @thewinner_a? 'A' : 'B' %></strong>, you could expect it to convert between <strong><%= @expecBot %>%</strong> and <strong><%= @expecTop %>%</strong> more users than concept <strong><%= @thewinner_a? 'B' : 'A' %></strong>.</p>
 
 <hr class="spacer-sm invisible" />
@@ -66,7 +64,9 @@
 <%= render partial: "chi_square/form" %>
 
 <% if Rails.env.development? %>
-  <%#= render partial: "chi_square/helper" %>
+  <%= render partial: "chi_square/helper" %>
 <% end %>
 
 <p>This calculator can be used to interpret the results of a usability-oriented split (A/B) test. This is a basic scenario where you have two groups of Visitors (A & B) who each get to see one version of your website and for whom you track the number of Conversions or Goals (purchases, downloads, click-throughs, etc.).</p>
+
+<hr class="invisible" />
