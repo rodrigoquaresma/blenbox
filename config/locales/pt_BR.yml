@@ -20,9 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt_BR:
-  hello: "Ola mundo"
+  fills_time:
+    title: "Ajudante folha ponto"
   ux_calculators:
-    title: "BlenBox UX Calculators"
+    title: "UX Calculators"
     explanation: "Utilize as calculadoras para determinar se os resultados dos testes de usabilidade que você possui são suficientes para decidir qual a versão com maior probabilidade de atingir os melhores resultados."
     asks:
       type_data: "What type of Data do you have?"
