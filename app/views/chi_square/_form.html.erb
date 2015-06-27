@@ -21,53 +21,52 @@ else
 end
 %>
 
-
 <%= form_tag(chi_calculate_path, method: "post", class: 'form-calculator') do %>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">confidence interval around two independent means</h3>
+      <h3 class="panel-title"><%= t('ab_testing_calculator.form_calculator.title') %></h3>
     </div>
     <div class="panel-body calculator-form">
       <div class="row-nogutter">
         <div class="col-sm-3 hidden-xs">
-          <span class="calculator-form-label-group <%= @thewinner_a? 'winner' : 'nowinner' %>">group A</span>
-          <span class="calculator-form-label-group <%= @thewinner_b? 'winner' : 'nowinner' %>">group B</span>
+          <span class="calculator-form-label-group <%= @thewinner_a? 'winner' : 'nowinner' %>"><%= t('ab_testing_calculator.form_calculator.label_group_a') %></span>
+          <span class="calculator-form-label-group <%= @thewinner_b? 'winner' : 'nowinner' %>"><%= t('ab_testing_calculator.form_calculator.label_group_b') %></span>
         </div>
         <div class="col-xs-4 col-sm-3">
           <div class="calculator-form-group input-visitors">
-            <h4 class="calculator-form-label">visitors</h4>
+            <h4 class="calculator-form-label"><%= t('ab_testing_calculator.form_calculator.label_visitors') %></h4>
             <div class="form-group <%= @thewinner_a? 'winner' : 'nowinner' %>">
-              <label class="visible-xs-block">group A <span class="visible-xs-inline">(visitors)</span></label>
+              <label class="visible-xs-block"><%= t('ab_testing_calculator.form_calculator.label_group_a') %> <span class="visible-xs-inline">(<%= t('ab_testing_calculator.form_calculator.label_visitors') %>)</span></label>
               <%= number_field_tag(:number_group_a_v, value_group_a_v, class: 'form-control') %>
             </div>
             <div class="form-group <%= @thewinner_b? 'winner' : 'nowinner' %>">
-              <label class="visible-xs-block">group B <span class="visible-xs-inline">(visitors)</span></label>
+              <label class="visible-xs-block"><%= t('ab_testing_calculator.form_calculator.label_group_b') %> <span class="visible-xs-inline">(<%= t('ab_testing_calculator.form_calculator.label_visitors') %>)</span></label>
               <%= number_field_tag(:number_group_b_v, value_group_b_v, class: 'form-control') %>
             </div>
           </div>
         </div>
         <div class="col-xs-4 col-sm-3">
           <div class="calculator-form-group input-pass">
-            <h4 class="calculator-form-label">pass</h4>
+            <h4 class="calculator-form-label"><%= t('ab_testing_calculator.form_calculator.label_pass') %></h4>
             <div class="form-group <%= @thewinner_a? 'winner' : 'nowinner' %>">
-              <label class="visible-xs-block">group A <span class="visible-xs-inline">(pass)</span></label>
+              <label class="visible-xs-block"><%= t('ab_testing_calculator.form_calculator.label_group_a') %> <span class="visible-xs-inline">(<%= t('ab_testing_calculator.form_calculator.label_pass') %>)</span></label>
               <%= number_field_tag(:number_group_a_g, value_group_a_g, class: 'form-control') %>
             </div>
             <div class="form-group <%= @thewinner_b? 'winner' : 'nowinner' %>">
-              <label class="visible-xs-block">group B <span class="visible-xs-inline">(pass)</span></label>
+              <label class="visible-xs-block"><%= t('ab_testing_calculator.form_calculator.label_group_b') %> <span class="visible-xs-inline">(<%= t('ab_testing_calculator.form_calculator.label_pass') %>)</span></label>
               <%= number_field_tag(:number_group_b_g, value_group_b_g, class: 'form-control') %>
             </div>
           </div>
         </div>
         <div class="col-xs-4 col-sm-3">
           <div class="calculator-form-group input-notpass">
-            <h4 class="calculator-form-label">not pass</h4>
+            <h4 class="calculator-form-label"><%= t('ab_testing_calculator.form_calculator.label_notpass') %></h4>
             <div class="form-group <%= @thewinner_a? 'winner' : 'nowinner' %>">
-              <label class="visible-xs-block">group A <span class="visible-xs-inline">(not pass)</span></label>
+              <label class="visible-xs-block"><%= t('ab_testing_calculator.form_calculator.label_group_a') %> <span class="visible-xs-inline">(<%= t('ab_testing_calculator.form_calculator.label_notpass') %>)</span></label>
               <%= number_field_tag(:number_group_a_n, 0, class: 'form-control', disabled: true) %>
             </div>
             <div class="form-group <%= @thewinner_b? 'winner' : 'nowinner' %>">
-              <label class="visible-xs-block">group B <span class="visible-xs-inline">(not pass)</span></label>
+              <label class="visible-xs-block"><%= t('ab_testing_calculator.form_calculator.label_group_b') %> <span class="visible-xs-inline">(<%= t('ab_testing_calculator.form_calculator.label_notpass') %>)</span></label>
               <%= number_field_tag(:number_group_b_n, 0, class: 'form-control', disabled: true) %>
             </div>
           </div>
@@ -78,7 +77,8 @@ end
       <%= hidden_field_tag(:number_total_pass, 0) %>
       <%= hidden_field_tag(:number_total_notpass, 0) %>
       <%= hidden_field_tag(:number_total, 0) %>
-      <%= submit_tag 'Go!', class: 'btn btn-primary' %>
+      <%= submit_tag t('ab_testing_calculator.form_calculator.button_submit'), class: 'btn btn-primary' %>
     </div>
   </div>
 <% end %>
+<p><%= t('ab_testing_calculator.form_description') %></p>

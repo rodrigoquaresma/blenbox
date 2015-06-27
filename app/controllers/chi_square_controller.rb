@@ -13,13 +13,13 @@ class ChiSquareController < ApplicationController
     @value_n = n
     @value_c = c
     if isnotzero(m) == false || isnotzero(n) == false
-      @message_error = "Visitors fields value cannot be zero or minor."
+      @message_error = t('ab_testing_calculator.result_calculator.message.error.have_zero')
       render :action => :not_result
     elsif isnotnegative(a) == false || isnotnegative(c) == false
-      @message_error = "Pass fields value cannot be negative."
+      @message_error = t('ab_testing_calculator.result_calculator.message.error.have_pass_negative')
       render :action => :not_result
     elsif m < a || n < c
-      @message_error = "Visitors value cannot be minor than a pass value."
+      @message_error = t('ab_testing_calculator.result_calculator.message.error.total_minor_pass')
       render :action => :not_result
     else
       function_conversionRates(m,a,n,c)
@@ -159,23 +159,23 @@ class ChiSquareController < ApplicationController
     case x
     when 0.000..1.640
       @winner = false
-      @message = 'No, there is not a clear winner. Try with a bigger sample.'
+      @message = t('ab_testing_calculator.result_calculator.message.confidence_interval_less_90')
       return "low"
     when 1.650..1.950
       @winner = false
-      @message = 'Almost done... the confidence interval is high, but it is not the best. Try with a bigger sample.'
+      @message = t('ab_testing_calculator.result_calculator.message.confidence_interval_90')
       return "90%"
     when 1.960..2.570
       @winner = true
-      @message = 'Hummm, we can say that we have a winner, but... be careful, the confidence interval is not the best.'
+      @message = t('ab_testing_calculator.result_calculator.message.confidence_interval_95')
       return "95%"
     when 2.580..3.290
       @winner = true
-      @message = 'Nice! You have a winner! Go for it!'
+      @message = t('ab_testing_calculator.result_calculator.message.confidence_interval_99')
       return "99%"
     else
       @winner = true
-      @message = 'Great! You have a winner! Go for it! It is the best confidence interval possible!'
+      @message = t('ab_testing_calculator.result_calculator.message.confidence_interval_greater_99')
       return "99.9%"
     end
   end

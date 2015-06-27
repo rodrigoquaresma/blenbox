@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="data-result-group <%= @thewinner_a? 'winner' : 'nowinner' %>">
-        <h4 class="data-result-label"><strong>group A</strong> | conversion rate:</h4>
+        <h4 class="data-result-label"><strong><%= t('ab_testing_calculator.form_calculator.label_group_a') %></strong> | <%= t('ab_testing_calculator.result_calculator.conversion_rate') %>:</h4>
         <div class="row row-gutter-xs">
           <div class="col-xs-4">
             <p class="data-result-value"><%=@conversion_rate_a%>%</p>
@@ -11,7 +11,7 @@
           <div class="col-xs-8">
             <div class="progress">
               <div class="progress-bar progress-bar-<%= @thewinner_a? 'success' : 'warning' %>" role="progressbar" aria-valuenow="<%=@conversion_rate_a%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@conversion_rate_a%>%">
-                <span class="sr-only"><%=@conversion_rate_b%> Complete (success)</span>
+                <span class="sr-only"><%=@conversion_rate_b%> <%= t('ab_testing_calculator.result_calculator.complete_success') %></span>
               </div>
             </div>
           </div>
@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-4">
       <div class="data-result-group <%= @thewinner_b? 'winner' : 'nowinner' %>">
-        <h4 class="data-result-label"><strong>group B</strong> | conversion rate:</h4>
+        <h4 class="data-result-label"><strong><%= t('ab_testing_calculator.form_calculator.label_group_b') %></strong> | <%= t('ab_testing_calculator.result_calculator.conversion_rate') %>:</h4>
         <div class="row row-gutter-xs">
           <div class="col-xs-4">
             <p class="data-result-value"><%=@conversion_rate_b%>%</p>
@@ -28,7 +28,7 @@
           <div class="col-xs-8">
             <div class="progress">
               <div class="progress-bar progress-bar-<%= @thewinner_b? 'success' : 'warning' %>" role="progressbar" aria-valuenow="<%=@conversion_rate_b%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@conversion_rate_b%>%">
-                <span class="sr-only"><%=@conversion_rate_b%> Complete (success)</span>
+                <span class="sr-only"><%=@conversion_rate_b%> <%= t('ab_testing_calculator.result_calculator.complete_success') %></span>
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
     </div>
     <div class="col-md-4">
       <div class="data-result-group <%= @winner? 'haswinner' : 'hasnotwinner' %>">
-        <h4 class="data-result-label">confidence interval:</h4>
+        <h4 class="data-result-label"><%= t('ab_testing_calculator.result_calculator.confidence_interval') %>:</h4>
         <div class="row row-gutter-xs">
           <div class="col-xs-4">
             <p class="data-result-value"><%=@function_confidenceInterval%></p>
@@ -45,7 +45,7 @@
           <div class="col-xs-8">
             <div class="progress">
               <div class="progress-bar progress-bar-<%= @winner? 'info' : 'warning' %>" role="progressbar" aria-valuenow="<%=@function_confidenceInterval%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@function_confidenceInterval%>">
-                <span class="sr-only"><%=@function_confidenceInterval%> Complete (success)</span>
+                <span class="sr-only"><%=@function_confidenceInterval%> <%= t('ab_testing_calculator.result_calculator.complete_success') %></span>
               </div>
             </div>
           </div>
@@ -55,9 +55,8 @@
   </div>
 </div>
 
-<p class="lead">The probability the two concepts have the same conversion rate is around <strong><%= @vp_value_probability_same %>%</strong>. That is, there is about <strong><%= @vp_value_probability_diff %>%</strong> probability the two completion rates are different.</p>
-
-<p class="lead <%= @winner? 'haswinner' : 'hide' %>">If you use concept <strong><%= @thewinner_a? 'A' : 'B' %></strong>, you could expect it to convert between <strong><%= @expecBot %>%</strong> and <strong><%= @expecTop %>%</strong> more users than concept <strong><%= @thewinner_a? 'B' : 'A' %></strong>.</p>
+<p class="lead"><%= t('ab_testing_calculator.result_calculator.probability_html', vp_value_probability_same: @vp_value_probability_same, vp_value_probability_diff: @vp_value_probability_diff) %></p>
+<p class="lead"><%= t('ab_testing_calculator.result_calculator.expectation_html', thewinner: (@thewinner_a? 'A' : 'B'), thelooser: (@thewinner_a? 'B' : 'A'), expecBot: @expecBot, expecTop: @expecTop) %></p>
 
 <hr class="spacer-sm invisible" />
 
@@ -66,7 +65,5 @@
 <% if Rails.env.development? %>
   <%= render partial: "chi_square/helper" %>
 <% end %>
-
-<p>This calculator can be used to interpret the results of a usability-oriented split (A/B) test. This is a basic scenario where you have two groups of Visitors (A & B) who each get to see one version of your website and for whom you track the number of Conversions or Goals (purchases, downloads, click-throughs, etc.).</p>
 
 <hr class="invisible" />

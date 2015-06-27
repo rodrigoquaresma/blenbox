@@ -1,7 +1,4 @@
-<h2 class="text-danger">Ooops... we have a problem.</h2>
+<h2 class="text-danger"><%= t('ab_testing_calculator.result_calculator.message.error.alert') %></h2>
 <p class="lead"><%= @message_error %></p>
 <hr class="spacer-sm invisible" />
-
 <%= render partial: "chi_square/form" %>
-
-<p>This calculator can be used to interpret the results of a usability-oriented split (A/B) test. This is a basic scenario where you have two groups of Visitors (A & B) who each get to see one version of your website and for whom you track the number of Conversions or Goals (purchases, downloads, click-throughs, etc.).</p>
