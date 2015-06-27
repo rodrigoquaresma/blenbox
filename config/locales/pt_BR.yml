@@ -23,4 +23,16 @@ pt_BR:
   hello: "Ola mundo"
   ux_calculators:
     title: "BlenBox UX Calculators"
-    what_is_this: "Utilize as calculadoras para descobrir se os resultados dos testes de usabilidade que você está fazendo já possuem dados suficientes para determinar qual a versão com maior probabilidade de atingir os melhores resultados."
+    explanation: "Utilize as calculadoras para determinar se os resultados dos testes de usabilidade que você possui são suficientes para decidir qual a versão com maior probabilidade de atingir os melhores resultados."
+    asks:
+      type_data: "What type of Data do you have?"
+      type_data_helper: "For this decision map, the primary thing you need to know is if your data is binary or not."
+      type_data_bn_title: "Binary"
+      type_data_bn_explanation_html: "<p>Pass/fail, yes/no, purchase/didn't purchase aor coded as 1 or 0.</p><p>These include things like completion rates and conversion rates.</p>"
+      type_data_bn_btn: "Binary"
+      type_data_cn_title: "Continuous"
+      type_data_cn_explanation_html: "<p>If your data isn't coded as 1's or 0's/pass or fail/yes or no then we can usually treat it as what's called continuous or metric data.</p><p><a href='http://www.usablestats.com/lessons/datatypes' target='_blank'>Learn more about the types of continuous data.</a></p>"
+      type_data_cn_btn: "Continuous"
+      cn:
+        ask: 'Comparing data?'
+        ask_helper: 'This decision is whether you are comparing data or just getting an estimate of precision. to get an estimate of precision you compute a confidence interval around your sample metrics (e.g., what is the margin of error around a completion rate of 70%). by comparing data we mean comparing data from two or more groups (e.g., task completion times for products A and B) or comparing your data to a benchmark (e.g., is the completion rate for product A significantly above 70%)'
