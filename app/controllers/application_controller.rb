@@ -14,9 +14,14 @@ class ApplicationController < ActionController::Base
   # in your /etc/hosts file to try this out locally
   def extract_locale_from_tld
     parsed_locale = request.host.split('.').last
+    if parsed_locale == 'com'
+      parsed_locale = 'en'
+    else
+      parsed_locale = 'pt_BR'
+    end
     I18n.available_locales.include?(parsed_locale.to_sym) ? parsed_locale  : nil
   end
-  
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
