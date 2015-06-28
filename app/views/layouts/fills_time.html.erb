@@ -8,9 +8,17 @@
   <meta name="author" content="rodrigo quaresma">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
   <title>rodrigo quaresma - interaction designer</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="../../assets/js/html5shiv.js"></script>
+    <script src="../../assets/js/respond.min.js"></script>
+  <![endif]-->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta property="og:title" content="rodrigo quaresma - interaction designer" />
-  <%= render partial: "layouts/ga" %>
+  <% if Rails.env.production? %>
+    <%= render partial: 'layouts/ga' %>
+    <%= render partial: "fills_time/ad" %>
+  <% end %>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= stylesheet_link_tag    'fills_time', media: 'all' %>
   <%= yield :head %>
@@ -19,7 +27,7 @@
   <%= render partial: "layouts/navbar" %>
   <%= yield :content %>
   <%= yield %>
-  <%= render partial: "fills_time/ad" %>
+  <%= yield :adsense %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "fills_time" %>
   <%= yield :footer %>

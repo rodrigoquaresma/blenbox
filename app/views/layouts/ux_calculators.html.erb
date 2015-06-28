@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="<%= @parsed_locale_lang %>">
 <head>
+  <meta name="author" content="BlenBox - by rodrigo quaresma">
+  <title><%= t('ux_calculators.head_meta.title') %></title>
+  <meta name="description" content="<%= t('ux_calculators.head_meta.description') %>">
+  <meta name="keywords" content="<%= t('ux_calculators.head_meta.keywords') %>">
+
+  <meta property="og:title" content="<%= t('ux_calculators.head_meta.title') %>">
+  <meta property="og:description" content="<%= t('ux_calculators.head_meta.description') %>">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://blenbox.com/ux-calculators">
+  <meta property="og:site_name" content="<%= t('ux_calculators.head_meta.title') %>">
+
+  <meta name="twitter:title" content="<%= t('ux_calculators.head_meta.title') %>">
+  <meta name="twitter:description" content="<%= t('ux_calculators.head_meta.description') %>">
+  <link rel="canonical" href="http://www.blenbox.com/ux-calculators">
+
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ux calculators">
-  <meta name="keywords" content="user experience, ux, calculator, test a/b">
-  <meta name="author" content="rodrigo quaresma">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-  <title>ux calculators - by rodrigo quaresma - ux designer</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta property="og:title" content="ux calculators" />
+
   <% if Rails.env.production? %>
     <%= render partial: 'layouts/ga' %>
     <%= render partial: "ux_calculators/ad" %>

@@ -1,11 +1,11 @@
 <%= render partial: "ux_calculators/decisions" %>
 <h2><%= @ask %></h2>
-<p><%= @ask_help %></p>
+<p class="lead"><%= @ask_help %></p>
 <div class="row">
   <div class="col-sm-6">
-    <p><%= link_to "yes", {controller: "ux_calculators", action: @answer_y}, class: "btn btn-primary btn-block" %></p>
+    <p><%= link_to t('ux_calculators.btns.yes'), {controller: "ux_calculators", action: @answer_y}, class: "btn btn-primary btn-block" %></p>
   </div>
   <div class="col-sm-6">
-    <p><%= link_to "no", {controller: "ux_calculators", action: @answer_n}, class: "btn btn-primary btn-block" %></p>
+    <p><%= link_to t('ux_calculators.btns.no'), {controller: "ux_calculators", action: @answer_n}, class: "btn btn-primary btn-block" %></p>
   </div>
 </div>

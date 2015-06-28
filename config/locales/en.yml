@@ -24,7 +24,16 @@ en:
     title: "Ajudante folha ponto"
   ux_calculators:
     title: "UX Calculators"
-    explanation: "Utilize as calculadoras para determinar se os resultados dos testes de usabilidade que você possui são suficientes para decidir qual a versão com maior probabilidade de atingir os melhores resultados."
+    description: "Blenbox UX Calculators is helpful to find which math formula you need to determine if usability tests results has achieved statistical significance."
+    head_meta:
+      title: "BlenBox UX Calculators | Statistically Significant | Confidence Interval | Usability Tests"
+      description: "Blenbox UX Calculators is helpful to find which math formula you need to determine if usability tests results has achieved statistical significance."
+      keywords: "BlenBox UX Calculators, Statistically Significant, Confidence Interval, Usability Tests, usability, conversion rates"
+    btns:
+      binary: "Binary"
+      continuous: "Continuous"
+      yes: "yes"
+      no: "no"
     asks:
       type_data: "What type of Data do you have?"
       type_data_helper: "For this decision map, the primary thing you need to know is if your data is binary or not."

@@ -22,9 +22,19 @@
 pt_BR:
   fills_time:
     title: "Ajudante folha ponto"
+
   ux_calculators:
     title: "Calculadoras de UX"
-    explanation: "Utilize as calculadoras para determinar se os resultados dos testes de usabilidade que você possui são suficientes para decidir qual a versão com maior probabilidade de atingir os melhores resultados."
+    description: "Blenbox Calculadoras de UX é útil para encontrar qual a fórmula matemática que você precisa para determinar se os resultados dos testes de usabilidade alcançaram significância estatística."
+    head_meta:
+      title: "BlenBox Calculadoras de UX | Significância Estatística | Intervalo de Confiança | Testes de usabilidade"
+      description: "Blenbox Calculadoras de UX é útil para encontrar qual a fórmula matemática que você precisa para determinar se os resultados dos testes de usabilidade alcançaram significância estatística."
+      keywords: "BlenBox Calculadoras de UX, Significância Estatística, Intervalo de Confiança, Testes de usabilidade, usabilidade, taxas de conversão"
+    btns:
+      binary: "Binário"
+      continuous: "Contínuo"
+      yes: "sim"
+      no: "não"
     asks:
       type_data: "Qual tipo de dado que você vai utilizar?"
       type_data_helper: "Para utilizar o mapa de decisão e encontrar e fórmula ideal para calcular seus testes, a primeira coisa que você precisa saber é se os seus dados são binários ou não."
@@ -37,6 +47,7 @@ pt_BR:
       cn:
         ask: 'Comparing data?'
         ask_helper: 'This decision is whether you are comparing data or just getting an estimate of precision. to get an estimate of precision you compute a confidence interval around your sample metrics (e.g., what is the margin of error around a completion rate of 70%). by comparing data we mean comparing data from two or more groups (e.g., task completion times for products A and B) or comparing your data to a benchmark (e.g., is the completion rate for product A significantly above 70%)'
+
   ab_testing_calculator:
     title: "Calculadora para teste A/B"
     description: "intervalo de confiança | descubra se o seu teste A/B possui significância estatística"
