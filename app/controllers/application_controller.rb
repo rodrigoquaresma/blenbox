@@ -16,8 +16,10 @@ class ApplicationController < ActionController::Base
     parsed_locale = request.host.split('.').last
     if parsed_locale == 'com'
       parsed_locale = 'en'
+      @parsed_locale_lang = 'en'
     else
       parsed_locale = 'pt_BR'
+      @parsed_locale_lang = 'pt'
     end
     I18n.available_locales.include?(parsed_locale.to_sym) ? parsed_locale  : nil
   end
