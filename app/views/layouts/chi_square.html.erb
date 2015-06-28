@@ -3,18 +3,18 @@
 <head>
 
   <meta name="author" content="BlenBox">
-  <title>BlenBox A/B Testing Calculator | Statistically Significant | Split Test | Confidence Interval</title>
-  <meta name="description" content="Blenbox A/B Testing Calculator helps you to see if your data has achieved statistical significance. Helpful for usability tests and comparison between landing page conversion rates.">
-  <meta name="keywords" content="A/B Testing Calculator, Statistically Significant, Split Test, Confidence Interval, usability, landing page, conversion rates, chi square formula">
+  <title><%= t('ab_testing_calculator.head_meta.title') %></title>
+  <meta name="description" content="<%= t('ab_testing_calculator.head_meta.description') %>">
+  <meta name="keywords" content="<%= t('ab_testing_calculator.head_meta.keywords') %>">
 
-  <meta property="og:title" content="BlenBox A/B Testing Calculator | Statistically Significant | Split Test | Confidence Interval">
-  <meta property="og:description" content="Blenbox A/B Testing Calculator helps you to see if your data has achieved statistical significance. Helpful for usability tests and comparison between landing page conversion rates.">
+  <meta property="og:title" content="<%= t('ab_testing_calculator.head_meta.title') %>">
+  <meta property="og:description" content="<%= t('ab_testing_calculator.head_meta.description') %>">
   <meta property="og:type" content="website">
   <meta property="og:url" content="http://blenbox.com/ab-testing-calculator">
   <meta property="og:site_name" content="Blenbox A/B Testing Calculator">
 
-  <meta name="twitter:title" content="BlenBox A/B Testing Calculator | Statistically Significant | Split Test | Confidence Interval">
-  <meta name="twitter:description" content="Blenbox A/B Testing Calculator helps you to see if your data has achieved statistical significance. Helpful for usability tests and comparison between landing page conversion rates.">
+  <meta name="twitter:title" content="<%= t('ab_testing_calculator.head_meta.title') %>">
+  <meta name="twitter:description" content="<%= t('ab_testing_calculator.head_meta.description') %>">
   <link rel="canonical" href="http://www.blenbox.com/ab-testing-calculator">
 
   <meta charset="utf-8">
@@ -32,8 +32,8 @@
 <body data-no-turbolink >
   <%= render partial: "layouts/navbar" %>
   <div class="container">
-    <h1>a/b testing calculator</h1>
-    <p class="lead"><strong class="text-muted">confidence interval</strong> | find out if your a/b testing results are statistically significant</p>
+    <h1><%= t('ab_testing_calculator.title') %></h1>
+    <p class="lead"><%= t('ab_testing_calculator.description') %></p>
     <div class="row">
       <div class="col-sm-8 col-md-9">
         <%= yield :content %>

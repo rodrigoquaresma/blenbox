@@ -20,7 +20,53 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt_BR:
-  hello: "Ola mundo"
+  fills_time:
+    title: "Ajudante folha ponto"
   ux_calculators:
-    title: "BlenBox UX Calculators"
-    what_is_this: "Utilize as calculadoras para descobrir se os resultados dos testes de usabilidade que você está fazendo já possuem dados suficientes para determinar qual a versão com maior probabilidade de atingir os melhores resultados."
+    title: "Calculadoras de UX"
+    explanation: "Utilize as calculadoras para determinar se os resultados dos testes de usabilidade que você possui são suficientes para decidir qual a versão com maior probabilidade de atingir os melhores resultados."
+    asks:
+      type_data: "Qual tipo de dado que você vai utilizar?"
+      type_data_helper: "Para utilizar o mapa de decisão e encontrar e fórmula ideal para calcular seus testes, a primeira coisa que você precisa saber é se os seus dados são binários ou não."
+      type_data_bn_title: "Binário"
+      type_data_bn_explanation_html: "<p>Sucesso/falha, sim/não, comprou/não comprou são dados que podem ser codificados como 1 or 0.</p><p>Isto inclui dados como taxas de conclusão e taxas de conversão.</p>"
+      type_data_bn_btn: "Binário"
+      type_data_cn_title: "Contínuo"
+      type_data_cn_explanation_html: "<p>Se seus dados não são codificados como 1's or 0's/sucesso ou falha/sim ou não, então nós podemos chamar estas informações como dados contínuos ou dado de métrica.</p><p><a href='http://www.usablestats.com/lessons/datatypes' target='_blank'>Saiba mais sobre os tipos de dados contínuos neste link.</a></p>"
+      type_data_cn_btn: "Contínuo"
+      cn:
+        ask: 'Comparing data?'
+        ask_helper: 'This decision is whether you are comparing data or just getting an estimate of precision. to get an estimate of precision you compute a confidence interval around your sample metrics (e.g., what is the margin of error around a completion rate of 70%). by comparing data we mean comparing data from two or more groups (e.g., task completion times for products A and B) or comparing your data to a benchmark (e.g., is the completion rate for product A significantly above 70%)'
+  ab_testing_calculator:
+    title: "Calculadora para teste A/B"
+    description: "intervalo de confiança | descubra se o seu teste A/B possui significância estatística"
+    form_description: "Esta calculadora pode ser utilizada para interpretar os resultados de testes de usabilidade orientados na divisão de versões A/B. Este é um cenário básico no qual você possui 2 grupos (A e B) no qual cada grupo acessa 1 versão diferente do website e você monitora o número de conversões ou metas (compra, downloads, clique, etc.)."
+    head_meta:
+      title: "BlenBox Calculadora de Teste A/B | Significância Estatística | Teste de divisão | Intervalo de confiança"
+      description: "BlenBox Calculadora de Teste A/B ajuda você a descobrir se os dados do seu teste possuem significância estastística. Útil para testes de usabilidade e comparação entre as taxas de conversão da Landing Pages."
+      keywords: "calculadora de teste A/B, significância estatística, teste de divisão, intervalo de confiança, usabilidade, landing page, taxa de conversão, fórmula chi square"
+    form_calculator:
+      title: "intervalo de confiança sobre dois grupos independentes"
+      label_visitors: "usuários"
+      label_pass: "sucessos"
+      label_notpass: "falhas"
+      label_group_a: "grupo A"
+      label_group_b: "grupo B"
+      button_submit: "Calcular"
+    result_calculator:
+      conversion_rate: "taxa de conversão"
+      complete_success: "Completou (sucesso)"
+      confidence_interval: "intervalo de confiança"
+      probability_html: "A probabilidade de as 2 versões testadas terem a mesma taxa de conversão é em volta de <strong>%{vp_value_probability_same}%</strong>. Com isto, é em torno de <strong>%{vp_value_probability_diff}%</strong> a probabilidade de as duas taxas de conversão serem diferentes."
+      expectation_html: "Utilizando a versão <strong>%{thewinner}</strong>, você pode ter uma expectativa de conversão entre <strong>%{expecBot}%</strong> e <strong>%{expecTop}%</strong> maior do que utilizando a versão <strong>%{thelooser}</strong>."
+      message:
+        confidence_interval_less_90: 'Não. Os dados não são suficientes para determinar uma versão ganhadora. Experimente com uma amostra maior.'
+        confidence_interval_90: 'Quase lá... o intervalo de confiança é alto, mas ainda não é dos melhores. Experimente com uma amostra maior.'
+        confidence_interval_95: 'Hummm, podemos dizer que temos um vencedor, mas... cuidado. O intervalo de confiança ainda não é dos melhores.'
+        confidence_interval_99: 'Show de bola! Temos um vencedor!'
+        confidence_interval_greater_99: 'Irado! Temos um vencedor! Este é o melhor intervalo de confiança possível!'
+        error:
+          alert: "Ooops... temos um problema."
+          have_zero: 'Os campos "usuários" não podem ter valores igual ou menor que zero.'
+          have_pass_negative: 'Os campos "sucessos" não podem ter valores negativos.'
+          total_minor_pass: 'Os campos "usuários" não podem ter valores menores que os campos "sucessos".'

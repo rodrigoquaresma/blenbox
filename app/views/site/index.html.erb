@@ -6,9 +6,9 @@
   <div class="cover">
     <h3 class="title"><strong>blen</strong>box</h3>
     <p>
-      <%= link_to 'ux calculators', ux_calculators_path, class: 'btn btn-default' %>
-      <%= link_to 'a/b testing calculator', chi_square_path, class: 'btn btn-default' %>
-      <%= link_to 'ajudante folha ponto', fills_time_path, class: 'btn btn-default' %>
+      <%= link_to t('ux_calculators.title'), ux_calculators_path, class: 'btn btn-default' %>
+      <%= link_to t('ab_testing_calculator.title'), chi_square_path, class: 'btn btn-default' %>
+      <%= link_to t('fills_time.title'), fills_time_path, class: 'btn btn-default' %>
     </p>
   </div>
   <%= render partial: "layouts/sharebuttons" %>
