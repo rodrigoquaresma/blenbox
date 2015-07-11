@@ -20,6 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt_BR:
+  bbq:
+    title: "Churrascomêtro"
+    description: "Blenbox Churrascomêtro vai ajudar você a calcular as compras do seu churrasco."
+    head_meta:
+      title: "BlenBox Churrascomêtro | Calculadora para churrasco"
+      description: "Blenbox Churrascomêtro vai ajudar você a calcular as compras do seu churrasco."
+      keywords: "BlenBox Churrascomêtro, churrasco, calculadora, galeto, festa, carne"
+
   fills_time:
     title: "Ajudante folha ponto"
 
