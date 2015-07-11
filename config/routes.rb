@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'churrascometro', :to => 'bbq#index', :as => :bbq
+
   get 'ux-calculators', :to => 'ux_calculators#index', :as => :ux_calculators
   get 'uxcalculators', :to => redirect('ux-calculators')
 

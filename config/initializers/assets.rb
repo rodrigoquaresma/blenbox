@@ -7,9 +7,9 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
-base_js    = %w( site.js fills_time.js chi_square.js ux_calculators.js )
+base_css   = %w( site.css fills_time.css chi_square.css ux_calculators.css bbq.css )
+base_js    = %w( site.js fills_time.js chi_square.js ux_calculators.js bbq.js )
+vendor_css = %w( )
 vendor_js  = %w( modernizr-2.8.3.js )
-base_css   = %w( site.css fills_time.css chi_square.css ux_calculators.css )
-# vendor_css = %w(  )
 
-Rails.application.config.assets.precompile += [ base_js, vendor_js, base_css ].flatten
+Rails.application.config.assets.precompile += [ base_css, base_js, vendor_css, vendor_js ].flatten

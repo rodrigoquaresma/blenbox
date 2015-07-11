@@ -1,0 +1,2 @@
+module BbqHelper
+end
