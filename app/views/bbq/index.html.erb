@@ -1,2 +1,140 @@
-<h1>Bbq#index</h1>
-<p>Find me in app/views/bbq/index.html.erb</p>
+<hr class="invisible" />
+<%= form_tag(bbq_calculate_path, method: "post") do %>
+  <h3>Convidados</h3>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="form-group">
+        <label>homens</label>
+        <input class="form-control" type="number" value="1" />
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" /> algum vegetariano?
+        </label>
+      </div>
+      <div class="form-group" style="display:none;">
+        <label>quantos homens vegetarianos?</label>
+        <input class="form-control" type="number" value="0" />
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="form-group">
+        <label>mulheres</label>
+        <input class="form-control" type="number" value="1" />
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" /> alguma vegetariana?
+        </label>
+      </div>
+      <div class="form-group" style="display:none;">
+        <label>quantas mulheres vegetarianas?</label>
+        <input class="form-control" type="number" value="0" />
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="form-group">
+        <label>crianças até 12 anos</label>
+        <input class="form-control" type="number" value="0" />
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" /> alguma vegetariana?
+        </label>
+      </div>
+      <div class="form-group" style="display:none;">
+        <label>quantas crianças vegetarianas?</label>
+        <input class="form-control" type="number" value="0" />
+      </div>
+    </div>
+  </div>
+  <hr />
+  <h3>Versão</h3>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="form-group">
+        <label>tipo do gasto $$$</label>
+        <select class="form-control">
+          <option>econômico</option>
+          <option>de boa</option>
+          <option>camarote</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <p><strong>carnes</strong></p>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" checked="checked" /> bovina (boi)
+          <input type="range"  name="boi" min="0" max="100" value="60" />
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" checked="checked" /> suína (porco)
+          <input type="range"  name="porco" min="0" max="100" value="30" />
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" /> aves (frango)
+          <input type="range"  name="ave" min="0" max="100" value="50" />
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" /> peixes
+          <input type="range"  name="peixe" min="0" max="100" disabled="disabled" value="0" />
+        </label>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <p><strong>opcionais</strong></p>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" /> salada de maionese
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" /> pão com alho
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" /> vingrete
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" /> farinha
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" /> farofa
+        </label>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <h3>Opções de cortes e peças</h3>
+  <div class="row">
+    <% meats.each do |meat| %>
+    <div class="col-xs-4">
+      <p><strong><%= meat[0] %></strong></p>
+      <% meat[1].each do |cut_meat| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" /> <%= cut_meat[0] %>
+        </label>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+  <hr class="invisible" />
+  <p>
+    <%= submit_tag 'Bora lá calcular esse churras!', class: 'btn btn-primary btn-lg btn-block' %>
+  </p>
+<% end %>
