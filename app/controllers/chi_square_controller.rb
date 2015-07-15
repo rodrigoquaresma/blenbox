@@ -160,7 +160,7 @@ class ChiSquareController < ApplicationController
     when 0.000..1.640
       @winner = false
       @message = t('ab_testing_calculator.result_calculator.message.confidence_interval_less_90')
-      return "low"
+      return "> 90"
     when 1.650..1.950
       @winner = false
       @message = t('ab_testing_calculator.result_calculator.message.confidence_interval_90')

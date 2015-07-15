@@ -54,10 +54,10 @@
     </div>
   </div>
 </div>
-
+<% if @winner == true %>
 <p class="lead"><%= t('ab_testing_calculator.result_calculator.probability_html', vp_value_probability_same: @vp_value_probability_same, vp_value_probability_diff: @vp_value_probability_diff) %></p>
 <p class="lead"><%= t('ab_testing_calculator.result_calculator.expectation_html', thewinner: (@thewinner_a? 'A' : 'B'), thelooser: (@thewinner_a? 'B' : 'A'), expecBot: @expecBot, expecTop: @expecTop) %></p>
-
+<% end %>
 <hr class="spacer-sm invisible" />
 
 <%= render partial: "chi_square/form" %>
