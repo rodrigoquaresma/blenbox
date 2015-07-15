@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="data-result-group <%= @thewinner_a? 'winner' : 'nowinner' %>">
-        <h4 class="data-result-label"><strong><%= t('ab_testing_calculator.form_calculator.label_group_a') %></strong> | <%= t('ab_testing_calculator.result_calculator.conversion_rate') %>:</h4>
+        <h4 class="data-result-label"><strong><%= t('ab_testing_calculator.form_calculator.label_group_a') %></strong></h4>
         <div class="row row-gutter-xs">
           <div class="col-xs-4">
             <p class="data-result-value"><%=@conversion_rate_a%>%</p>
@@ -17,10 +17,11 @@
           </div>
         </div>
       </div>
+      <p class="text-muted hide"><%= t('ab_testing_calculator.result_calculator.conversion_rate') %></p>
     </div>
     <div class="col-md-4">
       <div class="data-result-group <%= @thewinner_b? 'winner' : 'nowinner' %>">
-        <h4 class="data-result-label"><strong><%= t('ab_testing_calculator.form_calculator.label_group_b') %></strong> | <%= t('ab_testing_calculator.result_calculator.conversion_rate') %>:</h4>
+        <h4 class="data-result-label"><strong><%= t('ab_testing_calculator.form_calculator.label_group_b') %></strong></h4>
         <div class="row row-gutter-xs">
           <div class="col-xs-4">
             <p class="data-result-value"><%=@conversion_rate_b%>%</p>
@@ -34,10 +35,12 @@
           </div>
         </div>
       </div>
+      <p class="text-muted hide"><%= t('ab_testing_calculator.result_calculator.conversion_rate') %></p>
     </div>
     <div class="col-md-4">
       <div class="data-result-group <%= @winner? 'haswinner' : 'hasnotwinner' %>">
         <h4 class="data-result-label"><%= t('ab_testing_calculator.result_calculator.confidence_interval') %>:</h4>
+        <% if @winner == true %>
         <div class="row row-gutter-xs">
           <div class="col-xs-4">
             <p class="data-result-value"><%=@function_confidenceInterval%></p>
@@ -50,6 +53,9 @@
             </div>
           </div>
         </div>
+        <% else %>
+          <p class="text-muted" style="line-height:36px;"><%=@function_confidenceInterval%></p>
+        <% end %>
       </div>
     </div>
   </div>

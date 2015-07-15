@@ -70,6 +70,7 @@ en:
       expectation_html: "If you use concept <strong>%{thewinner}</strong>, you could expect it to convert between <strong>%{expecBot}%</strong> and <strong>%{expecTop}%</strong> more users than concept <strong>%{thelooser}</strong>."
       message:
         confidence_interval_less_90: 'No, there is not a clear winner. Try with a bigger sample.'
+        confidence_interval_less_90_value: 'less than 90%'
         confidence_interval_90: 'Almost done... the confidence interval is high, but it is not the best. Try with a bigger sample.'
         confidence_interval_95: 'Hummm, we can say that we have a winner, but... be careful, the confidence interval is not the best.'
         confidence_interval_99: 'Nice! You have a winner! Go for it!'

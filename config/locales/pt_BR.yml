@@ -72,6 +72,7 @@ pt_BR:
       expectation_html: "Utilizando a versão <strong>%{thewinner}</strong>, você pode ter uma expectativa de conversão entre <strong>%{expecBot}%</strong> e <strong>%{expecTop}%</strong> maior do que utilizando a versão <strong>%{thelooser}</strong>."
       message:
         confidence_interval_less_90: 'Não. Os dados não são suficientes para determinar uma versão ganhadora. Experimente com uma amostra maior.'
+        confidence_interval_less_90_value: 'abaixo de 90%'
         confidence_interval_90: 'Quase lá... o intervalo de confiança é alto, mas ainda não é dos melhores. Experimente com uma amostra maior.'
         confidence_interval_95: 'Hummm, podemos dizer que temos um vencedor, mas... cuidado. O intervalo de confiança ainda não é dos melhores.'
         confidence_interval_99: 'Show de bola! Temos um vencedor!'
