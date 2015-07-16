@@ -21,12 +21,12 @@
 
 en:
   bbq:
-    title: "Churrascomêtro"
-    description: "Blenbox Churrascomêtro vai ajudar você a calcular as compras do seu churrasco."
+    title: "Calculadora para Churrasco"
+    description: "Blenbox Calculadora para Churrasco vai ajudar você a calcular as compras do seu churrasco."
     head_meta:
-      title: "BlenBox Churrascomêtro | Calculadora para churrasco"
-      description: "Blenbox Churrascomêtro vai ajudar você a calcular as compras do seu churrasco."
-      keywords: "BlenBox Churrascomêtro, churrasco, calculadora, galeto, festa, carne"
+      title: "BlenBox Calculadora para Churrasco | Calculadora para churrasco"
+      description: "Blenbox Calculadora para Churrasco vai ajudar você a calcular as compras do seu churrasco."
+      keywords: "BlenBox Calculadora para Churrasco, churrasco, calculadora, galeto, festa, carne"
 
   fills_time:
     title: "Ajudante folha ponto"
