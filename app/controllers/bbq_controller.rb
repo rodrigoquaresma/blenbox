@@ -5,35 +5,33 @@ class BbqController < ApplicationController
   end
   def calculate
 
-    val_men = 0.7
-    val_women = 0.5
-    val_kids = 0.5
+    wgt_each_men = 0.7
+    wgt_each_women = 0.5
+    wgt_each_kids = 0.5
 
-    qtd_men = 1
-    qtd_women = 1
-    qtd_kids = 1
+    qtd_men = 10
+    qtd_women = 5
+    qtd_kids = 2
 
     val_bovine = 0.6
     val_swine = 0.2
     val_chicken = 0.2
 
-    qtd_meats = (val_men*qtd_men)+(val_women*qtd_women)+(val_kids*qtd_kids)
+    qtd_cut_bovine = 4
+    qtd_cut_swine = 3
+    qtd_cut_chicken = 2
 
-    qtd_bovine = qtd_meats*val_bovine
-    qtd_swine = qtd_meats*val_swine
-    qtd_chicken = qtd_meats*val_chicken
+    wgt_meats = (wgt_each_men*qtd_men)+(wgt_each_women*qtd_women)+(wgt_each_kids*qtd_kids)
 
-    @show_me = quantif(qtd_bovine),quantif(qtd_swine),quantif(qtd_chicken)
+    @wgt_bovine = wgt_meats*val_bovine
+    @wgt_swine = wgt_meats*val_swine
+    @wgt_chicken = wgt_meats*val_chicken
+
+    @wgt_each_cut_bovine = @wgt_bovine/qtd_cut_bovine
+    @wgt_each_cut_swine = @wgt_swine/qtd_cut_swine
+    @wgt_each_cut_chicken = @wgt_chicken/qtd_cut_chicken
 
     render :action => :result
-  end
-
-  def quantif(x)
-    if x < 1
-      x = "#{(x*1000).round(0)} gramas"
-    else
-      x = "#{number_with_precision(x, precision: 3)} kilos"
-    end
   end
 
 end
