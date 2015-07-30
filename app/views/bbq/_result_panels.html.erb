@@ -1,0 +1,41 @@
+<div class="row">
+<% meats.each do |meat| %>
+<div class="col-xs-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title"><%= meat[0] %></h4>
+    </div>
+    <div class="list-group">
+      <% meat[1].each do |cut_meat| %>
+      <div class="list-group-item">
+        <h5><strong><%= cut_meat[0] %></strong><h5>
+        <% if meat[0] == 'bovina (boi)' %>
+        <p><span class="text-muted">quantidade:</span> <%= quantif(min_value_cut(@wgt_each_cut_bovine,cut_meat[1])) %></p>
+        <p><span class="text-muted">valor:</span> <%= cost(min_value_cut(@wgt_each_cut_bovine,cut_meat[1])*cut_meat[3]) %></p>
+        <% elsif meat[0] == 'suína (porco)' %>
+        <p><span class="text-muted">quantidade:</span> <%= quantif(min_value_cut(@wgt_each_cut_swine,cut_meat[1])) %></p>
+        <p><span class="text-muted">valor:</span> <%= cost(min_value_cut(@wgt_each_cut_swine,cut_meat[1])*cut_meat[3]) %></p>
+        <% elsif meat[0] == 'aves (frango)' %>
+        <p><span class="text-muted">quantidade:</span> <%= quantif(min_value_cut(@wgt_each_cut_chicken,cut_meat[1])) %></p>
+        <p><span class="text-muted">valor:</span> <%= cost(min_value_cut(@wgt_each_cut_chicken,cut_meat[1])*cut_meat[3]) %></p>
+        <% end %>
+        <small><span class="text-muted">valor mínimo:</span> <%= quantif(cut_meat[1]) %></small><br />
+        <small><span class="text-muted">valor por pedaço:</span> <%= quantif(@wgt_each_cut_bovine) %></small>
+      </div>
+      <% end %>
+    </div>
+    <div class="panel-footer">
+      <% if meat[0] == 'bovina (boi)' %>
+      <span><span class="text-muted">total:</span> <%= @wgt_bovine %></span>
+      <% elsif meat[0] == 'suína (porco)' %>
+      <span><span class="text-muted">total:</span> <%= @wgt_swine %></span>
+      <% elsif meat[0] == 'aves (frango)' %>
+      <span><span class="text-muted">total:</span> <%= @wgt_chicken %></span>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+</div>
+
+<hr />
