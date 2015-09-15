@@ -1,4 +1,6 @@
 <h1><%= @showme %></h1>
+<h2>lista de carnes/cortes</h2>
+
 <%
 meats.each do |meat|
 
@@ -24,10 +26,14 @@ meats.each do |meat|
 
   if wgt_meat_lim > 0
     %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title"><%= meat[0] %></h4>
+      </div>
     <table class="table">
       <thead>
         <tr>
-          <th>corte <%= meat[0] %></th>
+          <th>corte</th>
           <th class="text-right">valor unitário</th>
           <th class="text-right">peso/quantidade</th>
           <th class="text-right">valor total</th>
@@ -65,6 +71,7 @@ meats.each do |meat|
         </tr>
       </tfoot>
     </table>
+  </div>
     <%
   end
 end

@@ -5,16 +5,16 @@
     <div class="col-xs-4">
       <div class="form-group">
         <label>homens</label>
-        <input class="form-control" type="number" value="1" />
+        <%= number_field_tag(:qtd_men, 10, class: 'form-control') %>
       </div>
       <div class="checkbox">
         <label>
-          <input type="checkbox" /> algum vegetariano?
+          <input type="checkbox" id='men_veg'/> algum vegetariano?
         </label>
       </div>
       <div class="form-group" style="display:none;">
         <label>quantos homens vegetarianos?</label>
-        <input class="form-control" type="number" value="0" />
+        <%= number_field_tag(:qtd_men_veg, 0, class: 'form-control') %>
       </div>
     </div>
     <div class="col-xs-4">

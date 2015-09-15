@@ -44,7 +44,15 @@ h4 { font-weight: 400; }
 @import "bootstrap/media";
 @import "bootstrap/list-group";
 @import "bootstrap/panels";
-.panel { border-width: 2px; }
+.panel {
+  border-width: 2px;
+  .table {
+    border-radius: $panel-border-radius - 2;
+    thead {background-color: rgba(255,255,255,0.25);}
+    tbody {background-color: rgba(255,255,255,0.75);}
+    tfoot {background-color: rgba(255,255,255,0.50);}
+  }
+}
 .panel-body {
   background-color: rgba(255,255,255,0.8);
   border-radius: $panel-border-radius - 2;
