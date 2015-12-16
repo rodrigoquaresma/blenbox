@@ -1,32 +1,18 @@
 <%
 day = i
-hour_in = xhour_in[0]
-minute_in = xminute_in[0]
+
+hour_in = rand(7..9)
+minute_in = rand(0..59) unless hour_in == 7
+minute_in ||= rand(30..59)
 start_time_in = Time.new(year,month,day,hour_in,minute_in)
-end_time_in = start_time_in + 9.hours + 48.minutes
-
-hour_in_l = xhour_in_l[0]
-minute_in_l = xminute_in_l[0]
-start_time_in_l = Time.new(year,month,day,hour_in_l,minute_in_l)
-end_time_in_l = start_time_in_l + 1.hours
-
-if (end_time_in - end_time_in_l) >= 8.hours
-  start_time_in = start_time_in - 2.hours
-  end_time_in = start_time_in + 9.hours + 48.minutes
-  start_time_in_l = start_time_in_l + 30.minutes
-  end_time_in_l = start_time_in_l + 1.hours
-elsif (end_time_in - end_time_in_l) >= 7.hours
-  start_time_in = start_time_in - 1.hours
-  start_time_in = start_time_in - 30.minutes
-  end_time_in = start_time_in + 9.hours + 48.minutes
-  start_time_in_l = start_time_in_l + 30.minutes
-  end_time_in_l = start_time_in_l + 1.hours
-elsif (end_time_in - end_time_in_l) >= 6.hours
-  start_time_in = start_time_in - 1.hours
-  end_time_in = start_time_in + 9.hours + 48.minutes
-  start_time_in_l = start_time_in_l + 30.minutes
-  end_time_in_l = start_time_in_l + 1.hours
+if hour_in == 7
+hours_to_lunch = 4.hours
+else 
+  hours_to_lunch = 3.hours
 end
+start_time_in_l = start_time_in + hours_to_lunch + (rand(0..30)).minutes
+end_time_in_l = start_time_in_l + 1.hours
+end_time_in = start_time_in + 9.hours + 48.minutes
 
 if start_time_in.strftime('%w').to_f == 6 %>
   <tr style="background:#eee">
