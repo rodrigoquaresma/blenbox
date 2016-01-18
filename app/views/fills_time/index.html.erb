@@ -10,4 +10,14 @@
 
   <%= render partial: "form", locals: { year: year_now, month: month_now, email: email } %>
 
+  <% content_for :footer do %>
+  <script type="text/javascript">
+    (function ($){
+      $(document).one('ready',function(){
+          $('#instructions').modal('show');
+      });
+    })(jQuery);
+  </script>
+  <% end %>
+
 </div>
