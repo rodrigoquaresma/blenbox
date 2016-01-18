@@ -31,7 +31,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <%= button_tag '&times;'.html_safe, class: 'close', data: { dismiss: 'modal', aria_hidden: 'true' } %>
+          <%= button_tag '&times;'.html_safe, type: 'button', class: 'close', data: { dismiss: 'modal', aria_hidden: 'true' } %>
           <h4 class="modal-title" id="instructionsLabel">instruções de uso</h4>
         </div>
         <div class="modal-body">
@@ -43,7 +43,7 @@
           <p><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> navegue entre as abas (frente e verso do cartão) utilizando direita e/ou esquerda</p>
         </div>
         <div class="modal-footer">
-          <%= button_tag 'fechar'.html_safe, class: 'btn btn-default', data: { dismiss: 'modal', aria_hidden: 'true' } %>
+          <%= button_tag 'fechar'.html_safe, type: 'button', class: 'btn btn-default', data: { dismiss: 'modal', aria_hidden: 'true' } %>
         </div>
       </div>
     </div>
