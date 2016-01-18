@@ -27,9 +27,14 @@
   <%= render partial: "layouts/navbar" %>
   <%= yield :content %>
   <%= yield %>
-  <%= yield :adsense %>
+  <% if Rails.env.production? %>
+    <%= yield :adsense %>
+  <% end %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "fills_time" %>
   <%= yield :footer %>
+  <% if Rails.env.production? %>
+    <%= render partial: "layouts/rdstation" %>
+  <% end %>
 </body>
 </html>

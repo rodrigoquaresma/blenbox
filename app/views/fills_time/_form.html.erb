@@ -1,0 +1,53 @@
+<%= form_tag(fills_time_calculate_path, method: "post") do %>
+  <div class="form-inline">
+    <div class="form-group js-year">
+      <%= label_tag :sel_year, 'Ano', class: 'sr-only' %>
+      <%= select_tag :sel_year, options_for_select(years.collect{ |y| [y] }, year), class: 'form-control input-lg' %>
+    </div>
+    <div class="form-group js-month">
+      <%= label_tag :sel_month, 'Mês', class: 'sr-only' %>
+      <%= select_tag :sel_month, options_for_select(months.collect{ |m| [m[0], m[1]] }, month), class: 'form-control input-lg' %>
+    </div>
+    <% if email == nil %>
+      <div class="form-group js-email">
+        <%= email_field_tag :email, email, placeholder: 'Seu email', class: "form-control input-lg" %>
+      </div>
+    <% else %>
+      <%= email_field_tag :email, email, placeholder: 'Seu email', class: "sr-only" %>
+    <% end %>
+    <%= submit_tag 'Go!', class: 'btn btn-primary btn-lg' %>
+    <% unless email == nil %>
+      <span class="lead btn-height-lg pull-right">
+        <span class="text-muted"><%= email %> | </span>
+        <span class="text-muted">ano</span> <span><%= year %></span>
+        <span class="text-muted">mês</span> <span><%= month %></span>
+      </span>
+    <% end %>
+  </div>
+  <hr class="spacer-sm" />
+  <p><a href="#" class="hidden-xs" data-toggle="modal" data-target="#instructions">instruções de uso</a></p>
+
+  <div class="modal fade" id="instructions" tabindex="-1" role="dialog" aria-label="instructionsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <%= button_tag '&times;'.html_safe, class: 'close', data: { dismiss: 'modal', aria_hidden: 'true' } %>
+          <h4 class="modal-title" id="instructionsLabel">instruções de uso</h4>
+        </div>
+        <div class="modal-body">
+          <p class="lead text-center">Utilize as setas direcionais para navegar</p>
+          <p class="text-center"><%= image_tag('arrow-keys-300x206.png') %></p>
+          <hr class="spacer-sm" />
+          <p><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> navegue entre os dias utilizando as teclas para cima e para baixo</p>
+          <hr class="spacer-sm" />
+          <p><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> navegue entre as abas (frente e verso do cartão) utilizando direita e/ou esquerda</p>
+        </div>
+        <div class="modal-footer">
+          <%= button_tag 'fechar'.html_safe, class: 'btn btn-default', data: { dismiss: 'modal', aria_hidden: 'true' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<% end %>

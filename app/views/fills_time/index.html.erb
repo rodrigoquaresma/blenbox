@@ -5,20 +5,19 @@
   year_now = Time.now.year
   month_now = Time.now.month
   month_now = month_now - 1
+  email = nil
   %>
 
-  <%= form_tag(fills_time_calculate_path, method: "post") do %>
-    <div class="form-inline">
-      <div class="form-group">
-        <%= label_tag :sel_year, 'Ano', class: 'sr-only' %>
-        <%= select_tag :sel_year, options_for_select(years.collect{ |y| [y] }, year_now), class: 'form-control input-lg' %>
-      </div>
-      <div class="form-group">
-        <%= label_tag :sel_month, 'Mês', class: 'sr-only' %>
-        <%= select_tag :sel_month, options_for_select(months.collect{ |m| [m[0], m[1]] }, month_now), class: 'form-control input-lg' %>
-      </div>
-      <%= submit_tag 'Go!', class: 'btn btn-primary btn-lg' %>
-    </div>
+  <%= render partial: "form", locals: { year: year_now, month: month_now, email: email } %>
+
+  <% content_for :footer do %>
+  <script type="text/javascript">
+    (function ($){
+      $(document).one('ready',function(){
+          $('#instructions').modal('show');
+      });
+    })(jQuery);
+  </script>
   <% end %>
 
 </div>
