@@ -1,0 +1,28 @@
+<%= form_tag(fills_time_calculate_path, method: "post") do %>
+  <div class="form-inline">
+    <div class="form-group js-year">
+      <%= label_tag :sel_year, 'Ano', class: 'sr-only' %>
+      <%= select_tag :sel_year, options_for_select(years.collect{ |y| [y] }, year), class: 'form-control input-lg' %>
+    </div>
+    <div class="form-group js-month">
+      <%= label_tag :sel_month, 'Mês', class: 'sr-only' %>
+      <%= select_tag :sel_month, options_for_select(months.collect{ |m| [m[0], m[1]] }, month), class: 'form-control input-lg' %>
+    </div>
+    <% if email == nil %>
+      <div class="form-group js-email">
+        <%= email_field_tag :email, email, placeholder: 'Seu email', class: "form-control input-lg" %>
+      </div>
+    <% else %>
+      <%= email_field_tag :email, email, placeholder: 'Seu email', class: "sr-only" %>
+    <% end %>
+    <%= submit_tag 'Go!', class: 'btn btn-primary btn-lg' %>
+    <% unless email == nil %>
+      <span class="lead btn-height-lg pull-right">
+        <span class="text-muted"><%= email %> | </span>
+        <span class="text-muted">ano</span> <span><%= year %></span>
+        <span class="text-muted">mês</span> <span><%= month %></span>
+      </span>
+    <% end %>
+  </div>
+  <hr class="spacer-sm" />
+<% end %>
