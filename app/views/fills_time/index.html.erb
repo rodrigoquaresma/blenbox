@@ -12,11 +12,7 @@
 
   <% content_for :footer do %>
   <script type="text/javascript">
-    (function ($){
-      $(document).one('ready',function(){
-          $('#instructions').modal('show');
-      });
-    })(jQuery);
+    $('#instructions').modal('show');
   </script>
   <% end %>
 
