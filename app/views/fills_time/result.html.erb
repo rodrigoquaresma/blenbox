@@ -16,6 +16,9 @@
     elsif year == 2016
       holiday_1 = Time.new(year,month,8).strftime('%F')
       holiday_2 = Time.new(year,month,9).strftime('%F')
+    elsif year == 2017
+      holiday_1 = Time.new(year,month,27).strftime('%F')
+      holiday_2 = Time.new(year,month,28).strftime('%F')
     end
   when 3
     # aniversario de floripa
@@ -29,6 +32,9 @@
     if year == 2015
       # paixao de cristo
       holiday_2 = Time.new(year,month,3).strftime('%F')
+    elsif year == 2017
+      # paixao de cristo
+      holiday_2 = Time.new(year,month,14).strftime('%F')
     end
   when 5
     # dia do trabalho
@@ -41,6 +47,9 @@
     if year == 2015
       # corpus christi
       holiday_1 = Time.new(year,month,4).strftime('%F')
+    elsif year == 2017
+      # corpus christi
+      holiday_1 = Time.new(year,month,15).strftime('%F')
     end
   when 9
     holiday_1 = Time.new(year,month,7).strftime('%F')

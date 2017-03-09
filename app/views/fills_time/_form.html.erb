@@ -2,7 +2,7 @@
   <div class="form-inline">
     <div class="form-group js-year">
       <%= label_tag :sel_year, 'Ano', class: 'sr-only' %>
-      <%= select_tag :sel_year, options_for_select(years.collect{ |y| [y] }, year), class: 'form-control input-lg' %>
+      <%= select_tag :sel_year, options_for_select(years.collect{ |y| y }, year), class: 'form-control input-lg' %>
     </div>
     <div class="form-group js-month">
       <%= label_tag :sel_month, 'Mês', class: 'sr-only' %>
