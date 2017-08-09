@@ -1,0 +1,8 @@
+// Core variables and mixins
+@import "bootstrap/mixins";
+@import "components/variables";
+
+legend {
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,.25);
+}

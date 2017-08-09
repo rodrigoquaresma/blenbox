@@ -20,6 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt_BR:
+  bbq:
+    title: "Calculadora para Churrasco"
+    description: "Blenbox Calculadora para Churrasco vai ajudar você a calcular as compras do seu churrasco. Quanto gastar com cada carne, o carvão, a salada, o gelo, etc."
+    head_meta:
+      title: "BlenBox Calculadora para Churrasco | Calculadora para churrasco"
+      description: "Blenbox Calculadora para Churrasco vai ajudar você a calcular as compras do seu churrasco. Quanto gastar com cada carne, o carvão, a salada, o gelo, etc."
+      keywords: "BlenBox Calculadora para Churrasco, churrasco, calculadora, galeto, festa, carne, salada, carvão, gelo"
+
   fills_time:
     title: "Ajudante folha ponto"
 

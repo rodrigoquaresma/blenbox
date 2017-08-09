@@ -1,0 +1,79 @@
+<h1><%= @showme %></h1>
+<h2>lista de carnes/cortes</h2>
+
+<%
+meats.each do |meat|
+
+  wgt_meat_lim = 0
+  wgt_meat_total = 0
+  cost_meat_total = 0
+  wgt_each_cut = 0
+  qtd_cuts = 0
+
+  if meat[0] == 'bovina (boi)'
+    wgt_meat_lim = @wgt_bovine
+    wgt_each_cut = @wgt_each_cut_bovine
+    qtd_cuts_lim = @qtd_cut_bovine
+  elsif meat[0] == 'suína (porco)'
+    wgt_meat_lim = @wgt_swine
+    wgt_each_cut = @wgt_each_cut_swine
+    qtd_cuts_lim = @qtd_cut_swine
+  elsif meat[0] == 'aves (frango)'
+    wgt_meat_lim = @wgt_chicken
+    wgt_each_cut = @wgt_each_cut_chicken
+    qtd_cuts_lim = @qtd_cut_chicken
+  end
+
+  if wgt_meat_lim > 0
+    %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title"><%= meat[0] %></h4>
+      </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>corte</th>
+          <th class="text-right">valor unitário</th>
+          <th class="text-right">peso/quantidade</th>
+          <th class="text-right">valor total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% meat[1].each do |cut_meat| %>
+          <%
+          qtd_cut = min_value_cut(wgt_each_cut,cut_meat[1],cut_meat[2])
+          cost_cut = min_value_cut(wgt_each_cut,cut_meat[1],cut_meat[2])*cut_meat[3]
+
+          if wgt_meat_total < wgt_meat_lim
+            if qtd_cuts <= qtd_cuts_lim
+              %>
+              <tr>
+                <td><%= cut_meat[0] %></td>
+                <td class="text-right"><%= cost(cut_meat[3]) %></td>
+                <td class="text-right"><%= quantif(qtd_cut) %></td>
+                <td class="text-right"><%= cost(cost_cut) %></td>
+              </tr>
+              <%
+              cost_meat_total = cost_meat_total + cost_cut
+              wgt_meat_total = wgt_meat_total + qtd_cut
+              qtd_cuts = qtd_cuts + 1
+            end
+          end
+        end
+        %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2">Total</td>
+          <td class="text-right"><%= quantif(wgt_meat_total) %></td>
+          <td class="text-right"><%= cost(cost_meat_total) %></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+    <%
+  end
+end
+%>
+<hr />
