@@ -27,6 +27,10 @@
       # paixao de cristo
       holiday_2 = Time.new(year,month,25).strftime('%F')
     end
+    elsif year == 2018
+      # paixao de cristo
+      holiday_2 = Time.new(year,month,30).strftime('%F')
+    end
   when 4
     holiday_1 = Time.new(year,month,21).strftime('%F')
     if year == 2015
@@ -35,6 +39,9 @@
     elsif year == 2017
       # paixao de cristo
       holiday_2 = Time.new(year,month,14).strftime('%F')
+    elsif year == 2018
+      # tiradentes
+      holiday_2 = Time.new(year,month,21).strftime('%F')
     end
   when 5
     # dia do trabalho
@@ -42,6 +49,9 @@
     if year == 2016
       # corpus christi
       holiday_2 = Time.new(year,month,26).strftime('%F')
+    elsif year == 2016
+      # corpus christi
+      holiday_2 = Time.new(year,month,31).strftime('%F')
     end
   when 6
     if year == 2015
@@ -50,6 +60,9 @@
     elsif year == 2017
       # corpus christi
       holiday_1 = Time.new(year,month,15).strftime('%F')
+    elsif year == 2017
+      # corpus christi delayed time off
+      holiday_1 = Time.new(year,month,1).strftime('%F')
     end
   when 9
     holiday_1 = Time.new(year,month,7).strftime('%F')
@@ -58,6 +71,10 @@
   when 11
     holiday_1 = Time.new(year,month,2).strftime('%F')
     holiday_2 = Time.new(year,month,15).strftime('%F')
+    if year == 2018
+      # after summit time off
+      holiday_3 = Time.new(year,month,16).strftime('%F')
+    end
   when 12
     holiday_1 = Time.new(year,month,24).strftime('%F')
     holiday_2 = Time.new(year,month,25).strftime('%F')
@@ -65,7 +82,7 @@
   %>
 
   <%= render partial: "form", locals: { year: year, month: month, email: email } %>
-  <%= render partial: "table", locals: { year: year, month: month, ndays: ndays, holiday_1: holiday_1, holiday_2: holiday_2 } %>
+  <%= render partial: "table", locals: { year: year, month: month, ndays: ndays, holiday_1: holiday_1, holiday_2: holiday_2, holiday_3: holiday_3 } %>
 
 </div>
 

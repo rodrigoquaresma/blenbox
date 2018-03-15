@@ -7,7 +7,7 @@ minute_in ||= rand(30..59)
 start_time_in = Time.new(year,month,day,hour_in,minute_in)
 if hour_in == 7
 hours_to_lunch = 4.hours
-else 
+else
   hours_to_lunch = 3.hours
 end
 start_time_in_l = start_time_in + hours_to_lunch + (rand(0..30)).minutes
@@ -29,7 +29,7 @@ if start_time_in.strftime('%w').to_f == 6 %>
     <td><%= end_time_in.strftime('%d') %></td>
     <td colspan="4" style="text-align:left;">Domingo</td>
   </tr>
-  <% elsif start_time_in.strftime('%F') == holiday_1 || start_time_in.strftime('%F') == holiday_2 %>
+  <% elsif start_time_in.strftime('%F') == holiday_1 || start_time_in.strftime('%F') == holiday_2 || start_time_in.strftime('%F') == holiday_3 %>
   <tr style="background:#eee">
     <td><%= end_time_in.strftime('%d') %></td>
     <td colspan="4" style="text-align:left;">\o/ feriado</td>
