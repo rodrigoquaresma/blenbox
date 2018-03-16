@@ -68,6 +68,10 @@
   when 11
     holiday_1 = Time.new(year,month,2).strftime('%F')
     holiday_2 = Time.new(year,month,15).strftime('%F')
+    if year == 2018
+      # post summit day off
+      holiday_3 = Time.new(year,month,16).strftime('%F')
+    else
   when 12
     holiday_1 = Time.new(year,month,24).strftime('%F')
     holiday_2 = Time.new(year,month,25).strftime('%F')
